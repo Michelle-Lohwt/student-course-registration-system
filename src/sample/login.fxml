@@ -93,12 +93,12 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Hyperlink layoutX="240.0" layoutY="582.0" text="Change Password" textAlignment="CENTER">
+            <Hyperlink layoutX="240.0" layoutY="582.0" onMouseClicked="#switchToContactUs" text="Change Password" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="238.0" layoutY="610.0" text="Forgot Account ID" textAlignment="CENTER">
+            <Hyperlink layoutX="238.0" layoutY="610.0" onMouseClicked="#switchToContactUs" text="Forgot Account ID" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
