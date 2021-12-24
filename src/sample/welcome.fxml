@@ -16,19 +16,14 @@
             <Image url="@images/convousm.jpg" />
          </image>
       </ImageView>
-      <Text layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Course Registration System" textAlignment="CENTER" wrappingWidth="1200.8989562988281">
+      <Text layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Course Registration System" textAlignment="CENTER" wrappingWidth="1200.0">
          <font>
             <Font size="48.0" />
          </font>
       </Text>
       <AnchorPane layoutY="491.0" prefHeight="64.0" prefWidth="1200.0">
          <children>
-            <Button layoutX="350.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: EB7E31;" text="Student" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button layoutX="659.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: EB7E31;" text="Lecturer" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="welcome" layoutX="504.5" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#switchToLogin" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: EB7E31; -fx-cursor: hand;" text="Welcome" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
