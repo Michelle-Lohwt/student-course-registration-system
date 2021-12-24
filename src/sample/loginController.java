@@ -29,4 +29,12 @@ public class loginController {
     stage.setScene(scene);
     stage.show();
   }
+
+  public void switchToStuDashboard(MouseEvent event) throws IOException {
+    root = FXMLLoader.load(getClass().getResource("stuDashboard.fxml"));
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
 }

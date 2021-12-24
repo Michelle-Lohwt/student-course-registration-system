@@ -88,7 +88,7 @@
                   <Image url="@images/padlock.png" />
                </image>
             </ImageView>
-            <Button layoutX="242.5" layoutY="500.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: EB7E31; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
+            <Button layoutX="242.5" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#switchToStuDashboard" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: EB7E31; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
