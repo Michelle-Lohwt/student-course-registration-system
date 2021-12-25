@@ -131,28 +131,28 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registered Course" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0">
+                  <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Suggestion" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="10.0" />
-                  <JFXButton fx:id="removeCourseButton" layoutX="38.0" layoutY="354.0" style="-fx-background-color: #EB7E31;" text="Remove Course" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="334.0">
+                  <ListView fx:id="courseSuggestion" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" />
+                  <JFXButton fx:id="removeCourseButton" layoutX="38.0" layoutY="354.0" style="-fx-background-color: #EB7E31;" text="Remove Course" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fx:id="printPreview" fitHeight="25.0" fitWidth="25.0" layoutX="332.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="425.0">
+                  <ImageView fx:id="printPreview" fitHeight="25.0" fitWidth="25.0" layoutX="332.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
                      <image>
                         <Image url="@images/printer.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Suggestions" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="60.0">
+                  <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registered Course" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="440.0" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0">
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="440.0" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="10.0">
                      <children>
                         <TextField fx:id="searchField1" prefHeight="25.0" prefWidth="400.0">
                            <font>
@@ -166,7 +166,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <ListView fx:id="courseSuggestion" layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="140.0" />
+                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
                </children>
             </AnchorPane>
          </center>
