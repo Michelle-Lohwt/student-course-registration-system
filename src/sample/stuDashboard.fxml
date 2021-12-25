@@ -18,7 +18,7 @@
                <children>
                   <HBox layoutX="56.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXButton onMouseClicked="#switchToLogOut" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-cursor: hand;" text="Log Out" textFill="WHITE" translateX="50.0" translateY="50.0">
+                        <JFXButton onMouseClicked="#LogOut" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-cursor: hand;" text="Log Out" textFill="WHITE" translateX="50.0" translateY="50.0">
                            <font>
                               <Font size="18.0" />
                            </font>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -20,26 +24,34 @@
    <left>
       <AnchorPane prefHeight="770.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31);" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="200.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/usm-ringlogo.png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student" textAlignment="CENTER" wrappingWidth="600             ">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Registration" textAlignment="CENTER" wrappingWidth="600             ">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" textAlignment="CENTER" wrappingWidth="600             ">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Text>
+            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.6" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Pane prefHeight="330.0" prefWidth="600.0">
+                     <children>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" onMouseClicked="#openBrowser" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" translateX="200.0" translateY="125.0">
+                           <image>
+                              <Image url="@images/usm-ringlogo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Student" textAlignment="CENTER" wrappingWidth="600             ">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Registration" textAlignment="CENTER" wrappingWidth="600             ">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="System" textAlignment="CENTER" wrappingWidth="600             ">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
          </children></AnchorPane>
    </left>
    <right>
@@ -63,11 +75,11 @@
                   </LinearGradient>
                </stroke>
             </Rectangle>
-            <Button layoutX="75.0" layoutY="125.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="225.0" style="-fx-background-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-cursor: hand;" text="Login" textFill="WHITE">
+            <JFXButton layoutX="75.0" layoutY="125.0" prefHeight="51.0" prefWidth="225.0" style="-fx-background-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31);" text="Login" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
-            </Button>
+            </JFXButton>
             <TextField layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="*@usm.my or any *.usm.my subdomains" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
@@ -88,41 +100,44 @@
                   <Image url="@images/padlock.png" />
                </image>
             </ImageView>
-            <Button layoutX="242.5" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#switchToStuDashboard" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: EB7E31; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Hyperlink layoutX="240.0" layoutY="582.0" onMouseClicked="#switchToContactUs" text="Change Password" textAlignment="CENTER">
+            <Hyperlink layoutX="240.0" layoutY="582.0" onMouseClicked="#ContactUs" text="Change Password" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="238.0" layoutY="610.0" onMouseClicked="#switchToContactUs" text="Forgot Account ID" textAlignment="CENTER">
+            <Hyperlink layoutX="238.0" layoutY="610.0" onMouseClicked="#ContactUs" text="Forgot Account ID" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Button layoutX="312.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#switchToSignUp" prefHeight="51.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 2px 2px 0px 2px; -fx-cursor: hand;" text="Sign Up">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
             <RadioButton layoutX="165.0" layoutY="416.0" mnemonicParsing="false" text="Student">
                <font>
                   <Font size="18.0" />
                </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="studentLecturer" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="325.0" layoutY="416.0" mnemonicParsing="false" text="Lecturer">
+            <RadioButton layoutX="325.0" layoutY="416.0" mnemonicParsing="false" text="Lecturer" toggleGroup="$studentLecturer">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <Button layoutX="450.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#switchToContactUs" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Contact Us" textAlignment="CENTER">
+            <Button layoutX="450.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#ContactUs" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Contact Us" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
+            <JFXButton layoutX="312.0" layoutY="125.0" onMouseClicked="#SignUp" prefHeight="51.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 2px 2px 0px 2px; -fx-cursor: hand;" text="Sign Up">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="242.5" layoutY="500.0" onMouseClicked="#StuDashboard" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
    </right>

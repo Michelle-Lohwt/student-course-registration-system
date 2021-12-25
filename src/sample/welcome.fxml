@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,15 +21,6 @@
             <Font size="48.0" />
          </font>
       </Text>
-      <AnchorPane layoutY="491.0" prefHeight="64.0" prefWidth="1200.0">
-         <children>
-            <Button fx:id="welcome" layoutX="504.5" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#switchToLogin" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: EB7E31; -fx-cursor: hand;" text="Welcome" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
       <AnchorPane layoutY="658.0" prefHeight="112.0" prefWidth="1200.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3c047c" height="112.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
@@ -44,6 +35,15 @@
                   <Font size="18.0" />
                </font>
             </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="491.0" prefHeight="64.0" prefWidth="1200.0">
+         <children>
+            <JFXButton layoutX="504.5" onMouseClicked="#Login" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Welcome" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>
