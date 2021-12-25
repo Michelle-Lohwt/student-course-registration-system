@@ -3,6 +3,7 @@ package sample;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,9 @@ public class loginController extends Controller {
   @FXML
   private ToggleGroup studentLecturer;
 
+  @FXML
+  private RadioButton rbLecturer, rbStudent;
+
   public void SignUp(MouseEvent event) throws IOException {
     switchTo(event, "signUp.fxml");
   }
@@ -20,11 +24,15 @@ public class loginController extends Controller {
     switchTo(event, "contactUs.fxml");
   }
 
-  public void StuDashboard(MouseEvent event) throws IOException {
-    switchTo(event, "stuDashboard.fxml");
-  }
-
   public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
     openLink(event);
+  }
+
+  public void SignIn(MouseEvent event) throws IOException {
+    if (rbStudent.isSelected()) {
+      switchTo(event, "stuDashboard.fxml");
+    } else if (rbLecturer.isSelected()) {
+      switchTo(event, "lecDashboard.fxml");
+    }
   }
 }

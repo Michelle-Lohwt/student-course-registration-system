@@ -110,7 +110,7 @@
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <RadioButton layoutX="165.0" layoutY="416.0" mnemonicParsing="false" text="Student">
+            <RadioButton fx:id="rbStudent" layoutX="165.0" layoutY="416.0" mnemonicParsing="false" text="Student">
                <font>
                   <Font size="18.0" />
                </font>
@@ -118,7 +118,7 @@
                   <ToggleGroup fx:id="studentLecturer" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="325.0" layoutY="416.0" mnemonicParsing="false" text="Lecturer" toggleGroup="$studentLecturer">
+            <RadioButton fx:id="rbLecturer" layoutX="325.0" layoutY="416.0" mnemonicParsing="false" text="Lecturer" toggleGroup="$studentLecturer">
                <font>
                   <Font size="18.0" />
                </font>
@@ -133,7 +133,7 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="242.5" layoutY="500.0" onMouseClicked="#StuDashboard" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
+            <JFXButton layoutX="242.5" layoutY="500.0" onMouseClicked="#SignIn" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Sign in" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
