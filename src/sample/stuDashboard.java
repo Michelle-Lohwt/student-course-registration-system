@@ -7,21 +7,13 @@ import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class stuDashboard implements Initializable {
-  private Stage stage;
-  private Scene scene;
-  private Parent root;
+public class stuDashboard extends Controller implements Initializable {
 
   @FXML
   private Label backMenu;
@@ -32,12 +24,8 @@ public class stuDashboard implements Initializable {
   @FXML
   private AnchorPane sideNav;
 
-  public void switchToLogOut(MouseEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("logout.fxml"));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+  public void LogOut(MouseEvent event) throws IOException {
+    switchTo(event, "logout.fxml");
   }
 
   @Override

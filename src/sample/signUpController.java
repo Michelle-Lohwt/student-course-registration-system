@@ -1,32 +1,26 @@
 package sample;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
 
-public class signUpController {
-  private Stage stage;
-  private Scene scene;
-  private Parent root;
+public class signUpController extends Controller {
 
-  public void switchToLogin(MouseEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("login.fxml"));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+  @FXML
+  private ToggleGroup studentLecturer;
+
+  public void Login(MouseEvent event) throws IOException {
+    switchTo(event, "login.fxml");
   }
 
-  public void switchToContactUs(MouseEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("contactUs.fxml"));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+  public void ContactUs(MouseEvent event) throws IOException {
+    switchTo(event, "contactUs.fxml");
+  }
+
+  public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
+    openLink(event);
   }
 }

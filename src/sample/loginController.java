@@ -1,40 +1,30 @@
 package sample;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
 
-public class loginController {
-  private Stage stage;
-  private Scene scene;
-  private Parent root;
+public class loginController extends Controller {
 
-  public void switchToSignUp(MouseEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("signUp.fxml"));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+  @FXML
+  private ToggleGroup studentLecturer;
+
+  public void SignUp(MouseEvent event) throws IOException {
+    switchTo(event, "signUp.fxml");
   }
 
-  public void switchToContactUs(MouseEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("contactUs.fxml"));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+  public void ContactUs(MouseEvent event) throws IOException {
+    switchTo(event, "contactUs.fxml");
   }
 
-  public void switchToStuDashboard(MouseEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getResource("stuDashboard.fxml"));
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+  public void StuDashboard(MouseEvent event) throws IOException {
+    switchTo(event, "stuDashboard.fxml");
+  }
+
+  public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
+    openLink(event);
   }
 }
