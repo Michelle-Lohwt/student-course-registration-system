@@ -94,7 +94,7 @@
                   <Image url="@images/padlock.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="242.5" layoutY="600.0" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Sign up" textFill="WHITE">
+            <JFXButton layoutX="242.5" layoutY="600.0" onMouseClicked="#signUp" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Sign up" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -142,6 +142,11 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
+            <Text fx:id="signUpMessage" fill="#eb7e31" layoutX="200.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </right>
