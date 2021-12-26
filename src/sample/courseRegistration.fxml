@@ -72,7 +72,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="350.0" style="-fx-cursor: hand;" text="Contact Us" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#ContactUs" prefHeight="100.0" prefWidth="350.0" style="-fx-cursor: hand;" text="Contact Us" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -113,7 +113,7 @@
                   </Text>
                   <HBox prefHeight="40.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0">
                      <children>
-                        <TextField fx:id="searchField" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
+                        <TextField fx:id="searchCourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -154,7 +154,7 @@
                   </Text>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="440.0" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="10.0">
                      <children>
-                        <TextField fx:id="searchField1" prefHeight="25.0" prefWidth="400.0" promptText="Search Suggested Course">
+                        <TextField fx:id="searchSuggest" prefHeight="25.0" prefWidth="400.0" promptText="Search Suggested Course">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -34,10 +34,7 @@ public class courseRegController extends Controller implements Initializable {
   private JFXButton removeCourseButton;
 
   @FXML
-  private TextField searchField;
-
-  @FXML
-  private TextField searchField1;
+  private TextField searchCourse, searchSuggest;
 
   public void StuDashboard(MouseEvent event) throws IOException {
     switchTo(event, "stuDashboard.fxml");
@@ -45,6 +42,10 @@ public class courseRegController extends Controller implements Initializable {
 
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
+  }
+
+  public void ContactUs(MouseEvent event) throws IOException {
+    switchTo(event, "stuReport.fxml");
   }
 
   public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
