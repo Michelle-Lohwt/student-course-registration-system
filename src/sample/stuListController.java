@@ -26,7 +26,10 @@ public class stuListController extends Controller implements Initializable {
   private JFXButton addCourseButton;
 
   @FXML
-  private TableColumn<?, ?> email;
+  private JFXButton addCourseButton1;
+
+  @FXML
+  private ListView<?> courseList;
 
   @FXML
   private TableColumn<?, ?> matric;
@@ -50,7 +53,7 @@ public class stuListController extends Controller implements Initializable {
   private TableView<Student> studentList;
 
   @FXML
-  private ListView<String> teachingCourse;
+  private ListView<?> teachingCourse;
 
   @FXML
   private Text totalStudents;
