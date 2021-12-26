@@ -19,6 +19,14 @@ public class lecDasController extends Controller implements Initializable {
     switchTo(event, "logout.fxml");
   }
 
+  public void StuList(MouseEvent event) throws IOException {
+    switchTo(event, "stuList.fxml");
+  }
+
+  public void ContactUs(MouseEvent event) throws IOException {
+    switchTo(event, "lecReport.fxml");
+  }
+
   public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
     openLink(event);
   }
