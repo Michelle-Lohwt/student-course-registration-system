@@ -23,6 +23,10 @@ public class stuDasController extends Controller implements Initializable {
     switchTo(event, "courseRegistration.fxml");
   }
 
+  public void ContactUs(MouseEvent event) throws IOException {
+    switchTo(event, "stuReport.fxml");
+  }
+
   public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
     openLink(event);
   }

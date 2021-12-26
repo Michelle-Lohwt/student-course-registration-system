@@ -71,7 +71,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="350.0" style="-fx-cursor: hand;" text="Contact Us" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#ContactUs" prefHeight="100.0" prefWidth="350.0" style="-fx-cursor: hand;" text="Contact Us" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
