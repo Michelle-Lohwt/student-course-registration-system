@@ -28,7 +28,7 @@
                   <Font size="36.0" />
                </font>
             </Text>
-            <Hyperlink layoutX="48.0" layoutY="60.0" onAction="#openLink" text="Official USM Website" textFill="WHITE" />
+            <Hyperlink layoutX="48.0" layoutY="60.0" onMouseClicked="#openBrowser" text="Official USM Website" textFill="WHITE" />
             <Text fill="WHITE" layoutX="935.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by: CAT201 Project">
                <font>
                   <Font size="18.0" />

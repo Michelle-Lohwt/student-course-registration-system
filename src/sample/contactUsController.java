@@ -15,7 +15,7 @@ public class contactUsController extends Controller {
     switchTo(event, "signUp.fxml");
   }
 
-  public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
-    openLink(event);
+  public void openBrowser() throws URISyntaxException, IOException {
+    openLink();
   }
 }

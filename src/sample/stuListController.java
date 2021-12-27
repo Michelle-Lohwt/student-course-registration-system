@@ -70,8 +70,8 @@ public class stuListController extends Controller implements Initializable {
     switchTo(event, "lecReport.fxml");
   }
 
-  public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
-    openLink(event);
+  public void openBrowser() throws URISyntaxException, IOException {
+    openLink();
   }
 
   public void studentYear() {

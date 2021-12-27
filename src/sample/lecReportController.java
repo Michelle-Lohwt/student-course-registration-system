@@ -18,8 +18,8 @@ public class lecReportController extends Controller {
     switchTo(event, "logout.fxml");
   }
 
-  public void openBrowser(MouseEvent event) throws URISyntaxException, IOException {
-    openLink(event);
+  public void openBrowser() throws URISyntaxException, IOException {
+    openLink();
   }
 
 }

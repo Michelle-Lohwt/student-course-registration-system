@@ -25,7 +25,7 @@ abstract class Controller {
     stage.show();
   }
 
-  protected void openLink(MouseEvent event) throws URISyntaxException, IOException {
+  protected void openLink() throws URISyntaxException, IOException {
     Desktop.getDesktop().browse(new URI("https://www.usm.my/"));
   }
 }
