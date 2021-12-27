@@ -22,16 +22,13 @@ public class courseRegController extends Controller implements Initializable {
   // private final ObservableList<Courses> dataList =
   // FXCollections.observableArrayList();
   @FXML
-  private JFXButton addCourseButton;
+  private JFXButton addCourseButton, removeCourseButton;
 
   @FXML
   private ListView<String> courseList, courseSuggestion, registeredCourse;
 
   @FXML
   private ImageView printPreview;
-
-  @FXML
-  private JFXButton removeCourseButton;
 
   @FXML
   private TextField searchCourse, searchSuggest;
