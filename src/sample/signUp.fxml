@@ -142,7 +142,7 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
-            <Text fx:id="signUpMessage" fill="#eb7e31" layoutX="75.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="462.0">
+            <Text fx:id="signUpMessage" fill="#eb7e31" layoutX="75.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
