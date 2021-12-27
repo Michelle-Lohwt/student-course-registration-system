@@ -20,7 +20,7 @@ public class stuDasController extends Controller implements Initializable {
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-    switchTo(event, "courseRegistration.fxml");
+    switchTo(event, "courseReg.fxml");
   }
 
   public void ContactUs(MouseEvent event) throws IOException {
