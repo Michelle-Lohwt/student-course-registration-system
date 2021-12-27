@@ -32,7 +32,7 @@ public class loginController extends Controller {
     if (rbStudent.isSelected()) {
       switchTo(event, "stuDashboard.fxml");
     } else if (rbLecturer.isSelected()) {
-      switchTo(event, "lecDashboard.fxml");
+      switchTo(event, "lecDash.fxml");
     }
   }
 }

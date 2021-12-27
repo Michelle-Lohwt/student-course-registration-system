@@ -59,7 +59,7 @@ public class stuListController extends Controller implements Initializable {
   private Text totalStudents;
 
   public void LecDashboard(MouseEvent event) throws IOException {
-    switchTo(event, "lecDashboard.fxml");
+    switchTo(event, "lecDash.fxml");
   }
 
   public void LogOut(MouseEvent event) throws IOException {

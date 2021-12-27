@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent;
 
 public class lecReportController extends Controller {
   public void LecDashboard(MouseEvent event) throws IOException {
-    switchTo(event, "lecDashboard.fxml");
+    switchTo(event, "lecDash.fxml");
   }
 
   public void StuList(MouseEvent event) throws IOException {

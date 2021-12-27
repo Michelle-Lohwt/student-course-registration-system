@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class lecDasController extends Controller implements Initializable {
+public class lecDashController extends Controller implements Initializable {
 
   @FXML
   private Text name, nric, position, school, staffID, status;
