@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent;
 
 public class stuReportController extends Controller{
   public void StuDashboard(MouseEvent event) throws IOException {
-    switchTo(event, "stuDashboard.fxml");
+    switchTo(event, "stuDash.fxml");
   }
 
   public void StuCourseRegistration(MouseEvent event) throws IOException{

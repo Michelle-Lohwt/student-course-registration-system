@@ -30,7 +30,7 @@ public class loginController extends Controller {
 
   public void SignIn(MouseEvent event) throws IOException {
     if (rbStudent.isSelected()) {
-      switchTo(event, "stuDashboard.fxml");
+      switchTo(event, "stuDash.fxml");
     } else if (rbLecturer.isSelected()) {
       switchTo(event, "lecDash.fxml");
     }

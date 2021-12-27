@@ -37,7 +37,7 @@ public class courseRegController extends Controller implements Initializable {
   private TextField searchCourse, searchSuggest;
 
   public void StuDashboard(MouseEvent event) throws IOException {
-    switchTo(event, "stuDashboard.fxml");
+    switchTo(event, "stuDash.fxml");
   }
 
   public void LogOut(MouseEvent event) throws IOException {

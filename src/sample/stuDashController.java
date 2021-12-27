@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class stuDasController extends Controller implements Initializable {
+public class stuDashController extends Controller implements Initializable {
 
   @FXML
   private Text acd_status, campus, cgpa, major, matric, minor, name, nric, programme, school, sem_reg, year;
