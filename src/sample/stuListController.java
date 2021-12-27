@@ -23,40 +23,31 @@ import javafx.scene.text.Text;
 public class stuListController extends Controller implements Initializable {
 
   @FXML
-  private JFXButton addCourseButton;
+    private JFXButton addCourseButton, removeCourseButton;
 
-  @FXML
-  private JFXButton addCourseButton1;
+    @FXML
+    private ListView<String> courseList, teachingCourse;
 
-  @FXML
-  private ListView<?> courseList;
+    @FXML
+    private TextField searchCourse, searchStudent;
 
-  @FXML
-  private TableColumn<?, ?> matric;
+    @FXML
+    private PieChart pieChart;
 
-  @FXML
-  private TableColumn<?, ?> name;
+    @FXML
+    private Text totalStudents;
 
-  @FXML
-  private PieChart pieChart;
+    @FXML
+    private ImageView printPreview;
 
-  @FXML
-  private ImageView printPreview;
+    @FXML
+    private TableView<Student> studentList;
 
-  @FXML
-  private TextField searchCourse;
+    @FXML
+    private TableColumn<?, ?> matric;
 
-  @FXML
-  private TextField searchStudent;
-
-  @FXML
-  private TableView<Student> studentList;
-
-  @FXML
-  private ListView<?> teachingCourse;
-
-  @FXML
-  private Text totalStudents;
+    @FXML
+    private TableColumn<?, ?> name;
 
   public void LecDashboard(MouseEvent event) throws IOException {
     switchTo(event, "lecDash.fxml");
