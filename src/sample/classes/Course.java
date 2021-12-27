@@ -1,5 +1,5 @@
 package sample.classes;
 
-public class Courses {
+public class Course {
   
 }
