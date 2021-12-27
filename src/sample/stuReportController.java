@@ -11,7 +11,7 @@ public class stuReportController extends Controller{
   }
 
   public void StuCourseRegistration(MouseEvent event) throws IOException{
-    switchTo(event, "courseRegistration.fxml");
+    switchTo(event, "courseReg.fxml");
   }
 
   public void LogOut(MouseEvent event) throws IOException {
