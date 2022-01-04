@@ -1,6 +1,6 @@
 package sample;
 // import sample.classes.Courses;
-
+import java.sql.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -50,32 +50,27 @@ public class courseRegController extends Controller implements Initializable {
   }
 
   public void addcourse() {
-    courseList.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
-    courseList.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
-    courseList.getItems().add("CST232 - OPERATING SYSTEMS");
-    courseList.getItems().add("CSE241 - FOUNDATION OF SOFTWARE ENGINEERING");
-    courseList.getItems().add("CPT111 - PRINCIPLES OF PROGRAMMING");
-    courseList.getItems().add("CPT112 - DISCRETE STRUCTURES");
-    courseList.getItems().add("CST131 - COMPUTER ORGANISATIONS");
-    courseList.getItems().add("CPT113 - PROGRAMMING METHODOLOGY AND DATA STRUCTURES");
-    courseList.getItems().add("CPT115 - MATHEMATICAL METHODS FOR COMPUTER SCIENCE");
-    courseList.getItems().add("CPC151 - FUNDAMENTALS OF LOGIC AND ARTIFICIAL INTELLIGENCE");
-    courseList.getItems().add("AKW103 - INTRODUCTION TO MANAGEMENT");
-    courseList.getItems().add("AKW104 - ACCOUNTING AND FINANCE");
-    courseList.getItems().add("ATW202 - BUSINESS RESEARCH METHOD");
-    courseList.getItems().add("ATW241 - PRINCIPLES OF MARKETING");
-    courseList.getItems().add("ATW262 - PRINCIPLES OF FINANCE");
-    courseList.getItems().add("MAA101 - CALCULUS FOR SCIENCE STUDENTS");
-    courseList.getItems().add("MAT111 - LINEAR ALGEBRA");
-    courseList.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
-    courseList.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    courseList.getItems().add("LAK100 - KOREAN LANGUAGE");
-    courseList.getItems().add("LAJ100 - JAPANESE LANGUAGE");
-    courseList.getItems().add("LKM400 - BAHASA MALAYSIA");
-    courseList.getItems().add("LSP300 - ACADEMIC ENGLISH");
-    courseList.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
-    courseList.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
-  }
+
+    
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/course_register","root","CAT201**");
+            Statement stmt= conn.createStatement();
+            ResultSet rs=stmt.executeQuery("SELECT COURSE_NAME FROM course_register.course;");
+            while(rs.next())
+            {
+               courseList.getItems().addAll(rs.getString(1));
+            }
+            conn.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+  
+  
 
   public void removecourse() {
     registeredCourse.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
