@@ -68,7 +68,7 @@ INSERT INTO STUDENT VALUES ('548921','San Yang', '63145', 'INACTIVE', '201', 3.8
 
 INSERT INTO COURSE VALUES ('CPT113', 'Programming Methodology and Data Structures');
 INSERT INTO COURSE VALUES ('AKW103', 'Introduction to Management');
-INSERT INTO COURSE VALUES ('MAT111', 'Lineaer Algebra');
+INSERT INTO COURSE VALUES ('MAT111', 'Linear Algebra');
 
 INSERT INTO STUDENT_ACCOUNT VALUES ('heng@gmail.com', 'HAHALOL', '123456');
 INSERT INTO STUDENT_ACCOUNT VALUES ('liu@gmail.com', 'Ladf', '654321');
