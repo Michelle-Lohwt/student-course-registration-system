@@ -71,8 +71,6 @@ public class courseRegController extends Controller implements Initializable {
     courseList.getItems().add("MAT111 - LINEAR ALGEBRA");
     courseList.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
     courseList.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    courseList.getItems().add("LAK100 - KOREAN LANGUAGE");
-    courseList.getItems().add("LAJ100 - JAPANESE LANGUAGE");
     courseList.getItems().add("LSP300 - ACADEMIC ENGLISH");
     courseList.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
     courseList.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
@@ -100,8 +98,6 @@ public class courseRegController extends Controller implements Initializable {
     registeredCourse.getItems().add("MAT111 - LINEAR ALGEBRA");
     registeredCourse.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
     registeredCourse.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    registeredCourse.getItems().add("LAK100 - KOREAN LANGUAGE");
-    registeredCourse.getItems().add("LAJ100 - JAPANESE LANGUAGE");
     registeredCourse.getItems().add("LSP300 - ACADEMIC ENGLISH");
     registeredCourse.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
     registeredCourse.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
@@ -127,8 +123,6 @@ public class courseRegController extends Controller implements Initializable {
     courseSuggestion.getItems().add("MAT111 - LINEAR ALGEBRA");
     courseSuggestion.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
     courseSuggestion.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    courseSuggestion.getItems().add("LAK100 - KOREAN LANGUAGE");
-    courseSuggestion.getItems().add("LAJ100 - JAPANESE LANGUAGE");
     courseSuggestion.getItems().add("LSP300 - ACADEMIC ENGLISH");
     courseSuggestion.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
     courseSuggestion.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
