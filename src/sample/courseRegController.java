@@ -51,7 +51,6 @@ public class courseRegController extends Controller implements Initializable {
 
   public void addcourse() {
 
-    
     courseList.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
     courseList.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
     courseList.getItems().add("CST232 - OPERATING SYSTEMS");
