@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.*;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -49,7 +50,7 @@ public class courseRegController extends Controller implements Initializable {
     openLink();
   }
 
-  public void addcourse() {
+  public void courselist() {
 
     courseList.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
     courseList.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
@@ -78,9 +79,14 @@ public class courseRegController extends Controller implements Initializable {
     courseList.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
     }
   
-  
+/*
+  public void registeredcourse()  {    
+    //registeredCourse.getItems().add(courseList.getSelectionModel().getSelectedItem());
+    System.out.println(courseList.getSelectionModel().getSelectedItem());
+  }
+*/
 
-  public void removecourse() {
+  public void registeredcourse() {
     registeredCourse.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
     registeredCourse.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
     registeredCourse.getItems().add("CST232 - OPERATING SYSTEMS");
@@ -108,7 +114,7 @@ public class courseRegController extends Controller implements Initializable {
     registeredCourse.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
   }
 
-  private void suggestcourse() {
+  private void coursesuggestion() {
     courseSuggestion.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
     courseSuggestion.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
     courseSuggestion.getItems().add("CST232 - OPERATING SYSTEMS");
@@ -139,12 +145,9 @@ public class courseRegController extends Controller implements Initializable {
   
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    addcourse();
-    removecourse();
-    suggestcourse();
+    courselist();
+    registeredcourse();
+    coursesuggestion();
   }
 
 }
-
-
-

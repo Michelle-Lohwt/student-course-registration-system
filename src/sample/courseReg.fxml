@@ -126,7 +126,7 @@
                      </children>
                   </HBox>
                   <ListView fx:id="courseList" prefHeight="200.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="140.0" />
-                  <JFXButton fx:id="addCourseButton" layoutX="28.0" layoutY="344.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Add Course" textFill="WHITE" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="345.0">
+                  <JFXButton fx:id="addCourseButton" layoutX="28.0" layoutY="344.0" onMouseClicked="#registeredcourse" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Add Course" textFill="WHITE" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="345.0">
                      <font>
                         <Font size="14.0" />
                      </font>
