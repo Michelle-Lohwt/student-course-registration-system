@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXButton;
 
 // import javafx.collections.FXCollections;
@@ -135,6 +134,8 @@ public class courseRegController extends Controller implements Initializable {
     courseSuggestion.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
     courseSuggestion.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
   }
+
+  
 
   
   @Override
