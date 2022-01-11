@@ -16,7 +16,7 @@ public class Student {
         list1.add("Kotlin");
         list1.add("Android");
         
-        String path = "Desktop/test.pdf"; 
+        String path = "Desktop/CourseList.pdf"; 
         PdfWriter pdfWriter = new PdfWriter(path);
 
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
