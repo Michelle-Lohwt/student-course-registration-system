@@ -1,6 +1,9 @@
 package sample.classes;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,28 +16,31 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class StudentController implements Initializable{
-    @FXML
+@FXML
 private Label label;
 @FXML
 private AnchorPane anchorid;
-
 @FXML 
 private TextField textfield;
 
 @FXML
-private void handleButtonAction(ActionEvent event){
+public void handleButtonAction(ActionEvent event) throws IOException{
     final DirectoryChooser dirchooser = new DirectoryChooser();
 
     Stage stage = (Stage) anchorid.getScene().getWindow();
 
     File file = dirchooser.showDialog(stage);
 
+    BufferedWriter bw = new BufferedWriter(new FileWriter("filepath.txt"));
     if(file !=null)
-    {
-        System.out.println("Path: " + file.getAbsolutePath());
-        textfield.setText(file.getAbsolutePath());
+    {   String myfilepath= file.getAbsolutePath();
+        System.out.println("Path: " + myfilepath);
+        textfield.setText(myfilepath);
+        bw.write(myfilepath);
+        
     }
 
+   bw.close();
 }
 
 @Override
