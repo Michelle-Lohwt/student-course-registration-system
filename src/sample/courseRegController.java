@@ -44,7 +44,10 @@ public class courseRegController extends Controller implements Initializable {
   public void ContactUs(MouseEvent event) throws IOException {
     switchTo(event, "stuReport.fxml");
   }
-
+  public void printPreview(MouseEvent event)throws IOException{
+  
+   switchTo(event,"classes/Student.fxml");
+  }
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
