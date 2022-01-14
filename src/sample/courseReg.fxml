@@ -113,12 +113,12 @@
                   </Text>
                   <HBox prefHeight="40.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0">
                      <children>
-                        <TextField fx:id="searchCourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
+                        <TextField fx:id="searchCourse" onAction="#searchcourse" onKeyTyped="#searchcourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" translateX="10.0" translateY="5.0">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#searchcourse" pickOnBounds="true" preserveRatio="true" translateX="10.0" translateY="5.0">
                            <image>
                               <Image url="@images/loupe.png" />
                            </image>

@@ -11,9 +11,12 @@ import java.io.IOException;
 
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -87,9 +90,7 @@ public class courseRegController extends Controller implements Initializable {
     }
   }
 
-  public void addcourse()  {
-    System.out.println("function addcourse is executed.");
-    
+  public void addcourse()  {    
     if(courseList.getSelectionModel().getSelectedItem() != null){
       //Store Courses Registered into txt file
       try (FileWriter myWriter = new FileWriter("student1registeredCourse.txt",true)){
@@ -116,12 +117,13 @@ public class courseRegController extends Controller implements Initializable {
 
     //Read and display list of all courses that can be registered from txt file
     displaycourselist();
+    
+    //Clear the searchCourse Textfield after a course is registered.
+    searchCourse.clear();
     } 
   }
 
   public void removecourse()  {
-    System.out.println("function removecourse is executed.");
-
     //Remove Courses Registered from txt file
     if(registeredCourse.getSelectionModel().getSelectedItem() != null){      
       try{
@@ -170,7 +172,65 @@ public class courseRegController extends Controller implements Initializable {
   }
 
   public void searchcourse() {
-    
+    List<String> list = new ArrayList<>();
+    try {
+        File fileObj = new File("student1courseList.txt");
+        Scanner fileReader = new Scanner(fileObj);
+        while (fileReader.hasNextLine()) {
+            list.add(fileReader.nextLine());
+        }
+        fileReader.close();
+    } catch (FileNotFoundException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+    }   
+
+    List<String> result = list
+      .stream()
+      .filter(x -> x.toLowerCase().contains(searchCourse.getText().toLowerCase()))
+      .collect(Collectors.toList());
+
+    //conversion of ArrayList to String
+    StringBuilder strbul = new StringBuilder();
+    for(String str : result)
+    {
+        strbul.append(str);
+        //for adding comma between elements
+        strbul.append("\n");
+    }
+
+    String str=strbul.toString();
+
+    //Clear the Course List ListView
+    courseList.getItems().clear();
+
+    //courseList.getItems().add(str);
+
+    //Insert Course List Search Result into txt file
+    try (FileWriter myWriter = new FileWriter("searchCourse.txt",true)){
+      myWriter.write(str);
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    //Display the search result in Listview
+    try {
+      File fileObj = new File("searchCourse.txt");
+      Scanner fileReader = new Scanner(fileObj);
+      while (fileReader.hasNextLine()) {
+        courseList.getItems().add(fileReader.nextLine());
+      }
+      fileReader.close();
+
+      //Clear searchCourse.txt
+      PrintWriter writer = new PrintWriter("searchCourse.txt");
+      writer.print("");
+      writer.close();    
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
   }
   
   //Filter out courses that have been registered by the student,
