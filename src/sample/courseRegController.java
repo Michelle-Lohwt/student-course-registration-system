@@ -1,21 +1,27 @@
 package sample;
-// import sample.classes.Courses;
 
+import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;  // Import the File class
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.FileReader;
 import java.io.IOException;
+
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.*;
+import java.util.Scanner; // Import the Scanner class to read text files
 
 import com.jfoenix.controls.JFXButton;
 
-// import javafx.collections.FXCollections;
-// import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageView;	
 import javafx.scene.input.MouseEvent;
 
 public class courseRegController extends Controller implements Initializable {
@@ -49,69 +55,166 @@ public class courseRegController extends Controller implements Initializable {
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
-
-  public void courselist() {
-
-    courseList.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
-    courseList.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
-    courseList.getItems().add("CST232 - OPERATING SYSTEMS");
-    courseList.getItems().add("CSE241 - FOUNDATION OF SOFTWARE ENGINEERING");
-    courseList.getItems().add("CPT111 - PRINCIPLES OF PROGRAMMING");
-    courseList.getItems().add("CPT112 - DISCRETE STRUCTURES");
-    courseList.getItems().add("CST131 - COMPUTER ORGANISATIONS");
-    courseList.getItems().add("CPT113 - PROGRAMMING METHODOLOGY AND DATA STRUCTURES");
-    courseList.getItems().add("CPT115 - MATHEMATICAL METHODS FOR COMPUTER SCIENCE");
-    courseList.getItems().add("CPC151 - FUNDAMENTALS OF LOGIC AND ARTIFICIAL INTELLIGENCE");
-    courseList.getItems().add("AKW103 - INTRODUCTION TO MANAGEMENT");
-    courseList.getItems().add("AKW104 - ACCOUNTING AND FINANCE");
-    courseList.getItems().add("ATW202 - BUSINESS RESEARCH METHOD");
-    courseList.getItems().add("ATW241 - PRINCIPLES OF MARKETING");
-    courseList.getItems().add("ATW262 - PRINCIPLES OF FINANCE");
-    courseList.getItems().add("MAA101 - CALCULUS FOR SCIENCE STUDENTS");
-    courseList.getItems().add("MAT111 - LINEAR ALGEBRA");
-    courseList.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
-    courseList.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    courseList.getItems().add("LAK100 - KOREAN LANGUAGE");
-    courseList.getItems().add("LAJ100 - JAPANESE LANGUAGE");
-    courseList.getItems().add("LKM400 - BAHASA MALAYSIA");
-    courseList.getItems().add("LSP300 - ACADEMIC ENGLISH");
-    courseList.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
-    courseList.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
-    }
   
-/*
-  public void registeredcourse()  {    
-    //registeredCourse.getItems().add(courseList.getSelectionModel().getSelectedItem());
-    System.out.println(courseList.getSelectionModel().getSelectedItem());
+  //Read and display list of all courses that can be registered from txt file
+  private void displaycourselist(){
+    try {
+      File fileObj = new File("student1courseList.txt");
+      Scanner fileReader = new Scanner(fileObj);
+      while (fileReader.hasNextLine()) {
+        courseList.getItems().add(fileReader.nextLine());
+      }
+      fileReader.close();
+    
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
   }
-*/
+  
+  //Read and Display Courses Registered from txt file
+  private void displaycourseregistered(){
+    try {
+      File fileObj = new File("student1registeredCourse.txt");
+      Scanner fileReader = new Scanner(fileObj);
+      while (fileReader.hasNextLine()) {
+        registeredCourse.getItems().add(fileReader.nextLine());
+      }
+      fileReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
 
-  public void registeredcourse() {
-    registeredCourse.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
-    registeredCourse.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
-    registeredCourse.getItems().add("CST232 - OPERATING SYSTEMS");
-    registeredCourse.getItems().add("CSE241 - FOUNDATION OF SOFTWARE ENGINEERING");
-    registeredCourse.getItems().add("CPT111 - PRINCIPLES OF PROGRAMMING");
-    registeredCourse.getItems().add("CPT112 - DISCRETE STRUCTURES");
-    registeredCourse.getItems().add("CST131 - COMPUTER ORGANISATIONS");
-    registeredCourse.getItems().add("CPT113 - PROGRAMMING METHODOLOGY AND DATA STRUCTURES");
-    registeredCourse.getItems().add("CPT115 - MATHEMATICAL METHODS FOR COMPUTER SCIENCE");
-    registeredCourse.getItems().add("CPC151 - FUNDAMENTALS OF LOGIC AND ARTIFICIAL INTELLIGENCE");
-    registeredCourse.getItems().add("AKW103 - INTRODUCTION TO MANAGEMENT");
-    registeredCourse.getItems().add("AKW104 - ACCOUNTING AND FINANCE");
-    registeredCourse.getItems().add("ATW202 - BUSINESS RESEARCH METHOD");
-    registeredCourse.getItems().add("ATW241 - PRINCIPLES OF MARKETING");
-    registeredCourse.getItems().add("ATW262 - PRINCIPLES OF FINANCE");
-    registeredCourse.getItems().add("MAA101 - CALCULUS FOR SCIENCE STUDENTS");
-    registeredCourse.getItems().add("MAT111 - LINEAR ALGEBRA");
-    registeredCourse.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
-    registeredCourse.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    registeredCourse.getItems().add("LAK100 - KOREAN LANGUAGE");
-    registeredCourse.getItems().add("LAJ100 - JAPANESE LANGUAGE");
-    registeredCourse.getItems().add("LKM400 - BAHASA MALAYSIA");
-    registeredCourse.getItems().add("LSP300 - ACADEMIC ENGLISH");
-    registeredCourse.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
-    registeredCourse.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
+  public void addcourse()  {
+    System.out.println("function addcourse is executed.");
+    
+    if(courseList.getSelectionModel().getSelectedItem() != null){
+      //Store Courses Registered into txt file
+      try (FileWriter myWriter = new FileWriter("student1registeredCourse.txt",true)){
+        myWriter.write(String.valueOf(courseList.getSelectionModel().getSelectedItem()), 0,
+        String.valueOf(courseList.getSelectionModel().getSelectedItem()).length());
+        myWriter.write("\n");
+        //System.out.println("Successfully wrote to the file.");
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+    
+      //Clear the Registered Course ListView
+    registeredCourse.getItems().clear();
+
+    //Read and Display Courses Registered from txt file
+    displaycourseregistered();
+
+    //Filter out courses that have been registered by the student.
+    filtercourselist();
+
+    //Clear the Course List ListView
+    courseList.getItems().clear();
+
+    //Read and display list of all courses that can be registered from txt file
+    displaycourselist();
+    } 
+  }
+
+  public void removecourse()  {
+    System.out.println("function removecourse is executed.");
+
+    //Remove Courses Registered from txt file
+    if(registeredCourse.getSelectionModel().getSelectedItem() != null){      
+      try{
+        File file = new File("student1registeredCourse.txt");
+        File temp = new File("TempFile.txt");
+        //File temp = File.createTempFile("temporarystudent", ".txt", file.getParentFile());
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+
+        String lineToRemove = registeredCourse.getSelectionModel().getSelectedItem();
+        String currentLine;
+
+        while((currentLine = reader.readLine()) != null) {
+          // trim newline when comparing with lineToRemove
+          String trimmedLine = currentLine.trim();
+          if(trimmedLine.equals(lineToRemove)) continue;
+          writer.write(currentLine + System.getProperty("line.separator"));
+        }
+
+        //Close the reader and writer (preferably in the finally block).
+        reader.close();
+        writer.close();
+        //Delete the file.
+        file.delete();
+        //Rename the temp file.
+        temp.renameTo(file);
+        
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+      //Clear the Registered Course ListView
+      registeredCourse.getItems().clear();
+      //Read and Display Courses Registered from txt file
+      displaycourseregistered();
+
+      //Filter out courses that have been registered by the student.
+      filtercourselist();
+
+      //Clear the Course List ListView
+      courseList.getItems().clear();
+
+      //Read and display list of all courses that can be registered from txt file
+      displaycourselist();
+    }
+  }
+
+  public void searchcourse() {
+    
+  }
+  
+  //Filter out courses that have been registered by the student,
+  //i.e. Only contains the courses that have not been registered by the student.
+  //e.g. Output.txt = Input.txt – Delete.txt
+  //In this case: studentcourseList = courseList – studentregisteredCourse
+  private void filtercourselist(){
+    try{
+      // PrintWriter object for output.txt
+      PrintWriter pw = new PrintWriter("student1courseList.txt");      
+      // BufferedReader object for delete.txt
+      BufferedReader br2 = new BufferedReader(new FileReader("student1registeredCourse.txt"));      
+      String line2 = br2.readLine();      
+      // hashset for storing lines of delete.txt
+      HashSet<String> hs = new HashSet<String>();      
+      // loop for each line of delete.txt
+      while(line2 != null)
+      {
+        hs.add(line2);
+        line2 = br2.readLine();
+      }
+      // BufferedReader object for input.txt
+      BufferedReader br1 = new BufferedReader(new FileReader("courseList.txt"));
+      String line1 = br1.readLine();
+      // loop for each line of input.txt
+      while(line1 != null){
+        // if line is not present in delete.txt, write it to output.txt
+        if(!hs.contains(line1))
+        {pw.println(line1);}
+            
+        line1 = br1.readLine();
+      }
+      
+      //Flush the stream
+      pw.flush();
+        
+      // closing resources
+      br1.close();
+      br2.close();
+      pw.close();
+    } catch (IOException e){
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
   }
 
   private void coursesuggestion() {
@@ -142,11 +245,14 @@ public class courseRegController extends Controller implements Initializable {
     courseSuggestion.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
   }
 
-  
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    courselist();
-    registeredcourse();
+    displaycourselist();
+    displaycourseregistered();
+    addcourse();
+    removecourse();
+    searchcourse();
+    filtercourselist();
     coursesuggestion();
   }
 
