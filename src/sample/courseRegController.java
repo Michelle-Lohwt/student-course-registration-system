@@ -11,11 +11,15 @@ import com.jfoenix.controls.JFXButton;
 // import javafx.collections.FXCollections;
 // import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class courseRegController extends Controller implements Initializable {
 
@@ -45,8 +49,18 @@ public class courseRegController extends Controller implements Initializable {
     switchTo(event, "stuReport.fxml");
   }
   public void printPreview(MouseEvent event)throws IOException{
-  
-   switchTo(event,"classes/Student.fxml");
+    try{
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("classes/Student.fxml"));
+      Parent root1= (Parent) fxmlLoader.load();
+      Stage stage= new Stage();
+
+      stage.setTitle("Select Course List pdf directory");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e){
+      System.out.println("Can't load new window");
+    }
+   //switchTo(event,"classes/Student.fxml");
   }
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
