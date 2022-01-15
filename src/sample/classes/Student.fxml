@@ -10,6 +10,6 @@
       <Button fx:id="button" layoutX="253.0" layoutY="128.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="101.0" text="Browse" />
       <TextField fx:id="textfield" layoutX="24.0" layoutY="131.0" />
       <Label fx:id="label" layoutX="24.0" layoutY="81.0" prefHeight="15.0" prefWidth="318.0" text="Choose directory to store your course list PDF FIle." />
-      <Button fx:id="confirm" layoutX="174.0" layoutY="216.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Confirm" />
+      <Button fx:id="confirm" layoutX="174.0" layoutY="216.0" mnemonicParsing="false" onAction="#confirmbutton" prefHeight="26.0" prefWidth="59.0" text="Confirm" />
    </children>
 </AnchorPane>

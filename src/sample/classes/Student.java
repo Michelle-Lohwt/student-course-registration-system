@@ -1,27 +1,12 @@
 package sample.classes;
-import java.io.File;
 //import java.io.File;
 import java.io.FileNotFoundException;
-//import java.util.Scanner;
-import java.util.Scanner;
-
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.List;
 
 
 public class Student {
 
-    public static String ReceiveFilePath() throws FileNotFoundException{
-      
-               File obj1 = new File("filepath.txt");
-              Scanner fileReader = new Scanner(obj1);
-                 String filepath= fileReader.next();
-                 fileReader.close();
-                 return filepath;
-            
-    }
+
     public static void main(String[] args) throws FileNotFoundException{
         List list1= new List();
         
@@ -45,15 +30,15 @@ public class Student {
         list1.add("Kotlin");
         list1.add("Android");
         
-        String path = ReceiveFilePath(); 
-        PdfWriter pdfWriter = new PdfWriter(path);
+        // String path = ;
+        // PdfWriter pdfWriter = new PdfWriter(path);
 
-        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-        pdfDocument.addNewPage();
+        // PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        // pdfDocument.addNewPage();
 
-        Document document = new Document(pdfDocument);
-        document.add(list1);
-        document.close();
+        // Document document = new Document(pdfDocument);
+        // document.add(list1);
+        // document.close();
 
     }
 }

@@ -1,11 +1,14 @@
 package sample.classes;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,17 +34,43 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
     File file = dirchooser.showDialog(stage);
 
-    BufferedWriter bw = new BufferedWriter(new FileWriter("filepath.txt"));
+    
     if(file !=null)
-    {   String myfilepath= file.getAbsolutePath();
-        System.out.println("Path: " + myfilepath);
-        textfield.setText(myfilepath);
-        bw.write(myfilepath);
+    {   
+        List list1= new List();
+        list1.add("Java");
+        list1.add("Android");
+        list1.add("Kotlin");
+        list1.add("Android");
         
+        System.out.println("Path: " + file.getAbsolutePath());
+        textfield.setText(file.getAbsolutePath());
+        
+        
+        PdfWriter pdfWriter = new PdfWriter(file.getAbsolutePath() + "/CourseList.pdf");
+
+        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        pdfDocument.addNewPage();
+
+        Document document = new Document(pdfDocument);
+        document.add(list1);
+
+ 
+        document.close();
+      
     }
 
-   bw.close();
+
+  
 }
+
+@FXML
+public void confirmbutton (ActionEvent event){
+    Stage stage = (Stage) anchorid.getScene().getWindow();
+    stage.close();
+
+}
+
 
 @Override
 public void initialize(URL url, ResourceBundle rb){
