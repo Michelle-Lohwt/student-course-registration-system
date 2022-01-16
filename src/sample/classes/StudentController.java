@@ -34,7 +34,18 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
     File file = dirchooser.showDialog(stage);
 
-    
+        //input the text file for the course list
+        // try {
+        //     File fileObj = new File("student1.txt");
+        //     Scanner fileReader = new Scanner(fileObj);
+        //     while (fileReader.hasNextLine()) {
+        //       registeredCourse.getItems().list1.add(fileReader.nextLine());
+        //     }
+        //     fileReader.close();
+        //   } catch (FileNotFoundException e) {
+        //     System.out.println("An error occurred.");
+        //     e.printStackTrace();
+        //   }
     if(file !=null)
     {   
         List list1= new List();
