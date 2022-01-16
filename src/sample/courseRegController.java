@@ -60,7 +60,7 @@ public class courseRegController extends Controller implements Initializable {
     } catch (Exception e){
       System.out.println("Can't load new window");
     }
-   //switchTo(event,"classes/Student.fxml");
+
   }
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
