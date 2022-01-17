@@ -38,7 +38,7 @@
       </AnchorPane>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="47.0" layoutY="580.0" onMouseClicked="#Welcome" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
-            <Image url="@images/quit.png" />
+            <Image url="@images/power-off.png" />
          </image>
       </ImageView>
    </children>
