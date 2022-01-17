@@ -1,9 +1,12 @@
 package sample.classes;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -34,26 +37,26 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
     File file = dirchooser.showDialog(stage);
 
-        //input the text file for the course list
-        // try {
-        //     File fileObj = new File("student1.txt");
-        //     Scanner fileReader = new Scanner(fileObj);
-        //     while (fileReader.hasNextLine()) {
-        //       registeredCourse.getItems().list1.add(fileReader.nextLine());
-        //     }
-        //     fileReader.close();
-        //   } catch (FileNotFoundException e) {
-        //     System.out.println("An error occurred.");
-        //     e.printStackTrace();
-        //   }
+        
     if(file !=null)
     {   
         List list1= new List();
-        list1.add("Java");
-        list1.add("Android");
-        list1.add("Kotlin");
-        list1.add("Android");
-        
+      
+        //input the text file for the course list
+        try {
+            File fileObj = new File("student1registeredCourse.txt");
+             Scanner fileReader = new Scanner(fileObj);
+             while (fileReader.hasNextLine()) {
+               
+            list1.add(fileReader.nextLine());
+             }
+             fileReader.close();
+           } catch (FileNotFoundException e) {
+             System.out.println("An error occurred.");
+             e.printStackTrace();
+           }
+
+           
         System.out.println("Path: " + file.getAbsolutePath());
         textfield.setText(file.getAbsolutePath());
         
@@ -68,19 +71,14 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
  
         document.close();
-      
+        stage.close();
     }
 
 
   
 }
 
-@FXML
-public void confirmbutton (ActionEvent event){
-    Stage stage = (Stage) anchorid.getScene().getWindow();
-    stage.close();
 
-}
 
 
 @Override
