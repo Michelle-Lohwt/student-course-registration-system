@@ -24,7 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;	
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class courseRegController extends Controller implements Initializable {
@@ -60,7 +60,7 @@ public class courseRegController extends Controller implements Initializable {
   }
   
   //Read and display list of all courses that can be registered from txt file
-  private void displaycourselist(){
+  public void displaycourselist(){
     try {
       File fileObj = new File("student1courseList.txt");
       Scanner fileReader = new Scanner(fileObj);
@@ -68,21 +68,20 @@ public class courseRegController extends Controller implements Initializable {
         courseList.getItems().add(fileReader.nextLine());
       }
       fileReader.close();
-    
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
   }
   
-  //Read and Display Courses Registered from txt file
-  private void displaycourseregistered(){
+  //Read and display Courses Registered of the student from txt file
+  public void displaycourseregistered(){
     try {
       File fileObj = new File("student1registeredCourse.txt");
       Scanner fileReader = new Scanner(fileObj);
-      while (fileReader.hasNextLine()) {
-        registeredCourse.getItems().add(fileReader.nextLine());
-      }
+        while (fileReader.hasNextLine()) {
+          registeredCourse.getItems().add(fileReader.nextLine());
+        }
       fileReader.close();
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
@@ -90,42 +89,30 @@ public class courseRegController extends Controller implements Initializable {
     }
   }
 
-  public void addcourse()  {    
+  public void addcourse(){
     if(courseList.getSelectionModel().getSelectedItem() != null){
       //Store Courses Registered into txt file
       try (FileWriter myWriter = new FileWriter("student1registeredCourse.txt",true)){
-        myWriter.write(String.valueOf(courseList.getSelectionModel().getSelectedItem()), 0,
-        String.valueOf(courseList.getSelectionModel().getSelectedItem()).length());
+        String linetoAdd = courseList.getSelectionModel().getSelectedItem();
+        myWriter.write(String.valueOf(linetoAdd), 0, String.valueOf(linetoAdd).length());
         myWriter.write("\n");
-        //System.out.println("Successfully wrote to the file.");
       } catch (IOException e) {
         System.out.println("An error occurred.");
         e.printStackTrace();
       }
     
-      //Clear the Registered Course ListView
-    registeredCourse.getItems().clear();
-
-    //Read and Display Courses Registered from txt file
-    displaycourseregistered();
-
-    //Filter out courses that have been registered by the student.
-    filtercourselist();
-
-    //Clear the Course List ListView
-    courseList.getItems().clear();
-
-    //Read and display list of all courses that can be registered from txt file
-    displaycourselist();
+    //Update both Registered Course ListView, Course List ListView and 
+    //filter out courses that have been registered by the student.
+    updatebothlist();
     
     //Clear the searchCourse Textfield after a course is registered.
     searchCourse.clear();
     } 
   }
 
-  public void removecourse()  {
-    //Remove Courses Registered from txt file
-    if(registeredCourse.getSelectionModel().getSelectedItem() != null){      
+  public void removecourse(){
+    if(registeredCourse.getSelectionModel().getSelectedItem() != null){
+      //Remove Courses Registered from txt file
       try{
         File file = new File("student1registeredCourse.txt");
         File temp = new File("TempFile.txt");
@@ -137,7 +124,7 @@ public class courseRegController extends Controller implements Initializable {
         String currentLine;
 
         while((currentLine = reader.readLine()) != null) {
-          // trim newline when comparing with lineToRemove
+          //Trim newline when comparing with lineToRemove
           String trimmedLine = currentLine.trim();
           if(trimmedLine.equals(lineToRemove)) continue;
           writer.write(currentLine + System.getProperty("line.separator"));
@@ -155,47 +142,38 @@ public class courseRegController extends Controller implements Initializable {
         System.out.println("An error occurred.");
         e.printStackTrace();
       }
-      //Clear the Registered Course ListView
-      registeredCourse.getItems().clear();
-      //Read and Display Courses Registered from txt file
-      displaycourseregistered();
 
-      //Filter out courses that have been registered by the student.
-      filtercourselist();
-
-      //Clear the Course List ListView
-      courseList.getItems().clear();
-
-      //Read and display list of all courses that can be registered from txt file
-      displaycourselist();
+    //Update both Registered Course ListView, Course List ListView and 
+    //filter out courses that have been registered by the student.
+    updatebothlist();
     }
   }
 
   public void searchcourse() {
+    //Get the list of courses that can be registered by the student and stored in an ArrayList named "list"
     List<String> list = new ArrayList<>();
     try {
         File fileObj = new File("student1courseList.txt");
         Scanner fileReader = new Scanner(fileObj);
         while (fileReader.hasNextLine()) {
-            list.add(fileReader.nextLine());
+          list.add(fileReader.nextLine());
         }
         fileReader.close();
     } catch (FileNotFoundException e) {
         System.out.println("An error occurred.");
         e.printStackTrace();
-    }   
+    }
 
+    //Perform the search(filter) in "list" and output the result in another ArrayList named "result"
     List<String> result = list
       .stream()
       .filter(x -> x.toLowerCase().contains(searchCourse.getText().toLowerCase()))
       .collect(Collectors.toList());
 
-    //conversion of ArrayList to String
+    //Convert the elements in "result" from ArrayList to String
     StringBuilder strbul = new StringBuilder();
-    for(String str : result)
-    {
+    for(String str : result){
         strbul.append(str);
-        //for adding comma between elements
         strbul.append("\n");
     }
 
@@ -203,8 +181,6 @@ public class courseRegController extends Controller implements Initializable {
 
     //Clear the Course List ListView
     courseList.getItems().clear();
-
-    //courseList.getItems().add(str);
 
     //Insert Course List Search Result into txt file
     try (FileWriter myWriter = new FileWriter("searchCourse.txt",true)){
@@ -226,38 +202,41 @@ public class courseRegController extends Controller implements Initializable {
       //Clear searchCourse.txt
       PrintWriter writer = new PrintWriter("searchCourse.txt");
       writer.print("");
-      writer.close();    
+      writer.close();
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-  }
-  
-  //Filter out courses that have been registered by the student,
-  //i.e. Only contains the courses that have not been registered by the student.
-  //e.g. Output.txt = Input.txt – Delete.txt
-  //In this case: studentcourseList = courseList – studentregisteredCourse
-  private void filtercourselist(){
+  }  
+
+  public void updatebothlist(){
+    //Clear the Registered Course ListView
+    registeredCourse.getItems().clear();
+    //Read and Display Courses Registered from txt file
+    displaycourseregistered();
+    //Filter out courses that have been registered by the student,
+    //i.e. Only contains the courses that have not been registered by the student.
+    //e.g. Output.txt = Input.txt – Delete.txt
+    //In this case: studentcourseList = courseList – studentregisteredCourse
     try{
-      // PrintWriter object for output.txt
-      PrintWriter pw = new PrintWriter("student1courseList.txt");      
-      // BufferedReader object for delete.txt
-      BufferedReader br2 = new BufferedReader(new FileReader("student1registeredCourse.txt"));      
-      String line2 = br2.readLine();      
-      // hashset for storing lines of delete.txt
-      HashSet<String> hs = new HashSet<String>();      
-      // loop for each line of delete.txt
-      while(line2 != null)
-      {
+      //PrintWriter object for output.txt
+      PrintWriter pw = new PrintWriter("student1courseList.txt");
+      //BufferedReader object for delete.txt
+      BufferedReader br2 = new BufferedReader(new FileReader("student1registeredCourse.txt"));
+      String line2 = br2.readLine();
+      //hashset for storing lines of delete.txt
+      HashSet<String> hs = new HashSet<String>();
+      //loop for each line of delete.txt
+      while(line2 != null){
         hs.add(line2);
         line2 = br2.readLine();
       }
-      // BufferedReader object for input.txt
+      //BufferedReader object for input.txt
       BufferedReader br1 = new BufferedReader(new FileReader("courseList.txt"));
       String line1 = br1.readLine();
-      // loop for each line of input.txt
+      //loop for each line of input.txt
       while(line1 != null){
-        // if line is not present in delete.txt, write it to output.txt
+        //if line is not present in delete.txt, write it to output.txt
         if(!hs.contains(line1))
         {pw.println(line1);}
             
@@ -267,7 +246,7 @@ public class courseRegController extends Controller implements Initializable {
       //Flush the stream
       pw.flush();
         
-      // closing resources
+      //Closing resources
       br1.close();
       br2.close();
       pw.close();
@@ -275,45 +254,20 @@ public class courseRegController extends Controller implements Initializable {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+    //Clear the Course List ListView
+    courseList.getItems().clear();
+    //Read and display list of all courses that can be registered from txt file
+    displaycourselist();
   }
 
-  private void coursesuggestion() {
-    courseSuggestion.getItems().add("CAT201 - INTEGRATED SOFTWARE DEVELOPMENT WORKSHOP");
-    courseSuggestion.getItems().add("CMT221 - DATABASE ORGANISATIONS AND DESIGN");
-    courseSuggestion.getItems().add("CST232 - OPERATING SYSTEMS");
-    courseSuggestion.getItems().add("CSE241 - FOUNDATION OF SOFTWARE ENGINEERING");
-    courseSuggestion.getItems().add("CPT111 - PRINCIPLES OF PROGRAMMING");
-    courseSuggestion.getItems().add("CPT112 - DISCRETE STRUCTURES");
-    courseSuggestion.getItems().add("CST131 - COMPUTER ORGANISATIONS");
-    courseSuggestion.getItems().add("CPT113 - PROGRAMMING METHODOLOGY AND DATA STRUCTURES");
-    courseSuggestion.getItems().add("CPT115 - MATHEMATICAL METHODS FOR COMPUTER SCIENCE");
-    courseSuggestion.getItems().add("CPC151 - FUNDAMENTALS OF LOGIC AND ARTIFICIAL INTELLIGENCE");
-    courseSuggestion.getItems().add("AKW103 - INTRODUCTION TO MANAGEMENT");
-    courseSuggestion.getItems().add("AKW104 - ACCOUNTING AND FINANCE");
-    courseSuggestion.getItems().add("ATW202 - BUSINESS RESEARCH METHOD");
-    courseSuggestion.getItems().add("ATW241 - PRINCIPLES OF MARKETING");
-    courseSuggestion.getItems().add("ATW262 - PRINCIPLES OF FINANCE");
-    courseSuggestion.getItems().add("MAA101 - CALCULUS FOR SCIENCE STUDENTS");
-    courseSuggestion.getItems().add("MAT111 - LINEAR ALGEBRA");
-    courseSuggestion.getItems().add("MAT181 - PROGRAMMING FOR SCIENTIFIC APPLICATIONS");
-    courseSuggestion.getItems().add("MAA111 - ALGEBRA FOR SCIENCE STUDENTS");
-    courseSuggestion.getItems().add("LAK100 - KOREAN LANGUAGE");
-    courseSuggestion.getItems().add("LAJ100 - JAPANESE LANGUAGE");
-    courseSuggestion.getItems().add("LKM400 - BAHASA MALAYSIA");
-    courseSuggestion.getItems().add("LSP300 - ACADEMIC ENGLISH");
-    courseSuggestion.getItems().add("HFF225 - PHILOSOPHY AND CURRENT ISSUES");
-    courseSuggestion.getItems().add("HFE224 - APPRECIATION OF ETHICS AND CIVILISATIONS");
+  public void coursesuggestion() {
+    System.out.println("function coursesuggestion() is executed.");
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     displaycourselist();
     displaycourseregistered();
-    addcourse();
-    removecourse();
-    searchcourse();
-    filtercourselist();
     coursesuggestion();
   }
-
 }
