@@ -2,7 +2,9 @@ package sample;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.text.Text;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -16,6 +18,15 @@ public class loginController extends Controller {
   @FXML
   private RadioButton rbLecturer, rbStudent;
 
+  @FXML
+  private Text loginMessage;
+
+  @FXML
+  private TextField studentIDTextField;
+
+  @FXML
+  private PasswordField passwordTextField;
+
   public void SignUp(MouseEvent event) throws IOException {
     switchTo(event, "signUp.fxml");
   }
@@ -28,11 +39,15 @@ public class loginController extends Controller {
     openLink();
   }
 
-  public void SignIn(MouseEvent event) throws IOException {
-    if (rbStudent.isSelected()) {
+  public void SignIn(MouseEvent event) {
+    if (studentIDTextField.getText().isBlank()==true && passwordTextField.getText().isBlank()==true)
+    {
+      loginMessage.setText("Please enter matrics number and password!");
+    }
+    /**if (rbStudent.isSelected()) {
       switchTo(event, "stuDash.fxml");
     } else if (rbLecturer.isSelected()) {
       switchTo(event, "lecDash.fxml");
-    }
+    }*/
   }
 }
