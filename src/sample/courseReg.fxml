@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -131,12 +133,11 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Suggestion" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="10.0">
+                  <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Details" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="courseSuggestion" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" />
                   <JFXButton fx:id="removeCourseButton" layoutX="38.0" layoutY="354.0" onMouseClicked="#removecourse" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Remove Course" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="14.0" />
@@ -152,21 +153,63 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="440.0" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="10.0">
-                     <children>
-                        <TextField fx:id="searchSuggest" prefHeight="25.0" prefWidth="400.0" promptText="Search Suggested Course">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" translateX="10.0" translateY="5.0">
-                           <image>
-                              <Image url="@images/loupe.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
                   <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="190.0" prefWidth="440.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="440.0">
+                           <children>
+                              <VBox prefWidth="420.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Text fx:id="courseTitle" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="400.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <HBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="time" layoutX="10.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="desc" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="400.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
          </center>
