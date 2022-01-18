@@ -86,11 +86,11 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+            <TextField fx:id="textPassword" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
                </font>
-            </PasswordField>
+            </TextField>
             <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="95.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/user.png" />
@@ -139,11 +139,16 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXCheckBox fx:id="showPassword" layoutX="350.0" layoutY="400.0" text="Show Password">
+            <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="400.0" onAction="#TriggerPasswordCheckBox" text="Show Password">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXCheckBox>
+            <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
          </children>
       </AnchorPane>
    </right>

@@ -21,7 +21,7 @@ public class loginController extends Controller {
   private RadioButton rbLecturer, rbStudent;
 
   @FXML
-  private TextField matricNo;
+  private TextField matricNo, textPassword;
 
   @FXML
   private PasswordField password;
@@ -46,6 +46,19 @@ public class loginController extends Controller {
       switchTo(event, "stuDash.fxml");
     } else if (rbLecturer.isSelected()) {
       switchTo(event, "lecDash.fxml");
+    }
+  }
+
+  public void TriggerPasswordCheckBox() {
+    if (showPassword.isSelected()) {
+      textPassword.setText(password.getText());
+      textPassword.setVisible(true);
+      password.setVisible(false);
+    }
+    else{
+      password.setText(textPassword.getText());
+      textPassword.setVisible(false);
+      password.setVisible(true);
     }
   }
 }
