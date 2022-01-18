@@ -101,17 +101,17 @@
                   <Image url="@images/padlock.png" />
                </image>
             </ImageView>
-            <Hyperlink layoutX="238.0" layoutY="582.0" onMouseClicked="#ContactUs" text="Change Password" textAlignment="CENTER">
+            <Hyperlink layoutX="238.0" layoutY="582.0" onMouseClicked="#ContactUs" style="-fx-cursor: hand;" text="Change Password" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="237.0" layoutY="610.0" onMouseClicked="#ContactUs" text="Forgot Account ID" textAlignment="CENTER">
+            <Hyperlink layoutX="237.0" layoutY="610.0" onMouseClicked="#ContactUs" style="-fx-cursor: hand;" text="Forgot Account ID" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <RadioButton fx:id="rbStudent" layoutX="180.0" layoutY="470.0" mnemonicParsing="false" text="Student">
+            <RadioButton fx:id="rbStudent" layoutX="180.0" layoutY="470.0" mnemonicParsing="false" style="-fx-cursor: hand;" text="Student">
                <font>
                   <Font size="18.0" />
                </font>
@@ -119,7 +119,7 @@
                   <ToggleGroup fx:id="studentLecturer" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="rbLecturer" layoutX="340.0" layoutY="470.0" mnemonicParsing="false" text="Lecturer" toggleGroup="$studentLecturer">
+            <RadioButton fx:id="rbLecturer" layoutX="340.0" layoutY="470.0" mnemonicParsing="false" style="-fx-cursor: hand;" text="Lecturer" toggleGroup="$studentLecturer">
                <font>
                   <Font size="18.0" />
                </font>
@@ -139,7 +139,7 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="400.0" onAction="#TriggerPasswordCheckBox" text="Show Password">
+            <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="400.0" onAction="#TriggerPasswordCheckBox" style="-fx-cursor: hand;" text="Show Password">
                <font>
                   <Font size="18.0" />
                </font>
