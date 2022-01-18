@@ -75,11 +75,6 @@
                   </LinearGradient>
                </stroke>
             </Rectangle>
-            <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </PasswordField>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="95.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/padlock.png" />
@@ -118,11 +113,6 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="rePassword" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" promptText="Retype Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </PasswordField>
             <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="95.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/user.png" />
@@ -138,11 +128,31 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <JFXCheckBox fx:id="showPassword" layoutX="350.0" layoutY="470.0" text="Show Password">
+            <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="470.0" onAction="#TriggerPasswordCheckBox" text="Show Password">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXCheckBox>
+            <TextField fx:id="TextPassword" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="reTextPassword" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <PasswordField fx:id="rePassword" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" promptText="Retype Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
          </children>
       </AnchorPane>
    </right>

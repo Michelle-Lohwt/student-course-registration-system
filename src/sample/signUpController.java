@@ -17,7 +17,7 @@ import javafx.fxml.FXML;
 public class signUpController extends Controller {
 
   @FXML
-  private TextField matricNo;
+  private TextField matricNo, TextPassword, reTextPassword;
 
   @FXML
   private PasswordField password, rePassword;
@@ -108,5 +108,29 @@ public class signUpController extends Controller {
     }
 
     signUpMessage.setText("Sign Up Successful");
+  }
+
+  public void TriggerPasswordCheckBox() {
+    if (showPassword.isSelected()) {
+      TextPassword.setText(password.getText());
+      reTextPassword.setText(rePassword.getText());
+
+      TextPassword.setVisible(true);
+      reTextPassword.setVisible(true);
+
+      password.setVisible(false);
+      rePassword.setVisible(false);
+
+    }
+    else{
+      password.setText(TextPassword.getText());
+      rePassword.setText(reTextPassword.getText());
+
+      TextPassword.setVisible(false);
+      reTextPassword.setVisible(false);
+
+      password.setVisible(true);
+      rePassword.setVisible(true);
+    }
   }
 }
