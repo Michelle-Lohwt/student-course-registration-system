@@ -37,7 +37,6 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
     File file = dirchooser.showDialog(stage);
 
-        
     if(file !=null)
     {   
         List list1= new List();
