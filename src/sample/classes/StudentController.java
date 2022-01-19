@@ -26,7 +26,7 @@ public class StudentController implements Initializable{
 private Label label;
 @FXML
 private AnchorPane anchorid;
-@FXML 
+@FXML
 private TextField textfield;
 
 @FXML
