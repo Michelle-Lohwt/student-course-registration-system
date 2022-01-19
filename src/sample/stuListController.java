@@ -1,7 +1,5 @@
 package sample;
 
-import sample.classes.Student;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -14,7 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+//import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -40,8 +38,8 @@ public class stuListController extends Controller implements Initializable {
     @FXML
     private ImageView printPreview;
 
-    @FXML
-    private TableView<Student> studentList;
+    //@FXML
+    //private TableView<Student> studentList;
 
     @FXML
     private TableColumn<?, ?> matric;
@@ -74,3 +72,4 @@ public class stuListController extends Controller implements Initializable {
 
   }
 }
+
