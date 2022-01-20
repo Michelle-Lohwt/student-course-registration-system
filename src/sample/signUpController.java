@@ -1,116 +1,138 @@
 package sample;
- 
-import java.io.File;
+
+import java.io.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import com.jfoenix.controls.JFXCheckBox;
 
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.fxml.FXML;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 public class signUpController extends Controller {
- 
-  @FXML
 
-  private ToggleGroup studentLecturer;
- 
+  @FXML
+  private TextField matricNo, TextPassword, reTextPassword;
+
+  @FXML
+  private PasswordField password, rePassword;
+
+  @FXML
+  private RadioButton rbLecturer, rbStudent;
+
+  @FXML
+  private JFXCheckBox showPassword;
+
   @FXML
   private Text signUpMessage;
- 
-  @FXML
-  private TextField studentIDTextField, passwordText, passwordText1;
- 
-  @FXML
-  private PasswordField passwordField , passwordField1;
 
+  @FXML
+  private ToggleGroup studentLecturer;
 
   public void Login(MouseEvent event) throws IOException {
     switchTo(event, "login.fxml");
   }
- 
+
   public void ContactUs(MouseEvent event) throws IOException {
     switchTo(event, "contactUs.fxml");
   }
- 
+
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
 
-  
- 
   public void signUp(MouseEvent event) {
 
- if(studentIDTextField.getText().isBlank()==true && passwordField.getText().isBlank()==true)
- {
-  signUpMessage.setText("Please enter matrics number and password!");
- }
- 
+    // These 3 things are actually You Quan's part, but I help him to do a bit.
+    // These 3 things are actually need to happen whenever a new user sign up. No
+    // need if log in.
 
-
- else if (studentIDTextField.getText().isBlank()==false && passwordField.getText().isBlank()==false && passwordField.getLength()<6)
- {
-  signUpMessage.setText("Password must have minimum 6 characters!");
- }
- 
-
-else if(studentIDTextField.getText().isBlank()==true)
-{
-  signUpMessage.setText("Please enter matrics number!");
-}
- 
-else if(passwordField.getText().isBlank()==true ||passwordField1.getText().isBlank()==true )
-{
-  signUpMessage.setText("Please enter password!");
-}
-
-else if (!passwordField.getText().equals (passwordField1.getText()))
-{
-  signUpMessage.setText("Password is incorrect!");
-}
-
-
-
- 
- else{
-   
-  try {
-    File fileObj = new File(studentIDTextField.getText() + ".txt");
-    
-     if (fileObj.exists()) 
-    {
-      signUpMessage.setText("This matrics number has been registered before!");
-      System.out.println(fileObj.getName() + " already exists.");
-      //System.out.println(fileObj.getAbsolutePath());
-    } 
-    
-    else if(!fileObj.exists())
-    {
-      signUpMessage.setText("Sign Up Successful!");
-  System.out.println("File created: " + fileObj.getName());
-  BufferedWriter writer=new BufferedWriter(new FileWriter(studentIDTextField.getText() + ".txt"));
-    writer.write("Matrics Number : " + studentIDTextField.getText());
-    writer.write("\nPassword: " + passwordField.getText());
-    writer.close();
-   
-  //System.out.println(fileObj.getAbsolutePath());
-      //System.out.println(fileObj.getAbsolutePath());
+    // 1. Create student1courselist.txt file
+    try {
+      File fileObj = new File("student1courseList.txt");
+      if (fileObj.createNewFile()) {
+        System.out.println("File created: " + fileObj.getName());
+        // System.out.println(fileObj.getAbsolutePath());
+      } else {
+        System.out.println(fileObj.getName() + " already exists.");
+        // System.out.println(fileObj.getAbsolutePath());
+      }
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
     }
- 
-   
-  } catch (IOException e) {
-    System.out.println("An error occurred.");
-    e.printStackTrace();
+
+    // 2. Copy the content of courseList.txt into student1courseList.txt
+    try {
+      FileInputStream in = new FileInputStream(new File("courseList.txt"));
+      FileOutputStream out = new FileOutputStream(new File("student1courseList.txt"));
+
+      try {
+        int n;
+        while ((n = in.read()) != -1) {
+          out.write(n);
+        }
+      }
+
+      finally {
+        if (in != null) {
+          in.close();
+        }
+        if (out != null) {
+          out.close();
+        }
+      }
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    // 3. Create student1registeredCourse.txt file
+    try {
+      File fileObj = new File("student1registeredCourse.txt");
+      if (fileObj.createNewFile()) {
+        System.out.println("File created: " + fileObj.getName());
+        // System.out.println(fileObj.getAbsolutePath());
+      } else {
+        System.out.println(fileObj.getName() + " already exists.");
+        // System.out.println(fileObj.getAbsolutePath());
+      }
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    signUpMessage.setText("Sign Up Successful");
   }
 
- }
- }  
+  public void TriggerPasswordCheckBox() {
+    if (showPassword.isSelected()) {
+      TextPassword.setText(password.getText());
+      reTextPassword.setText(rePassword.getText());
+
+      TextPassword.setVisible(true);
+      reTextPassword.setVisible(true);
+
+      password.setVisible(false);
+      rePassword.setVisible(false);
+
+    } else {
+      password.setText(TextPassword.getText());
+      rePassword.setText(reTextPassword.getText());
+
+      TextPassword.setVisible(false);
+      reTextPassword.setVisible(false);
+
+      password.setVisible(true);
+      rePassword.setVisible(true);
+    }
   }
+}
  
 
   

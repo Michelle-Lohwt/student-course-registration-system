@@ -8,7 +8,6 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.List;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -70,12 +69,15 @@ public class StudentController implements Initializable {
 
   }
 
+  @FXML
+  public void confirmbutton(ActionEvent event) {
+    Stage stage = (Stage) anchorid.getScene().getWindow();
+    stage.close();
 
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
-
-
-
+  }
 }

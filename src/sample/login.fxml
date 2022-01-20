@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.control.Button?>
@@ -20,7 +19,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.loginController">
    <left>
       <AnchorPane prefHeight="770.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31);" BorderPane.alignment="CENTER">
@@ -81,16 +79,12 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
-
-            <TextField fx:id="studentIDTextField" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matrics Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
-
+            <TextField fx:id="matricNo" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matric Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-
-            <PasswordField fx:id="passwordTextField" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
-
+            <TextField fx:id="textPassword" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -143,13 +137,16 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-
-            <Text fx:id="loginMessage" fill="#eb7e31" layoutX="75.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
+            <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="400.0" onAction="#TriggerPasswordCheckBox" style="-fx-cursor: hand;" text="Show Password">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font size="18.0" />
                </font>
-            </Text>
-
+            </JFXCheckBox>
+            <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
          </children>
       </AnchorPane>
    </right>

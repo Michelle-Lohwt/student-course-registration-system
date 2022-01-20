@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.stream.Collectors;
-
 import com.jfoenix.controls.JFXButton;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,7 +31,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class courseRegController extends Controller implements Initializable {
-
   // private final ObservableList<Courses> dataList =
   // FXCollections.observableArrayList();
   @FXML
@@ -132,7 +129,6 @@ public class courseRegController extends Controller implements Initializable {
       searchCourse.clear();
     }
   }
-
 
   public void removecourse() {
     if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
