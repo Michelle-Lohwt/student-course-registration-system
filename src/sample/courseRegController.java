@@ -100,6 +100,17 @@ public class courseRegController extends Controller implements Initializable {
         System.out.println("An error occurred.");
         e.printStackTrace();
       }
+
+      //Store the student information into the respective courseStudentList.txt
+      try (FileWriter myWriter = new FileWriter(courseList.getSelectionModel().getSelectedItem()+"StudentList.txt",true)){
+        myWriter.write(String.valueOf("student1name"), 0, String.valueOf("student1name").length());
+        myWriter.write("\t");
+        myWriter.write(String.valueOf("student1matricnumber"), 0, String.valueOf("student1matricnumber").length());
+        myWriter.write("\n");
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
     
     //Update both Registered Course ListView, Course List ListView and 
     //filter out courses that have been registered by the student.
@@ -125,8 +136,37 @@ public class courseRegController extends Controller implements Initializable {
 
         while((currentLine = reader.readLine()) != null) {
           //Trim newline when comparing with lineToRemove
-          String trimmedLine = currentLine.trim();
-          if(trimmedLine.equals(lineToRemove)) continue;
+          if(currentLine.trim().equals(lineToRemove)) continue;
+          writer.write(currentLine + System.getProperty("line.separator"));
+        }
+
+        //Close the reader and writer (preferably in the finally block).
+        reader.close();
+        writer.close();
+        //Delete the file.
+        file.delete();
+        //Rename the temp file.
+        temp.renameTo(file);
+        
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+
+      //Remove the student information from the respective courseStudentList.txt
+      try{
+        File file = new File(courseList.getSelectionModel().getSelectedItem()+"StudentList.txt");
+        File temp = new File("TempFile.txt");
+        //File temp = File.createTempFile("temporarystudent", ".txt", file.getParentFile());
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+
+        String lineToRemove = "student1name\tstudent1matricnumber";
+        String currentLine;
+
+        while((currentLine = reader.readLine()) != null) {
+          //Trim newline when comparing with lineToRemove
+          if(currentLine.trim().equals(lineToRemove)) continue;
           writer.write(currentLine + System.getProperty("line.separator"));
         }
 
@@ -261,7 +301,18 @@ public class courseRegController extends Controller implements Initializable {
   }
 
   public void coursesuggestion() {
-    System.out.println("function coursesuggestion() is executed.");
+    if(courseList.getSelectionModel().getSelectedItem() != null){
+      System.out.println(courseList.getSelectionModel().getSelectedItem());
+      
+      try{
+        List<String> lines = Files.lines(Paths.get("student-course-registration-system/src/sample/data/Course Details/"+courseList.getSelectionModel().getSelectedItem()+".txt")).collect(Collectors.toList());
+        System.out.println(lines.get(0));
+        System.out.println(lines.get(2));
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }      
+    }
   }
 
   @Override

@@ -1,0 +1,3 @@
+Monday 3:00pm-5:00pm
+
+This is a course on basic concepts of differential and integral calculus. Some of the concepts being discussed are limit, continuity, derivative and integral. Techniques of differentiation and integration will also be taught. Some of the applications of differentiation and integration, like finding the maximum and minimum, the area and volume of revolution, are covered.

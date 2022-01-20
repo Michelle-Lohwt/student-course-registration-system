@@ -125,7 +125,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <ListView fx:id="courseList" prefHeight="200.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="140.0" />
+                  <ListView fx:id="courseList" onMouseClicked="#coursesuggestion" prefHeight="200.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="140.0" />
                   <JFXButton fx:id="addCourseButton" layoutX="28.0" layoutY="344.0" onMouseClicked="#addcourse" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Add Course" textFill="WHITE" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="345.0">
                      <font>
                         <Font size="14.0" />
@@ -166,7 +166,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
+                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" onMouseClicked="#coursesuggestion" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
                </children>
             </AnchorPane>
          </center>

@@ -116,12 +116,12 @@
                   </Text>
                   <HBox prefHeight="40.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0">
                      <children>
-                        <TextField fx:id="searchCourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
+                        <TextField fx:id="searchCourse" onKeyTyped="#searchcourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" translateX="10.0" translateY="5.0">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#searchcourse" pickOnBounds="true" preserveRatio="true" translateX="10.0" translateY="5.0">
                            <image>
                               <Image url="@images/loupe.png" />
                            </image>
@@ -129,7 +129,7 @@
                      </children>
                   </HBox>
                   <ListView fx:id="courseList" prefHeight="200.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="140.0" />
-                  <JFXButton fx:id="addCourseButton" layoutX="28.0" layoutY="344.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Add Course" textFill="WHITE" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="345.0">
+                  <JFXButton fx:id="addCourseButton" layoutX="28.0" layoutY="344.0" onMouseClicked="#addcourse" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Add Course" textFill="WHITE" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="345.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -189,7 +189,7 @@
                      </font>
                   </Text>
                   <ListView fx:id="teachingCourse" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" />
-                  <JFXButton fx:id="removeCourseButton" layoutX="38.0" layoutY="354.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Remove Course" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="450.0">
+                  <JFXButton fx:id="removeCourseButton" layoutX="38.0" layoutY="354.0" onMouseClicked="#removecourse" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Remove Course" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="450.0">
                      <font>
                         <Font size="14.0" />
                      </font>
