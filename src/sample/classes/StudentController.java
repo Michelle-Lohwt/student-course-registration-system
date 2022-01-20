@@ -38,6 +38,7 @@ public class StudentController implements Initializable {
 
     File file = dirchooser.showDialog(stage);
 
+
     if (file != null) {
       List list1 = new List();
       //input the text file for the course list
@@ -53,6 +54,7 @@ public class StudentController implements Initializable {
       e.printStackTrace();
       }
 
+
       System.out.println("Path: " + file.getAbsolutePath());
       textfield.setText(file.getAbsolutePath());
 
@@ -65,10 +67,12 @@ public class StudentController implements Initializable {
       document.add(list1);
 
       document.close();
+
       pdfMessage.setText("The course list is printed successfully!");
     }
 
-  }
+    }
+
 
 
   @Override
