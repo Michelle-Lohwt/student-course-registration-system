@@ -70,20 +70,12 @@ public class StudentController implements Initializable {
 
   }
 
-  @FXML
-  public void confirmbutton(ActionEvent event) {
-    Stage stage = (Stage) anchorid.getScene().getWindow();
-    stage.close();
 
-  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
 
-@Override
-public void initialize(URL url, ResourceBundle rb){
-    
-}
+
 
 }
