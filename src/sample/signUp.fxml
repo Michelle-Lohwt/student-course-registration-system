@@ -75,7 +75,18 @@
                   </LinearGradient>
                </stroke>
             </Rectangle>
-            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="95.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+
+            <TextField layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="*@usm.my or any *.usm.my subdomains" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="95.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/email.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="95.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/padlock.png" />
                </image>
@@ -108,11 +119,19 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <TextField fx:id="matricNo" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="StudentID or StaffID" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+
+            <TextField fx:id="studentIDTextField" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matrics Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
+
+            <PasswordField fx:id="passwordField1" accessibleRole="TEXT_FIELD" layoutX="150.0" layoutY="470.0" prefHeight="26.0" prefWidth="350.0" promptText="Retype Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+
             <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="95.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/user.png" />
@@ -128,6 +147,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
+
             <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="470.0" onAction="#TriggerPasswordCheckBox" style="-fx-cursor: hand;" text="Show Password">
                <font>
                   <Font size="18.0" />
@@ -149,6 +169,7 @@
                </font>
             </PasswordField>
             <PasswordField fx:id="rePassword" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" promptText="Retype Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+
                <font>
                   <Font size="18.0" />
                </font>
