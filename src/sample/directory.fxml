@@ -4,12 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.classes.StudentController">
+<AnchorPane fx:id="anchorid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.printcontroller">
    <children>
       <Button fx:id="button" layoutX="253.0" layoutY="128.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="101.0" text="Browse" />
       <TextField fx:id="textfield" layoutX="24.0" layoutY="131.0" />
       <Label fx:id="label" layoutX="24.0" layoutY="81.0" prefHeight="15.0" prefWidth="318.0" text="Choose directory to store your course list PDF FIle." />
-      <Button fx:id="confirm" layoutX="174.0" layoutY="216.0" mnemonicParsing="false" onAction="#confirmbutton" prefHeight="26.0" prefWidth="59.0" text="Confirm" />
+      <Text fx:id="pdfMessage" fill="#eb7e31" layoutX="-1.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="430.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

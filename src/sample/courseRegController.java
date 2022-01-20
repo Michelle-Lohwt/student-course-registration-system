@@ -65,7 +65,7 @@ public class courseRegController extends Controller implements Initializable {
 
   public void printPreview(MouseEvent event) throws IOException {
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("classes/Student.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("directory.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
 
