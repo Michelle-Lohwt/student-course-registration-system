@@ -1,12 +1,9 @@
 package sample;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -36,45 +33,49 @@ public class StudentController implements Initializable {
 
     File file = dirchooser.showDialog(stage);
 
+    // input the text file for the course list
+    // try {
+    // File fileObj = new File("student1.txt");
+    // Scanner fileReader = new Scanner(fileObj);
+    // while (fileReader.hasNextLine()) {
+    // registeredCourse.getItems().list1.add(fileReader.nextLine());
+    // }
+    // fileReader.close();
+    // } catch (FileNotFoundException e) {
+    // System.out.println("An error occurred.");
+    // e.printStackTrace();
+    // }
+    if (file != null) {
+      List list1 = new List();
+      list1.add("Java");
+      list1.add("Android");
+      list1.add("Kotlin");
+      list1.add("Android");
 
-    if(file !=null)
-    {   
-        List list1= new List();
+      System.out.println("Path: " + file.getAbsolutePath());
+      textfield.setText(file.getAbsolutePath());
 
-        //input the text file for the course list
-        try {
-            File fileObj = new File("student1registeredCourse.txt");
-             Scanner fileReader = new Scanner(fileObj);
-             while (fileReader.hasNextLine()) {
+      PdfWriter pdfWriter = new PdfWriter(file.getAbsolutePath() + "/CourseList.pdf");
 
-            list1.add(fileReader.nextLine());
-             }
-             fileReader.close();
-           } catch (FileNotFoundException e) {
-             System.out.println("An error occurred.");
-             e.printStackTrace();
-           }
+      PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+      pdfDocument.addNewPage();
 
+      Document document = new Document(pdfDocument);
+      document.add(list1);
 
-        System.out.println("Path: " + file.getAbsolutePath());
-        textfield.setText(file.getAbsolutePath());
+      document.close();
 
-
-        PdfWriter pdfWriter = new PdfWriter(file.getAbsolutePath() + "/CourseList.pdf");
-
-        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-        pdfDocument.addNewPage();
-
-        Document document = new Document(pdfDocument);
-        document.add(list1);
-
-
-        document.close();
-        stage.close();
+    }
 
   }
-  
+
+  @FXML
+  public void confirmbutton(ActionEvent event) {
+    Stage stage = (Stage) anchorid.getScene().getWindow();
+    stage.close();
+
   }
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
