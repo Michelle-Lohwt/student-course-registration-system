@@ -2,10 +2,14 @@ package sample;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import javafx.scene.control.TextField;
+
+
+import com.jfoenix.controls.JFXCheckBox;
+
 import javafx.scene.control.PasswordField;
-import javafx.scene.text.Text;
+
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
@@ -19,6 +23,7 @@ public class loginController extends Controller {
   private RadioButton rbLecturer, rbStudent;
 
   @FXML
+
   private Text loginMessage;
 
   @FXML
@@ -26,6 +31,13 @@ public class loginController extends Controller {
 
   @FXML
   private PasswordField passwordTextField;
+
+  @FXML
+  private PasswordField password;
+
+  @FXML
+  private JFXCheckBox showPassword;
+
 
   public void SignUp(MouseEvent event) throws IOException {
     switchTo(event, "signUp.fxml");
@@ -49,5 +61,18 @@ public class loginController extends Controller {
     } else if (rbLecturer.isSelected()) {
       switchTo(event, "lecDash.fxml");
     }*/
+  }
+
+  public void TriggerPasswordCheckBox() {
+    if (showPassword.isSelected()) {
+      textPassword.setText(password.getText());
+      textPassword.setVisible(true);
+      password.setVisible(false);
+    }
+    else{
+      password.setText(textPassword.getText());
+      textPassword.setVisible(false);
+      password.setVisible(true);
+    }
   }
 }
