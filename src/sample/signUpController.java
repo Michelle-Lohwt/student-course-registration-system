@@ -89,11 +89,11 @@ else if (!passwordField.getText().equals (passwordField1.getText()))
     else if(!fileObj.exists())
     {
       signUpMessage.setText("Sign Up Successful!");
-  System.out.println("File created: " + fileObj.getName());
-  BufferedWriter writer=new BufferedWriter(new FileWriter(studentIDTextField.getText() + ".txt"));
-    writer.write("Matrics Number : " + studentIDTextField.getText());
-    writer.write("\nPassword: " + passwordField.getText());
-    writer.close();
+      System.out.println("File created: " + fileObj.getName());
+      BufferedWriter writer=new BufferedWriter(new FileWriter(studentIDTextField.getText() + ".txt"));
+      writer.write(studentIDTextField.getText());
+      writer.write("\n" + passwordField.getText());
+      writer.close();
    
   //System.out.println(fileObj.getAbsolutePath());
       //System.out.println(fileObj.getAbsolutePath());
