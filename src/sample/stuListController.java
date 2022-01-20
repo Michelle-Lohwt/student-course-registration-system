@@ -91,4 +91,3 @@ public class stuListController extends Controller implements Initializable {
         "The course serves to dkksjfasjkfdsfkjslkdjfaskljfksjfahahhahahahahahahahahahadjfksdhfjksadhfljashfjkshd");
   }
 }
-

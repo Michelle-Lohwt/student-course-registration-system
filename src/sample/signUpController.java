@@ -133,11 +133,3 @@ public class signUpController extends Controller {
     }
   }
 }
- 
-
-  
- 
- 
- 
- 
- 
