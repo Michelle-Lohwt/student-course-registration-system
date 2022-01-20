@@ -1,4 +1,5 @@
-package sample.classes;
+
+    package sample;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,17 +19,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-public class StudentController implements Initializable{
+public class printcontroller implements Initializable{
 @FXML
 private Label label;
 @FXML
 private AnchorPane anchorid;
 @FXML
 private TextField textfield;
-
+@FXML
+private Text pdfMessage;
 @FXML
 public void handleButtonAction(ActionEvent event) throws IOException{
     final DirectoryChooser dirchooser = new DirectoryChooser();
@@ -70,7 +73,9 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
  
         document.close();
-        stage.close();
+        pdfMessage.setText("The course list is printed successfully");
+        
+
     }
 
 
@@ -80,8 +85,17 @@ public void handleButtonAction(ActionEvent event) throws IOException{
 
 
 
+
+
+
+
+
+
 @Override
 public void initialize(URL url, ResourceBundle rb){
-    // TODO
+    
 }
+
+
 }
+
