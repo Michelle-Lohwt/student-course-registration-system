@@ -81,12 +81,16 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
-            <TextField fx:id="matricNo" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matric Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+
+            <TextField fx:id="studentIDTextField" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matrics Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="textPassword" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+
+            <PasswordField fx:id="passwordTextField" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+
                <font>
                   <Font size="18.0" />
                </font>
@@ -139,16 +143,13 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="400.0" onAction="#TriggerPasswordCheckBox" style="-fx-cursor: hand;" text="Show Password">
+
+            <Text fx:id="loginMessage" fill="#eb7e31" layoutX="75.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
-            </JFXCheckBox>
-            <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </PasswordField>
+            </Text>
+
          </children>
       </AnchorPane>
    </right>

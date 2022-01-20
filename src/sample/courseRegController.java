@@ -133,6 +133,7 @@ public class courseRegController extends Controller implements Initializable {
     }
   }
 
+
   public void removecourse() {
     if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
       // Remove Courses Registered from txt file
