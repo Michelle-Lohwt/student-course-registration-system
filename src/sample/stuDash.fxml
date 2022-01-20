@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -105,144 +107,157 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ImageView fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="90.0">
+                  <ImageView fx:id="profilePic" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="90.0">
                      <image>
                         <Image url="@test/dbimages/stu_profile_pic.jpg" />
                      </image>
                   </ImageView>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="400.0" stroke="BLACK" strokeType="INSIDE" width="850.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="70.0" />
                   <HBox AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="90.0">
                      <children>
                         <VBox alignment="TOP_RIGHT" spacing="5.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NRIC No: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NRIC No : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Matric No: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Matric No : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Academic Status: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Academic Status : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Semester Registered: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Semester Registered : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CGPA: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CGPA : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" text="Year: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Year : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="School: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="School : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Campus: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Campus : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Programme: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Programme : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Major: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Major : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Minor: ">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Minor : ">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
                               </Text>
                            </children>
                         </VBox>
                         <VBox prefWidth="450.0" spacing="5.0" translateX="10.0">
                            <children>
-                              <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0">
+                              <TextField fx:id="name" disable="true" editable="false" promptText="Your Name" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </Text>
-                              <Text fx:id="nric" strokeType="OUTSIDE" strokeWidth="0.0">
+                              </TextField>
+                              <TextField fx:id="nric" disable="true" editable="false" layoutX="10.0" layoutY="327.0" promptText="Indentity Card No" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </Text>
-                              <Text fx:id="matric" strokeType="OUTSIDE" strokeWidth="0.0">
+                              </TextField>
+                              <TextField fx:id="matric" disable="true" editable="false" layoutX="10.0" layoutY="314.0" promptText="Matric No" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </Text>
-                              <Text fx:id="acd_status" strokeType="OUTSIDE" strokeWidth="0.0">
+                              </TextField>
+                              <ChoiceBox fx:id="acd_status" disable="true" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <ChoiceBox fx:id="sem_reg" disable="true" layoutX="10.0" layoutY="346.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <TextField fx:id="cgpa" disable="true" editable="false" layoutX="10.0" layoutY="301.0" promptText="Current CGPA" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </Text>
-                              <Text fx:id="sem_reg" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="cgpa" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="school" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="campus" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="programme" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="major" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="minor" strokeType="OUTSIDE" strokeWidth="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
+                              </TextField>
+                              <ChoiceBox fx:id="year" disable="true" layoutX="10.0" layoutY="362.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <ChoiceBox fx:id="school" disable="true" layoutX="10.0" layoutY="394.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <ChoiceBox fx:id="campus" disable="true" layoutX="10.0" layoutY="439.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <ChoiceBox fx:id="programme" disable="true" layoutX="10.0" layoutY="455.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <ChoiceBox fx:id="major" disable="true" layoutX="10.0" layoutY="442.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
+                              <ChoiceBox fx:id="minor" disable="true" layoutX="10.0" layoutY="458.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
+                  <JFXButton fx:id="editInfoButton" layoutX="690.0" layoutY="356.0" onAction="#editStuInfo" prefWidth="170.0" style="-fx-background-color: #EB7E31; -fx-cursor: Hand;" text="Edit Info" textFill="WHITE" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="356.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="saveButton" layoutX="700.0" layoutY="366.0" onAction="#saveInfo" prefWidth="170.0" style="-fx-background-color: #EB7E31; -fx-cursor: Hand;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="400.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </center>
