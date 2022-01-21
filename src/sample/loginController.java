@@ -46,7 +46,7 @@ public class loginController extends Controller {
 
 
   public void SignIn(MouseEvent event) throws IOException{
-    if (matricNo.getText().isBlank()==true && textPassword.getText().isBlank()==true)
+    if (matricNo.getText().isBlank()==true && password.getText().isBlank()==true)
     {
       loginMessage.setText("Please enter matrics number and password!");
     }
@@ -71,11 +71,11 @@ public class loginController extends Controller {
         {
           loginMessage.setText("Matrics number is incorrect!");
         }
-        else if(!textPassword.getText().equals(correctPassword))
+        else if(!password.getText().equals(correctPassword))
         {
           loginMessage.setText("Password is incorrect!");
         }
-        else if (matricNo.getText().equals(correctStudentID) && textPassword.getText().equals(correctPassword) && rbStudent.isSelected())
+        else if (matricNo.getText().equals(correctStudentID) && password.getText().equals(correctPassword) && rbStudent.isSelected())
        {
         switchTo(event, "stuDash.fxml");
        }
