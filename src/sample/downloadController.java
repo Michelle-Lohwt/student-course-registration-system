@@ -1,4 +1,4 @@
-package sample.classes;
+package sample;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-public class StudentController implements Initializable {
+public class downloadController implements Initializable {
   @FXML
   private Label label;
   @FXML
@@ -30,6 +30,7 @@ public class StudentController implements Initializable {
   private TextField textfield;
   @FXML
   private Text pdfMessage;
+
   @FXML
   public void handleButtonAction(ActionEvent event) throws IOException {
     final DirectoryChooser dirchooser = new DirectoryChooser();
@@ -38,22 +39,20 @@ public class StudentController implements Initializable {
 
     File file = dirchooser.showDialog(stage);
 
-
     if (file != null) {
       List list1 = new List();
-      //input the text file for the course list
+      // input the text file for the course list
       try {
-      File fileObj = new File("student1.txt");
-      Scanner fileReader = new Scanner(fileObj);
-      while (fileReader.hasNextLine()) {
-      list1.add(fileReader.nextLine());
-      }
-      fileReader.close();
+        File fileObj = new File("student1.txt");
+        Scanner fileReader = new Scanner(fileObj);
+        while (fileReader.hasNextLine()) {
+          list1.add(fileReader.nextLine());
+        }
+        fileReader.close();
       } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
+        System.out.println("An error occurred.");
+        e.printStackTrace();
       }
-
 
       System.out.println("Path: " + file.getAbsolutePath());
       textfield.setText(file.getAbsolutePath());
@@ -71,9 +70,7 @@ public class StudentController implements Initializable {
       pdfMessage.setText("The course list is printed successfully!");
     }
 
-    }
-
-
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
