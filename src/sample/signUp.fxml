@@ -123,7 +123,7 @@
             </JFXButton>
             <Text fx:id="signUpMessage" fill="#eb7e31" layoutX="75.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Text>
             <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="470.0" onAction="#TriggerPasswordCheckBox" style="-fx-cursor: hand;" text="Show Password">
