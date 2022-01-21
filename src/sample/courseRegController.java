@@ -25,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -62,11 +63,13 @@ public class courseRegController extends Controller implements Initializable {
 
   public void printPreview(MouseEvent event) throws IOException {
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("classes/Student.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("download.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
-
+      Image icon = new Image("sample/images/download.png");
+      stage.getIcons().add(icon);
       stage.setTitle("Select Course List pdf directory");
+      stage.setResizable(false);
       stage.setScene(new Scene(root1));
       stage.show();
     } catch (Exception e) {
