@@ -36,7 +36,6 @@ public class downloadController implements Initializable {
     final DirectoryChooser dirchooser = new DirectoryChooser();
 
     Stage stage = (Stage) anchorid.getScene().getWindow();
-
     File file = dirchooser.showDialog(stage);
 
     if (file != null) {

@@ -29,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class courseRegController extends Controller implements Initializable {
@@ -66,6 +67,7 @@ public class courseRegController extends Controller implements Initializable {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("download.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
       Image icon = new Image("sample/images/download.png");
       stage.getIcons().add(icon);
       stage.setTitle("Select Course List pdf directory");
