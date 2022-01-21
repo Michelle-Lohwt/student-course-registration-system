@@ -47,11 +47,12 @@ public class signUpController extends Controller {
   }
 
   public void signUp(MouseEvent event) {
-    
-    //These 3 things are actually You Quan's part, but I help him to do a bit.
-    //These 3 things are actually need to happen whenever a new user sign up. No need if log in.
 
-    //1. Create student1courselist.txt file
+    // These 3 things are actually You Quan's part, but I help him to do a bit.
+    // These 3 things are actually need to happen whenever a new user sign up. No
+    // need if log in.
+
+    // 1. Create student1courselist.txt file
     try {
       File fileObj = new File("src/sample/data/Student Course List/"+matricNo.getText()+".txt");
       if (fileObj.createNewFile()) {
@@ -69,14 +70,14 @@ public class signUpController extends Controller {
     FileInputStream in = new FileInputStream(new File("src/sample/data/Course List.txt"));
     FileOutputStream out = new FileOutputStream(new File ("src/sample/data/Student Course List/"+matricNo.getText()+".txt"));
 
-      try{
+      try {
         int n;
-        while ((n = in.read()) != -1){
+        while ((n = in.read()) != -1) {
           out.write(n);
         }
       }
 
-      finally{
+      finally {
         if (in != null) {
           in.close();
         }
@@ -89,15 +90,15 @@ public class signUpController extends Controller {
       e.printStackTrace();
     }
 
-    //3. Create student1registeredCourse.txt file
+    // 3. Create student1registeredCourse.txt file
     try {
       File fileObj = new File("src/sample/data/Student Registered Course/"+matricNo.getText()+".txt");
       if (fileObj.createNewFile()) {
         System.out.println("File created: " + fileObj.getName());
-        //System.out.println(fileObj.getAbsolutePath());
+        // System.out.println(fileObj.getAbsolutePath());
       } else {
         System.out.println(fileObj.getName() + " already exists.");
-        //System.out.println(fileObj.getAbsolutePath());
+        // System.out.println(fileObj.getAbsolutePath());
       }
     } catch (IOException e) {
       System.out.println("An error occurred.");
