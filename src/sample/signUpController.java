@@ -48,12 +48,14 @@ public class signUpController extends Controller {
   }
 
   public void signUp(MouseEvent event) throws IOException{
- if(matricNo.getText().isBlank()==true && password.getText().isBlank()==true)
+ if(matricNo.getText().isBlank()==true && password.getText().isBlank()==true && rePassword.getText().isBlank()==true)
  {
   signUpMessage.setText("Please enter matrics number and password!");
  }
  
- else if (matricNo.getText().isBlank()==false && password.getText().isBlank()==false && password.getLength()<6)
+ else if 
+ (matricNo.getText().isBlank()==false && password.getText().isBlank()==false && 
+ password.getLength()<6 && rePassword.getText().isBlank()==false && rePassword.getLength()<6)
  {
   signUpMessage.setText("Password must have minimum 6 characters!");
  }
@@ -63,14 +65,14 @@ else if(matricNo.getText().isBlank()==true)
   signUpMessage.setText("Please enter matrics number!");
 }
  
-else if(password.getText().isBlank()==true && rePassword.getText().isBlank()==true )
+else if(password.getText().isBlank()==true || rePassword.getText().isBlank()==true)
 {
   signUpMessage.setText("Please enter password!");
 }
 
 else if (!password.getText().equals (rePassword.getText()))
 {
-  signUpMessage.setText("Password is incorrect!");
+  signUpMessage.setText("Password does not match!");
 }
 
  else{
