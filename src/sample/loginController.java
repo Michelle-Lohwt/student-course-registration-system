@@ -50,11 +50,19 @@ public class loginController extends Controller {
   public void TriggerPasswordCheckBox() {
     if (showPassword.isSelected()) {
       textPassword.setText(password.getText());
+
+      textPassword.setDisable(false);
       textPassword.setVisible(true);
+
+      password.setDisable(true);
       password.setVisible(false);
     } else {
       password.setText(textPassword.getText());
+
+      textPassword.setDisable(true);
       textPassword.setVisible(false);
+
+      password.setDisable(false);
       password.setVisible(true);
     }
   }
