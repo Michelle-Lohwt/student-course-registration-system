@@ -115,8 +115,14 @@ public class signUpController extends Controller {
       TextPassword.setText(password.getText());
       reTextPassword.setText(rePassword.getText());
 
+      TextPassword.setDisable(false);
+      reTextPassword.setDisable(false);
+
       TextPassword.setVisible(true);
       reTextPassword.setVisible(true);
+
+      password.setDisable(true);
+      rePassword.setDisable(true);
 
       password.setVisible(false);
       rePassword.setVisible(false);
@@ -125,8 +131,14 @@ public class signUpController extends Controller {
       password.setText(TextPassword.getText());
       rePassword.setText(reTextPassword.getText());
 
+      TextPassword.setDisable(true);
+      reTextPassword.setDisable(true);
+
       TextPassword.setVisible(false);
       reTextPassword.setVisible(false);
+
+      password.setDisable(false);
+      rePassword.setDisable(false);
 
       password.setVisible(true);
       rePassword.setVisible(true);
