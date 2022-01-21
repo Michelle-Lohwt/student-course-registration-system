@@ -4,6 +4,7 @@ import java.io.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+
 import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.scene.control.PasswordField;
@@ -46,69 +47,71 @@ public class signUpController extends Controller {
     openLink();
   }
 
-  public void signUp(MouseEvent event) {
+  public void signUp(MouseEvent event) throws IOException{
+ if(matricNo.getText().isBlank()==true && password.getText().isBlank()==true && rePassword.getText().isBlank()==true)
+ {
+  signUpMessage.setText("Please enter matrics number and password!");
+ }
+ 
+ else if 
+ (matricNo.getText().isBlank()==false && password.getText().isBlank()==false && 
+ password.getLength()<6 && rePassword.getText().isBlank()==false && rePassword.getLength()<6)
+ {
+  signUpMessage.setText("Password must have minimum 6 characters!");
+ }
+ 
+else if(matricNo.getText().isBlank()==true)
+{
+  signUpMessage.setText("Please enter matrics number!");
+}
+ 
+else if(password.getText().isBlank()==true || rePassword.getText().isBlank()==true)
+{
+  signUpMessage.setText("Please enter password!");
+}
 
-    // These 3 things are actually You Quan's part, but I help him to do a bit.
-    // These 3 things are actually need to happen whenever a new user sign up. No
-    // need if log in.
+else if (!password.getText().equals (rePassword.getText()))
+{
+  signUpMessage.setText("Password does not match!");
+}
 
-    // 1. Create student1courselist.txt file
-    try {
-      File fileObj = new File("student1courseList.txt");
-      if (fileObj.createNewFile()) {
-        System.out.println("File created: " + fileObj.getName());
-        // System.out.println(fileObj.getAbsolutePath());
-      } else {
-        System.out.println(fileObj.getName() + " already exists.");
-        // System.out.println(fileObj.getAbsolutePath());
-      }
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
+ else{
+   
+  try {
+    File fileObj = new File(matricNo.getText() + ".txt");
+    
+     if (fileObj.exists()) 
+    {
+      System.out.println(fileObj.getName() + " already exists.");
+      signUpMessage.setText("This matrics number has been registered before!");
+      //System.out.println(fileObj.getAbsolutePath());
+    } 
+    
+    else if(!fileObj.exists())
+    {
+      signUpMessage.setText("Sign Up Successful!");
+      System.out.println("File created: " + fileObj.getName());
+      BufferedWriter writer=new BufferedWriter(new FileWriter(matricNo.getText() + ".txt"));
+      writer.write(matricNo.getText());
+      writer.write("\n" + password.getText());
+      writer.close();
+  //System.out.println(fileObj.getAbsolutePath());
+      //System.out.println(fileObj.getAbsolutePath());
     }
-
-    // 2. Copy the content of courseList.txt into student1courseList.txt
-    try {
-      FileInputStream in = new FileInputStream(new File("courseList.txt"));
-      FileOutputStream out = new FileOutputStream(new File("student1courseList.txt"));
-
-      try {
-        int n;
-        while ((n = in.read()) != -1) {
-          out.write(n);
-        }
-      }
-
-      finally {
-        if (in != null) {
-          in.close();
-        }
-        if (out != null) {
-          out.close();
-        }
-      }
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
+    else
+    {
+      signUpMessage.setText("An error occurred!");
     }
-
-    // 3. Create student1registeredCourse.txt file
-    try {
-      File fileObj = new File("student1registeredCourse.txt");
-      if (fileObj.createNewFile()) {
-        System.out.println("File created: " + fileObj.getName());
-        // System.out.println(fileObj.getAbsolutePath());
-      } else {
-        System.out.println(fileObj.getName() + " already exists.");
-        // System.out.println(fileObj.getAbsolutePath());
-      }
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-
-    signUpMessage.setText("Sign Up Successful");
   }
+    
+  
+catch(IOException e)
+{
+  signUpMessage.setText("This matrics number has been registered before!");
+}
+
+ }
+}
 
   public void TriggerPasswordCheckBox() {
     if (showPassword.isSelected()) {

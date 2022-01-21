@@ -149,6 +149,11 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
+            <Text fx:id="loginMessage" fill="#eb7b31" layoutX="75.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </right>
