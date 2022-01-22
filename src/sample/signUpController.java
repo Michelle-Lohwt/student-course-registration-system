@@ -45,7 +45,7 @@ public class signUpController extends Controller {
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
-
+  
   public void signUp(MouseEvent event) {
     
     //These 3 things are actually You Quan's part, but I help him to do a bit.

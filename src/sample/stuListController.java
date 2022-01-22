@@ -435,7 +435,7 @@ public class stuListController extends Controller implements Initializable {
     desc.setStyle("-fx-border-color: transparent");
         
     try (FileWriter myWriter = new FileWriter("data/Course Details/"+courseTitle.getText()+".txt")){
-      myWriter.write(time.getText().replaceAll("\n"," "));
+      myWriter.write(time.getText().replaceAll("\n",", "));
       myWriter.write("\n\n");
       myWriter.write(desc.getText().replaceAll("\n"," "));
     } catch (IOException e) {
