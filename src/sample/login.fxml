@@ -149,7 +149,7 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Text fx:id="loginMessage" fill="#eb7b31" layoutX="75.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
+            <Text fx:id="loginMessage" fill="RED" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="442.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="72.20000000000005">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
