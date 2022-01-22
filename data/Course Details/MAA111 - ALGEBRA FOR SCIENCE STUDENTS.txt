@@ -1,0 +1,3 @@
+Thursday 3:00pm-5:00pm
+
+This course introduces fundamental concepts of linear algebra. Topics covered include matrix operations, methods for solving linear systems, determinants, vector space in n and matrix diagonalisation.

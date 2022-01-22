@@ -1,0 +1,3 @@
+Tuesday 3:00pm-5:00pm
+
+This course introduces the basic concepts of linear algebra such as matrices, real vector spaces, linear transformations from Error! Objects cannot be created from editing field codes.to Error! Objects cannot be created from editing field codes., inner product in Error! Objects cannot be created from editing field codes.and diagonalization problems in real eigen value. The relationship between linear transformations and matrices is emphasized.

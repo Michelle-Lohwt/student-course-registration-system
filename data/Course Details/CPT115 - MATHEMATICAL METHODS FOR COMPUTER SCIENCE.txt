@@ -1,0 +1,3 @@
+Friday 8:00am-10:00am
+
+Mathematical methods play a significant role in Computer Science. This course combines fundamental mathematics concepts with practical analysis through the use of MATLAB as a software tool. Concepts covered include Matrices, Vectors, Complex Numbers, Numerical Analysis, and Introduction to Simulation and Statistics. The applications of these concepts in the field of Computer Science are demonstrated along with the mathematical concepts in an integrated manner.

@@ -1,0 +1,3 @@
+Monday 8:00am-10:00am
+
+The main emphasis of the course is on the basic principles of programming using the C++ programming language. This course covers basic concepts of computer system, introduction to problem solving techniques, basics of programming, control structures, modular programming, data file processing, reference variable, pointers and one dimensional array.

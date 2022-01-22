@@ -1,0 +1,3 @@
+Wednesday 8:00am-10:00am
+
+This course introduces the structure and functional units of the computer that are responsible for storing and processing information. It focuses on the functioning of individual components, interaction between components, techniques and technologies used, various number systems and simple digital logic circuits.

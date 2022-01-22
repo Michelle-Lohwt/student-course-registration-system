@@ -57,7 +57,7 @@ public class loginController extends Controller implements Initializable {
       loginMessage.setText("ID must be 6 characters");
     } else {
       try {
-        File fileObj = new File(id.getText() + ".txt");
+        File fileObj = new File("data/Student Profile/" + id.getText() + ".txt");
         Scanner sc = new Scanner(fileObj);
         String correctStudentID = sc.nextLine();
         String correctPassword = sc.nextLine();

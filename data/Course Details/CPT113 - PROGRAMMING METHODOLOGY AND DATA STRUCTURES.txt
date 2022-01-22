@@ -1,0 +1,3 @@
+Thursday 8:00am-10:00am
+
+This course exposes students to data structures e.g. dynamic arrays, lists, stacks, queues, and fundamental binary trees. This course also strengthens further programming skills in C++ using computational thinking methods through topics that include recursion, object oriented design, data abstraction, and classes. This course gives fundamental knowledge on abstract data types and data structures in problem solving.
