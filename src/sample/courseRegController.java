@@ -143,8 +143,10 @@ public class courseRegController extends Controller implements Initializable {
       //filter out courses that have been registered by the student.	
       updatebothlist();	
         
-      //Clear the searchCourse Textfield after a course is registered.	
-      searchCourse.clear();
+      //Clear the Course Details after a course is registered.
+      courseTitle.setText("");
+      time.setText("");
+      desc.setText("");
 
       addCourseButton.setDisable(true);	
       removeCourseButton.setDisable(true);
@@ -210,6 +212,11 @@ public class courseRegController extends Controller implements Initializable {
       // Update both Registered Course ListView, Course List ListView and	
       // filter out courses that have been registered by the student.	
       updatebothlist();
+
+      //Clear the Course Details after a course is registered.
+      courseTitle.setText("");
+      time.setText("");
+      desc.setText("");
 
       addCourseButton.setDisable(true);	
       removeCourseButton.setDisable(true);
