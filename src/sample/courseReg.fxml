@@ -152,11 +152,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-<<<<<<< HEAD
                   <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" onMouseClicked="#courseregistereddetails" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
-=======
-                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
                   <ScrollPane hbarPolicy="NEVER" prefHeight="190.0" prefWidth="440.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="440.0">
