@@ -143,7 +143,15 @@ public class stuListController extends Controller implements Initializable {
     
     //Clear the searchCourse Textfield after a course is registered.
     searchCourse.clear();
-    } 
+
+    //Clear the Course Details after a course is registered.
+    courseTitle.setText("");
+    time.clear();
+    desc.clear();
+
+    addCourseButton.setDisable(true);	
+    removeCourseButton.setDisable(true);
+    }
   }
 
   public void removecourse(){
@@ -181,6 +189,14 @@ public class stuListController extends Controller implements Initializable {
     //Update both Teaching Course ListView, Course List ListView and 
     //filter out courses that have been registered by the lecturer.
     updatebothlist();
+
+    //Clear the Course Details after a course is registered.
+    courseTitle.setText("");
+    time.clear();
+    desc.clear();
+
+    addCourseButton.setDisable(true);	
+    removeCourseButton.setDisable(true);
     }
   }
 
