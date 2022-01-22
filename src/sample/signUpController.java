@@ -21,7 +21,7 @@ import javafx.fxml.Initializable;
 public class signUpController extends Controller implements Initializable {
 
   @FXML
-  private TextField matricNo, TextPassword, reTextPassword;
+  private TextField id, TextPassword, reTextPassword;
 
   @FXML
   private PasswordField password, rePassword;
@@ -51,7 +51,7 @@ public class signUpController extends Controller implements Initializable {
   }
 
   public void signUp(MouseEvent event) throws IOException {
-    if (matricNo.getText().isBlank() || password.getText().isBlank() || rePassword.getText().isBlank()) {
+    if (id.getText().isBlank() || password.getText().isBlank() || rePassword.getText().isBlank()) {
       signUpMessage.setText("Please fill in all required fields!");
     } else if (!password.getText().equals(rePassword.getText())) {
       signUpMessage.setText("Password does not match!");
@@ -59,11 +59,11 @@ public class signUpController extends Controller implements Initializable {
       signUpMessage.setText("Password must have minimum 6 characters!");
     } else {
       try {
-        File fileObj = new File(matricNo.getText() + ".txt");
+        File fileObj = new File(id.getText() + ".txt");
 
         if (fileObj.exists()) {
           System.out.println(fileObj.getName() + " already exists.");
-          signUpMessage.setText("This matrics number has been registered before!");
+          signUpMessage.setText("This ID has been registered before!");
           // System.out.println(fileObj.getAbsolutePath());
         }
 
@@ -72,8 +72,8 @@ public class signUpController extends Controller implements Initializable {
             signUpMessage.setFill(Color.GREEN);
             signUpMessage.setText("Sign Up Successful!");
             System.out.println("File created: " + fileObj.getName());
-            BufferedWriter writer = new BufferedWriter(new FileWriter(matricNo.getText() + ".txt"));
-            writer.write(matricNo.getText());
+            BufferedWriter writer = new BufferedWriter(new FileWriter(id.getText() + ".txt"));
+            writer.write(id.getText());
             writer.write("\n" + password.getText());
             writer.close();
             // System.out.println(fileObj.getAbsolutePath());
@@ -87,7 +87,7 @@ public class signUpController extends Controller implements Initializable {
       }
 
       catch (IOException e) {
-        signUpMessage.setText("This matrics number has been registered before!");
+        signUpMessage.setText("This ID has been registered before!");
       }
 
     }
