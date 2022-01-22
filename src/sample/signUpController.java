@@ -69,22 +69,21 @@ public class signUpController extends Controller {
     }
 
     else{
-      //Check whether if the account exist or not
       File file1 = new File("data/Student Profile/"+matricNo.getText()+".txt");
       File file2 = new File("data/Student Course List/"+matricNo.getText()+".txt");
       File file3 = new File("data/Student Registered Course/"+matricNo.getText()+".txt");
-      if(file1.exists() || file2.exists() || file3.exists()) {
-        signUpMessage.setText("This matric number has been registered before!");
-      }
 
-      else if(!file1.exists() && !file2.exists() && !file3.exists()){
+      //Check whether if the account exist or not
+      if(!file1.exists() && !file2.exists() && !file3.exists()){
         try{
+          //Create Student Profile txt file and save their matric number and password into it
           file1.createNewFile();
           BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Profile/"+matricNo.getText()+".txt"));
           writer.write(matricNo.getText());
           writer.write("\n" + password.getText());
           writer.close();
 
+          //Create Student Course List txt file and copy the Course List into it
           file2.createNewFile();
           try{
             FileInputStream in = new FileInputStream(new File("data/Course List.txt"));
@@ -108,6 +107,7 @@ public class signUpController extends Controller {
             e.printStackTrace();
           }
 
+          //Create Student Registered Course txt file
           file3.createNewFile();
 
           signUpMessage.setText("Sign Up Successful!");
@@ -115,6 +115,9 @@ public class signUpController extends Controller {
           System.out.println("An error occurred.");
           e.printStackTrace();
         }
+      }
+      else if(file1.exists() || file2.exists() || file3.exists()) {
+        signUpMessage.setText("This matric number has been registered before!");
       }
       else{
         signUpMessage.setText("An error occurred!");
