@@ -23,7 +23,7 @@ public class loginController extends Controller implements Initializable {
   private RadioButton rbLecturer, rbStudent;
 
   @FXML
-  private TextField matricNo, textPassword;
+  private TextField id, textPassword;
 
   @FXML
   private PasswordField password;
@@ -47,30 +47,30 @@ public class loginController extends Controller implements Initializable {
   }
 
   public void SignIn(MouseEvent event) throws IOException {
-    if (matricNo.getText().isBlank() && password.getText().isBlank()) {
-      loginMessage.setText("Please enter matrics number and password!");
-    } else if (matricNo.getText().isBlank()) {
-      loginMessage.setText("Please enter matrics number!");
+    if (id.getText().isBlank() && password.getText().isBlank()) {
+      loginMessage.setText("Please enter ID and password!");
+    } else if (id.getText().isBlank()) {
+      loginMessage.setText("Please enter ID!");
     } else if (password.getText().isBlank()) {
       loginMessage.setText("Please enter password!");
     } else {
       try {
-        File fileObj = new File(matricNo.getText() + ".txt");
+        File fileObj = new File(id.getText() + ".txt");
         Scanner sc = new Scanner(fileObj);
         String correctStudentID = sc.nextLine();
         String correctPassword = sc.nextLine();
 
-        if (!matricNo.getText().equals(correctStudentID)) {
-          loginMessage.setText("Matrics number is incorrect!");
+        if (!id.getText().equals(correctStudentID)) {
+          loginMessage.setText("ID number is incorrect!");
         } else if (!password.getText().equals(correctPassword)) {
           loginMessage.setText("Password is incorrect!");
-        } else if (matricNo.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
+        } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
           if (rbStudent.isSelected()) {
             switchTo(event, "stuDash.fxml");
           } else if (rbLecturer.isSelected()) {
             switchTo(event, "lecDash.fxml");
           } else {
-            loginMessage.setText("Please choose Student or Lecturer");
+            loginMessage.setText("Please choose Student or Lecturer!");
           }
         }
 
@@ -80,7 +80,7 @@ public class loginController extends Controller implements Initializable {
         }
         sc.close();
       } catch (IOException e) {
-        loginMessage.setText("This matrics number has not registered yet!");
+        loginMessage.setText("This ID has not registered yet!");
         System.out.println("An error occurred.");
         e.printStackTrace();
       }

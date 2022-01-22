@@ -81,7 +81,7 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
-            <TextField fx:id="matricNo" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matric Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+            <TextField fx:id="id" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="StudentID or StaffID" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
                </font>
