@@ -2,14 +2,15 @@ package sample;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+import java.io.File;
+import java.util.Scanner;
+import javafx.scene.control.TextField;
 import com.jfoenix.controls.JFXCheckBox;
-
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.fxml.FXML;
 
 public class loginController extends Controller {
@@ -25,6 +26,9 @@ public class loginController extends Controller {
   private PasswordField password;
 
   @FXML
+  private Text loginMessage;
+  
+  @FXML
   private JFXCheckBox showPassword;
 
   public void SignUp(MouseEvent event) throws IOException {
@@ -39,23 +43,87 @@ public class loginController extends Controller {
     openLink();
   }
 
-  public void SignIn(MouseEvent event) throws IOException {
-    if (rbStudent.isSelected()) {
-      switchTo(event, "stuDash.fxml");
-    } else if (rbLecturer.isSelected()) {
-      switchTo(event, "lecDash.fxml");
+
+
+  public void SignIn(MouseEvent event) throws IOException{
+    if (matricNo.getText().isBlank()==true && password.getText().isBlank()==true)
+    {
+      loginMessage.setText("Please enter matrics number and password!");
     }
-  }
+    else if(matricNo.getText().isBlank()==true)
+    {
+    loginMessage.setText("Please enter matrics number!");
+    }
+ 
+    else if(password.getText().isBlank()==true)
+    {
+    loginMessage.setText("Please enter password!");
+    }
+
+    else{
+      try
+      {
+        File fileObj = new File(matricNo.getText() + ".txt");
+        Scanner sc =new Scanner(fileObj);
+        String correctStudentID = sc.nextLine();
+        String correctPassword = sc.nextLine();
+        if(!matricNo.getText().equals(correctStudentID))
+        {
+          loginMessage.setText("Matrics number is incorrect!");
+        }
+        else if(!password.getText().equals(correctPassword))
+        {
+          loginMessage.setText("Password is incorrect!");
+        }
+        else if (matricNo.getText().equals(correctStudentID) && password.getText().equals(correctPassword) && rbStudent.isSelected())
+       {
+        switchTo(event, "stuDash.fxml");
+       }
+
+        
+        while(sc.hasNextLine())
+        {
+        System.out.println(sc.nextInt());
+        
+      } 
+      sc.close();
+    }
+      catch (IOException e) {
+        loginMessage.setText("This matrics number has not registered yet!");
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+    }
 
   public void TriggerPasswordCheckBox() {
     if (showPassword.isSelected()) {
       textPassword.setText(password.getText());
+
+      textPassword.setDisable(false);
       textPassword.setVisible(true);
+
+      password.setDisable(true);
       password.setVisible(false);
     } else {
       password.setText(textPassword.getText());
+
+      textPassword.setDisable(true);
       textPassword.setVisible(false);
+
+      password.setDisable(false);
       password.setVisible(true);
+
     }
   }
+      
 }
+
+    /**if (rbStudent.isSelected()) {
+      switchTo(event, "stuDash.fxml");
+    } else if (rbLecturer.isSelected()) {
+      switchTo(event, "lecDash.fxml");
+    }*/
+  
+
+
+
+ 
