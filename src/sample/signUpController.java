@@ -53,6 +53,8 @@ public class signUpController extends Controller implements Initializable {
   public void signUp(MouseEvent event) throws IOException {
     if (id.getText().isBlank() || password.getText().isBlank() || rePassword.getText().isBlank()) {
       signUpMessage.setText("Please fill in all required fields!");
+    } else if (id.getLength() != 6) {
+      signUpMessage.setText("ID must be 6 characters");
     } else if (!password.getText().equals(rePassword.getText())) {
       signUpMessage.setText("Password does not match!");
     } else if (password.getText().equals(rePassword.getText()) && password.getLength() < 6) {

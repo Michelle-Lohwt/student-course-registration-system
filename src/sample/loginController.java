@@ -53,6 +53,8 @@ public class loginController extends Controller implements Initializable {
       loginMessage.setText("Please enter ID!");
     } else if (password.getText().isBlank()) {
       loginMessage.setText("Please enter password!");
+    } else if (id.getLength() != 6) {
+      loginMessage.setText("ID must be 6 characters");
     } else {
       try {
         File fileObj = new File(id.getText() + ".txt");
