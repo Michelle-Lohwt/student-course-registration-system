@@ -4,6 +4,9 @@ import java.io.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.scene.control.PasswordField;
@@ -11,13 +14,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
-public class signUpController extends Controller {
+public class signUpController extends Controller implements Initializable {
 
   @FXML
-  private TextField matricNo, TextPassword, reTextPassword;
+  private TextField id, TextPassword, reTextPassword;
 
   @FXML
   private PasswordField password, rePassword;
@@ -47,25 +52,14 @@ public class signUpController extends Controller {
   }
 
   public void signUp(MouseEvent event) throws IOException{
-    if(matricNo.getText().isBlank()==true && password.getText().isBlank()==true && rePassword.getText().isBlank()==true){
-      signUpMessage.setText("Please enter matrics number and password!");
-    }
- 
-    else if(matricNo.getText().isBlank()==false && password.getText().isBlank()==false && 
-            password.getLength()<6 && rePassword.getText().isBlank()==false && rePassword.getLength()<6){
-      signUpMessage.setText("Password must have minimum 6 characters!");
-    }
- 
-    else if(matricNo.getText().isBlank()==true){
-      signUpMessage.setText("Please enter matrics number!");
-    }
- 
-    else if(password.getText().isBlank()==true || rePassword.getText().isBlank()==true){
-      signUpMessage.setText("Please enter password!");
-    }
-
-    else if (!password.getText().equals (rePassword.getText())){
+    if (id.getText().isBlank() || password.getText().isBlank() || rePassword.getText().isBlank()) {
+      signUpMessage.setText("Please fill in all required fields!");
+    } else if (id.getLength() != 6) {
+      signUpMessage.setText("ID must be 6 characters");
+    } else if (!password.getText().equals(rePassword.getText())) {
       signUpMessage.setText("Password does not match!");
+    } else if (password.getText().equals(rePassword.getText()) && password.getLength() < 6) {
+      signUpMessage.setText("Password must have minimum 6 characters!");
     }
 
     else{
@@ -109,7 +103,7 @@ public class signUpController extends Controller {
 
           //Create Student Registered Course txt file
           file3.createNewFile();
-
+          signUpMessage.setFill(Color.GREEN);
           signUpMessage.setText("Sign Up Successful!");
         } catch (IOException e) {
           System.out.println("An error occurred.");
@@ -127,8 +121,6 @@ public class signUpController extends Controller {
 
   public void TriggerPasswordCheckBox() {
     if (showPassword.isSelected()) {
-      TextPassword.setText(password.getText());
-      reTextPassword.setText(rePassword.getText());
 
       TextPassword.setDisable(false);
       reTextPassword.setDisable(false);
@@ -143,8 +135,6 @@ public class signUpController extends Controller {
       rePassword.setVisible(false);
 
     } else {
-      password.setText(TextPassword.getText());
-      rePassword.setText(reTextPassword.getText());
 
       TextPassword.setDisable(true);
       reTextPassword.setDisable(true);
@@ -158,5 +148,11 @@ public class signUpController extends Controller {
       password.setVisible(true);
       rePassword.setVisible(true);
     }
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    password.textProperty().bindBidirectional(TextPassword.textProperty());
+    rePassword.textProperty().bindBidirectional(reTextPassword.textProperty());
   }
 }

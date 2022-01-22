@@ -79,16 +79,13 @@
                   <Font size="24.0" />
                </font>
             </JFXButton>
-            <TextField fx:id="matricNo" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="Matric Number" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+            <TextField fx:id="id" layoutX="150.0" layoutY="260.0" prefHeight="26.0" prefWidth="350.0" promptText="StudentID or StaffID" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-<<<<<<< HEAD
-            <TextField fx:id="textPassword" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
-=======
+
             <TextField fx:id="textPassword" disable="true" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;" visible="false">
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
                <font>
                   <Font size="18.0" />
                </font>
@@ -151,14 +148,11 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-<<<<<<< HEAD
-=======
-            <Text fx:id="loginMessage" fill="#eb7b31" layoutX="75.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
+            <Text fx:id="loginMessage" fill="RED" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="442.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="72.20000000000005">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
          </children>
       </AnchorPane>
    </right>
