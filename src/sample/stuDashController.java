@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 import com.jfoenix.controls.JFXButton;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;

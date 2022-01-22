@@ -123,7 +123,7 @@
             </JFXButton>
             <Text fx:id="signUpMessage" fill="#eb7e31" layoutX="75.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="462.0">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Text>
             <JFXCheckBox fx:id="showPassword" checkedColor="#eb7e31" layoutX="350.0" layoutY="470.0" onAction="#TriggerPasswordCheckBox" style="-fx-cursor: hand;" text="Show Password">
@@ -131,12 +131,20 @@
                   <Font size="18.0" />
                </font>
             </JFXCheckBox>
+<<<<<<< HEAD
             <TextField fx:id="TextPassword" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+=======
+            <TextField fx:id="TextPassword" disable="true" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;" visible="false">
+>>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
+<<<<<<< HEAD
             <TextField fx:id="reTextPassword" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
+=======
+            <TextField fx:id="reTextPassword" disable="true" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;" visible="false">
+>>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
                <font>
                   <Font size="18.0" />
                </font>
