@@ -112,11 +112,3 @@ public class loginController extends Controller implements Initializable {
   }
 
 }
-
-/**
- * if (rbStudent.isSelected()) {
- * switchTo(event, "stuDash.fxml");
- * } else if (rbLecturer.isSelected()) {
- * switchTo(event, "lecDash.fxml");
- * }
- */
