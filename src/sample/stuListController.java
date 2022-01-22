@@ -1,6 +1,5 @@
 package sample;
 
-<<<<<<< HEAD
 import sample.classes.Student;
 import sample.classes.StudentList;
 
@@ -11,8 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-=======
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.invoke.StringConcatFactory;
@@ -25,12 +22,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-=======
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
 import com.jfoenix.controls.JFXButton;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -39,13 +33,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-<<<<<<< HEAD
+
 import javafx.scene.Scene;
-=======
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
+
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
-
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -67,7 +59,6 @@ public class stuListController extends Controller implements Initializable {
   private TextField searchCourse, searchStudent;
 
   @FXML
-<<<<<<< HEAD
   //public TableView<StudentList> studentList;
   public TableView<StudentList> studentList = new TableView<>();
 
@@ -78,15 +69,6 @@ public class stuListController extends Controller implements Initializable {
   @FXML
   //public TableColumn<StudentList, Integer> matric;
   public TableColumn<StudentList, Integer> matric = new TableColumn<>("matric");
-=======
-  private TableView<?> studentList;
-
-  @FXML
-  private TableColumn<?, ?> matric;
-
-  @FXML
-  private TableColumn<?, ?> name;
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
 
   @FXML
   private Text courseTitle;
@@ -467,7 +449,6 @@ public class stuListController extends Controller implements Initializable {
 
   }
 
-<<<<<<< HEAD
   public void searchstudent(){
     
   }
@@ -480,29 +461,5 @@ public class stuListController extends Controller implements Initializable {
     removeCourseButton.setDisable(true);
     editCourseButton.setDisable(true);
     saveCourseDetailsButton.setDisable(true);
-=======
-  public void EditCourse() {
-    time.setEditable(true);
-    desc.setEditable(true);
-
-    time.setStyle("-fx-border-color: #eb7231");
-    desc.setStyle("-fx-border-color: #eb7231");
-  }
-
-  public void SaveCourse() {
-    time.setEditable(false);
-    desc.setEditable(false);
-
-    time.setStyle("-fx-border-color: transparent");
-    desc.setStyle("-fx-border-color: transparent");
-  }
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    courseTitle.setText("CAT 201 Software Integrated Development Workshop kdfkslfsfhjshfjdkahahahhahahahahahahahahaha");
-    time.setText("Tuesday 3pm - 4pm ahahhahahahahahahahahahadjfhjhjsfhjksffksdhfkshdfjkshfdjdkshfljsakhsah");
-    desc.setText(
-        "The course serves to dkksjfasjkfdsfkjslkdjfaskljfksjfahahhahahahahahahahahahadjfksdhfjksadhfljashfjkshd");
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
   }
 }

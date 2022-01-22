@@ -2,16 +2,10 @@ package sample;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-<<<<<<< HEAD
-
-import com.jfoenix.controls.JFXCheckBox;
-
-=======
 import java.io.File;
 import java.util.Scanner;
 import javafx.scene.control.TextField;
 import com.jfoenix.controls.JFXCheckBox;
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -33,12 +27,9 @@ public class loginController extends Controller {
   private PasswordField password;
 
   @FXML
-<<<<<<< HEAD
-=======
   private Text loginMessage;
   
   @FXML
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
   private JFXCheckBox showPassword;
 
   public void SignUp(MouseEvent event) throws IOException {
@@ -102,7 +93,7 @@ public class loginController extends Controller {
         loginMessage.setText("This matrics number has not registered yet!");
         System.out.println("An error occurred.");
         e.printStackTrace();
-    }
+      }
 
   public void TriggerPasswordCheckBox() {
     if (showPassword.isSelected()) {
@@ -131,27 +122,9 @@ public class loginController extends Controller {
       switchTo(event, "stuDash.fxml");
     } else if (rbLecturer.isSelected()) {
       switchTo(event, "lecDash.fxml");
-<<<<<<< HEAD
-    }
-  }
-
-  public void TriggerPasswordCheckBox() {
-    if (showPassword.isSelected()) {
-      textPassword.setText(password.getText());
-      textPassword.setVisible(true);
-      password.setVisible(false);
-    } else {
-      password.setText(textPassword.getText());
-      textPassword.setVisible(false);
-      password.setVisible(true);
-    }
-  }
-}
-=======
     }*/
   
 
 
 
  
->>>>>>> dc2130f694f14deb71f6dc4fc4fd242793f04e2f
