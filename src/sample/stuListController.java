@@ -8,13 +8,16 @@ import java.io.BufferedWriter;
 import java.io.File;
 // import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 // import java.lang.invoke.StringConcatFactory;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -456,7 +459,8 @@ public class stuListController extends Controller implements Initializable {
     time.setStyle("-fx-border-color: transparent");
     desc.setStyle("-fx-border-color: transparent");
 
-    try (FileWriter myWriter = new FileWriter("data/Course Details/" + courseTitle.getText() + ".txt")) {
+      //try (FileWriter myWriter = new FileWriter("data/Course Details/" + courseTitle.getText() + ".txt")) {
+      try (OutputStreamWriter myWriter = new OutputStreamWriter(new FileOutputStream("data/Course Details/" + courseTitle.getText() + ".txt"), StandardCharsets.UTF_8)) {
       myWriter.write(time.getText().replaceAll("\n", ", "));
       myWriter.write("\n\n");
       myWriter.write(desc.getText().replaceAll("\n", " "));
