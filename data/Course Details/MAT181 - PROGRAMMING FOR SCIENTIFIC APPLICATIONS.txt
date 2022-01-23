@@ -1,0 +1,3 @@
+Wednesday 3:00pm-5:00pm
+
+This course introduces basic computer concepts, algorithm development, problem solving methods and programming techniques using the C++ language. Topics covered include types of data, variables, input/output and file manipulation, computation and arithmetic expression, control structure, modular program design, arrays, pointers, structure and file processing. Application problems will be discussed.
