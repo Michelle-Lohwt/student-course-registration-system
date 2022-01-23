@@ -464,6 +464,7 @@ public class stuListController extends Controller implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     displaycourselist();
     displayteachingcourse();
+    editCourseButton.setDisable(true);
     saveCourseDetailsButton.setDisable(true);
   }
 }
