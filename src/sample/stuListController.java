@@ -316,6 +316,11 @@ public class stuListController extends Controller implements Initializable {
   public void courselist() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
 
+      //Clear the Course Details
+      courseTitle.setText("");
+      time.setText("");
+      desc.setText("");
+
       // Display the Course Details
       courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
       try {
@@ -412,6 +417,11 @@ public class stuListController extends Controller implements Initializable {
   // executed.
   public void teachingcourse() {
     if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
+
+      //Clear the Course Details
+      courseTitle.setText("");
+      time.setText("");
+      desc.setText("");
 
       // Display the Course Details
       courseTitle.setText(teachingCourse.getSelectionModel().getSelectedItem());

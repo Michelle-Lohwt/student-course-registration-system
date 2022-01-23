@@ -343,6 +343,11 @@ public class courseRegController extends Controller implements Initializable {
   public void courselistdetails() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
 
+      //Clear the Course Details
+      courseTitle.setText("");
+      time.setText("");
+      desc.setText("");
+
       // Display the Course Details
       courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
       try {
@@ -362,6 +367,11 @@ public class courseRegController extends Controller implements Initializable {
   // executed.
   public void courseregistereddetails() {
     if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
+
+      //Clear the Course Details
+      courseTitle.setText("");
+      time.setText("");
+      desc.setText("");
 
       // Display the Course Details
       courseTitle.setText(registeredCourse.getSelectionModel().getSelectedItem());
