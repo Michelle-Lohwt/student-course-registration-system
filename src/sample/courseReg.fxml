@@ -115,7 +115,7 @@
                   </Text>
                   <HBox prefHeight="40.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0">
                      <children>
-                        <TextField fx:id="searchCourse" onAction="#searchcourse" onKeyTyped="#searchcourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
+                        <TextField fx:id="searchCourse" onKeyTyped="#searchcourse" prefHeight="25.0" prefWidth="400.0" promptText="Search Course">
                            <font>
                               <Font size="14.0" />
                            </font>
