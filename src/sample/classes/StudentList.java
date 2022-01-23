@@ -1,7 +1,7 @@
 package sample.classes;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+// import javafx.beans.property.SimpleStringProperty;
+// import javafx.beans.property.StringProperty;
 
 public class StudentList {
     
