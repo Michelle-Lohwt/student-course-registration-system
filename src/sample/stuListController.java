@@ -1,24 +1,24 @@
 package sample;
 
-import sample.classes.Student;
+// import sample.classes.Student;
 import sample.classes.StudentList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
+// import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.invoke.StringConcatFactory;
+// import java.lang.invoke.StringConcatFactory;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
+// import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,14 +27,14 @@ import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+// import javafx.beans.property.SimpleStringProperty;
+// import javafx.beans.property.StringProperty;
+// import javafx.collections.FXCollections;
+// import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import javafx.scene.Scene;
+// import javafx.scene.Scene;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -44,7 +44,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+// import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 public class stuListController extends Controller implements Initializable {
@@ -74,7 +74,10 @@ public class stuListController extends Controller implements Initializable {
   private Text courseTitle;
 
   @FXML
-  private TextArea time, desc;
+  private TextField time;
+
+  @FXML
+  private TextArea desc;
 
   @FXML
   private ImageView downloadStudent, downloadTeaching;
@@ -148,9 +151,6 @@ public class stuListController extends Controller implements Initializable {
     courseTitle.setText("");
     time.clear();
     desc.clear();
-
-    addCourseButton.setDisable(true);	
-    removeCourseButton.setDisable(true);
     }
   }
 
@@ -194,9 +194,6 @@ public class stuListController extends Controller implements Initializable {
     courseTitle.setText("");
     time.clear();
     desc.clear();
-
-    addCourseButton.setDisable(true);	
-    removeCourseButton.setDisable(true);
     }
   }
 
@@ -390,7 +387,7 @@ public class stuListController extends Controller implements Initializable {
       //bind list into the table
       //studentList.setItems(list);
 
-      studentList.getColumns().addAll(name, matric);
+      // studentList.getColumns().addAll(name, matric);
       
     }
   }
@@ -467,9 +464,6 @@ public class stuListController extends Controller implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     displaycourselist();
     displayteachingcourse();
-    addCourseButton.setDisable(true);
-    removeCourseButton.setDisable(true);
-    editCourseButton.setDisable(true);
     saveCourseDetailsButton.setDisable(true);
   }
 }
