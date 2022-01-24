@@ -7,10 +7,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.List;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.HorizontalAlignment;
+import com.itextpdf.layout.property.TextAlignment;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +44,7 @@ public class downloadController implements Initializable {
          stuID=text;
   }
   @FXML
-  public void handleButtonAction(ActionEvent event) throws IOException {
+  public void handleButtonAction(ActionEvent event) throws FileNotFoundException,IOException {
     final DirectoryChooser dirchooser = new DirectoryChooser();
 
     Stage stage = (Stage) anchorid.getScene().getWindow();
@@ -61,12 +68,18 @@ public class downloadController implements Initializable {
       System.out.println("Path: " + file.getAbsolutePath());
       textfield.setText(file.getAbsolutePath());
 
+      ImageData data= ImageDataFactory.create("C:/Users/user/student-course-registration-system/src/sample/images/usm-ringlogo.png");
+      Image image1 = new Image(data);
+      image1.scaleToFit(140f,120f);
+      image1.setHorizontalAlignment(HorizontalAlignment.CENTER);
       PdfWriter pdfWriter = new PdfWriter(file.getAbsolutePath() + "/CourseList.pdf");
 
       PdfDocument pdfDocument = new PdfDocument(pdfWriter);
       pdfDocument.addNewPage();
 
       Document document = new Document(pdfDocument);
+      document.add(image1);
+      document.add(new Paragraph("Universiti Sains Malaysia").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(30f));
       document.add(list1);
 
       document.close();
