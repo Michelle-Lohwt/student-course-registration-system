@@ -1,9 +1,13 @@
 package sample;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -44,11 +48,13 @@ public class stuDashController extends Controller implements Initializable {
     openLink();
   }
 
-  private void defaultInfo() {
-    // Please change the matric number
+  private void defaultInfo() throws IOException{
     matric.setText("12345");
     acd_status.setValue("Active");
-  }
+
+   
+
+}
 
   public void editStuInfo() {
     name.setEditable(true);
@@ -72,7 +78,7 @@ public class stuDashController extends Controller implements Initializable {
     minor.setDisable(false);
   }
 
-  public void saveInfo() {
+  public void saveInfo() throws IOException{
     name.setEditable(false);
     nric.setEditable(false);
     cgpa.setEditable(false);
@@ -81,19 +87,33 @@ public class stuDashController extends Controller implements Initializable {
     nric.setStyle("-fx-border-color: default");
     cgpa.setStyle("-fx-border-color: default");
 
-    name.setDisable(true);
-    nric.setDisable(true);
-    cgpa.setDisable(true);
-    acd_status.setDisable(true);
-    sem_reg.setDisable(true);
-    year.setDisable(true);
-    school.setDisable(true);
-    campus.setDisable(true);
-    programme.setDisable(true);
-    major.setDisable(true);
-    minor.setDisable(true);
+    try{
+      File stuinfoFile = new File("data/Student Dashboard/"+name.getText()+".txt");
+      stuinfoFile.createNewFile();
+      BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Dashboard/"+name.getText()+".txt"));
+      writer.write(name.getText());
+      writer.write("\n" + nric.getText());
+      writer.write("\n" + acd_status.getSelectionModel().getSelectedItem());
+      writer.write("\n" + sem_reg.getSelectionModel().getSelectedItem());
+      writer.write("\n" + cgpa.getText());
+      writer.write("\n" + year.getSelectionModel().getSelectedItem());
+      writer.write("\n" + school.getSelectionModel().getSelectedItem());
+      writer.write("\n" + campus.getSelectionModel().getSelectedItem());
+      writer.write("\n" + programme.getSelectionModel().getSelectedItem());
+      writer.write("\n" + major.getSelectionModel().getSelectedItem());
+      writer.write("\n" + minor.getSelectionModel().getSelectedItem());
+      writer.close();
+      
+    }catch(IOException e)
+    {
+      System.out.println("An error occured.");
+    }
+
+
   }
 
+
+  
   private void ChoiceBoxItem() {
     acd_status.getItems().addAll("Active", "Probationary");
     sem_reg.getItems().addAll("17/1", "17/2", "18/1", "18/2", "19/1", "19/2", "20/1", "20/2", "21/1", "21/2", "22/1",
@@ -104,11 +124,33 @@ public class stuDashController extends Controller implements Initializable {
     programme.getItems().addAll("BSc Computer Science", "BSc Mathematics", "BSc Management");
     major.getItems().addAll("Software Engineering", "Intelligent Computing", "Computing Infrastructure");
     minor.getItems().addAll("Accounting", "Mathematics", "Electives");
+    
+
+  }
+
+  public void display() throws IOException{
+    File stuinfoFile = new File("data/Student Dashboard/"+name.getText()+".txt");
+    Scanner sc = new Scanner(stuinfoFile);
+    String name= sc.nextLine();
+    String ic = sc.nextLine();
+    while(sc.hasNextLine())
+    {
+      System.out.println(name);
+      System.out.println(ic);
+    }
+    sc.close();
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize(URL location, ResourceBundle resources){
     ChoiceBoxItem();
-    defaultInfo();
+    try {
+      defaultInfo();
+      display();
+    } catch (IOException e) {
+      
+      e.printStackTrace();
+    }
   }
 }
+
