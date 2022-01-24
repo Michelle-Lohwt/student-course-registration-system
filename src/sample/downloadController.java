@@ -42,7 +42,7 @@ public class downloadController implements Initializable {
       List list1 = new List();
       // input the text file for the course list
       try {
-        File fileObj = new File("student1.txt");
+        File fileObj = new File("data/Student Registered Course/123456.txt");
         Scanner fileReader = new Scanner(fileObj);
         while (fileReader.hasNextLine()) {
           list1.add(fileReader.nextLine());
