@@ -53,19 +53,6 @@ public class downloadController implements Initializable {
     File file = dirchooser.showDialog(stage);
 
      if (file != null) {
-    //   List list1 = new List();
-    //   // input the text file for the course list
-    //   try {
-    //     File fileObj = new File("data/Student Registered Course/"+stuID+".txt");
-    //     Scanner fileReader = new Scanner(fileObj);
-    //     while (fileReader.hasNextLine()) {
-    //       list1.add(fileReader.nextLine());
-    //     }
-    //     fileReader.close();
-    //   } catch (FileNotFoundException e) {
-    //     System.out.println("An error occurred.");
-    //     e.printStackTrace();
-    //   }
 
       System.out.println("Path: " + file.getAbsolutePath());
       textfield.setText(file.getAbsolutePath());
@@ -82,6 +69,7 @@ public class downloadController implements Initializable {
 
       courseTable.addCell("No.");
       courseTable.addCell("Course Taken");
+
       //Print course list in table
       try {
         File fileObj = new File("data/Student Registered Course/"+stuID+".txt");
@@ -107,8 +95,7 @@ public class downloadController implements Initializable {
       document.add(new Paragraph("Universiti Sains Malaysia").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(30f));
       document.add(new Paragraph("Student ID:   "+stuID));
       document.add(courseTable);
-      //document.add(list1);
-
+      
       document.close();
 
       pdfMessage.setText("The course list is printed successfully!");
