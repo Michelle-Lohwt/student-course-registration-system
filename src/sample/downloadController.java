@@ -31,6 +31,11 @@ public class downloadController implements Initializable {
   @FXML
   private Text pdfMessage;
 
+  static String stuID;
+
+  public static void inputID(String text){
+         stuID=text;
+  }
   @FXML
   public void handleButtonAction(ActionEvent event) throws IOException {
     final DirectoryChooser dirchooser = new DirectoryChooser();
@@ -42,7 +47,7 @@ public class downloadController implements Initializable {
       List list1 = new List();
       // input the text file for the course list
       try {
-        File fileObj = new File("student1.txt");
+        File fileObj = new File("data/Student Registered Course/"+stuID+".txt");
         Scanner fileReader = new Scanner(fileObj);
         while (fileReader.hasNextLine()) {
           list1.add(fileReader.nextLine());
@@ -70,7 +75,7 @@ public class downloadController implements Initializable {
     }
 
   }
-
+  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
