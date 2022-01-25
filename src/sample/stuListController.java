@@ -2,7 +2,6 @@ package sample;
 
 // import sample.classes.Student;
 import sample.classes.StudentList;
-//open sample.classes.StudentList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -53,17 +52,12 @@ public class stuListController extends Controller implements Initializable {
 
   @FXML
   public TableView<StudentList> studentList;
-  //public TableView<StudentList> studentList = new TableView<>();
 
   @FXML
   public TableColumn<StudentList, String> name;
-  //public TableColumn<StudentList, String> name = new TableColumn<>("name");
-  //public TableColumn<StudentList, String> name = new TableColumn<>();
 
   @FXML
   public TableColumn<StudentList, String> matric;
-  //public TableColumn<StudentList, String> matric = new TableColumn<>("matric");
-  //public TableColumn<StudentList, String> matric = new TableColumn<>();
 
   @FXML
   private Text courseTitle;
@@ -183,9 +177,9 @@ public class stuListController extends Controller implements Initializable {
 
   //Clear the Course Details
   public void cleardetails(){
-      courseTitle.setText("");
-      time.clear();
-      desc.clear();
+    courseTitle.setText("");
+    time.clear();
+    desc.clear();
   }
 
   // When a Course in the Course List is Clicked, this function will be executed.
