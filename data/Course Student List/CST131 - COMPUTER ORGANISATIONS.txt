@@ -1,2 +1,1 @@
-Student 1 Name	123458
 Student 1 Name	123456
