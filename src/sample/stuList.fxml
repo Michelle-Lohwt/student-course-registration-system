@@ -153,7 +153,7 @@
                   </TableView>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="420.0" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="360.0">
                      <children>
-                        <TextField fx:id="searchStudent" prefHeight="25.0" prefWidth="380.0" promptText="Search Student">
+                        <TextField fx:id="searchStudent" onKeyTyped="#searchstudent" prefHeight="25.0" prefWidth="380.0" promptText="Search Student">
                            <font>
                               <Font size="14.0" />
                            </font>

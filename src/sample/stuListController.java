@@ -449,7 +449,72 @@ public class stuListController extends Controller implements Initializable {
   }
   
   public void searchstudent() {
+    // Get the list of students that registered the course and store in ArrayList named "list"
+    List<String> list = new ArrayList<>();
+    try {
+      File fileObj = new File("data/Course Student List/"+courseTitle.getText()+".txt");
+      Scanner fileReader = new Scanner(fileObj);
+      while (fileReader.hasNextLine()) {
+        list.add(fileReader.nextLine());
+      }
+      fileReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
 
+    // Perform the search(filter) in "list" and output the result in another
+    // ArrayList named "result"
+    List<String> result = list
+        .stream()
+        .filter(x -> x.toLowerCase().contains(searchStudent.getText().toLowerCase()))
+        .collect(Collectors.toList());
+
+    // Convert the elements in "result" from ArrayList to String
+    StringBuilder strbul = new StringBuilder();
+    for (String str : result) {
+      strbul.append(str);
+      strbul.append("\n");
+    }
+
+    String str = strbul.toString();
+
+    // Insert Search Result into txt file
+    try (FileWriter myWriter = new FileWriter("data/Search.txt", true)) {
+      myWriter.write(str);
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    // Clear the TableView
+    studentList.getItems().clear();
+
+    // Display the search result in Listview
+    try{
+      Collection<StudentList> table = Files.readAllLines(new File("data/Search.txt").toPath())
+            .stream()
+            .map(line -> {
+            String[] details = line.split("\t");
+            StudentList sl = new StudentList();
+            sl.setName(details[0]);
+            sl.setMatric(details[1]);
+            return sl;
+            })
+            .collect(Collectors.toList());
+
+      ObservableList<StudentList> details = FXCollections.observableArrayList(table);
+          
+      name.setCellValueFactory(data -> data.getValue().nameProperty());
+      matric.setCellValueFactory(data -> data.getValue().matricProperty());
+          
+      studentList.setItems(details);
+
+      new File("data/Search.txt").delete();
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
   }
 
   @Override
