@@ -3,6 +3,7 @@ package sample;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -52,7 +53,7 @@ public class downloadController implements Initializable {
   }
 
   @FXML
-  public void handleButtonAction(ActionEvent event) throws FileNotFoundException,IOException {
+  public void handleButtonAction(ActionEvent event) throws FileNotFoundException,IOException,MalformedURLException {
     final DirectoryChooser dirchooser = new DirectoryChooser();
 
     Stage stage = (Stage) anchorid.getScene().getWindow();
@@ -63,11 +64,7 @@ public class downloadController implements Initializable {
       System.out.println("Path: " + file.getAbsolutePath());
       textfield.setText(file.getAbsolutePath());
 
-      //Image
-      ImageData data= ImageDataFactory.create("C:/Users/user/student-course-registration-system/src/sample/images/usm-ringlogo.png");
-      Image image1 = new Image(data);
-      image1.scaleToFit(140f,120f);
-      image1.setHorizontalAlignment(HorizontalAlignment.CENTER);
+
       
       //Table
       float TableColWidth[] = {50f,300f}; 
@@ -97,6 +94,14 @@ public class downloadController implements Initializable {
       pdfDocument.addNewPage();
 
       Document document = new Document(pdfDocument);
+
+      //Image
+      String logopath= "src/sample/images/usm-ringlogo.png";
+      ImageData data= ImageDataFactory.create(logopath);
+      Image image1 = new Image(data);
+      image1.scaleToFit(140f,120f);
+      image1.setHorizontalAlignment(HorizontalAlignment.CENTER);
+
       document.add(image1);
       document.add(new Paragraph("Universiti Sains Malaysia").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(30f));
       document.add(new Paragraph("Student ID:   "+stuID));
