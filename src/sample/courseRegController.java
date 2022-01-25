@@ -56,6 +56,12 @@ public class courseRegController extends Controller implements Initializable {
   @FXML
   private TextField searchCourse;
 
+  static String stuID;
+
+  public static void inputID(String text) {
+    stuID = text;
+  }
+
   public void StuDashboard(MouseEvent event) throws IOException {
     switchTo(event, "stuDash.fxml");
   }
@@ -93,7 +99,7 @@ public class courseRegController extends Controller implements Initializable {
   // Read and display list of all courses that can be registered from txt file
   public void displaycourselist() {
     try {
-      File fileObj = new File("data/Student Course List/" + "123456" + ".txt");
+      File fileObj = new File("data/Student Course List/" + stuID + ".txt");
       Scanner fileReader = new Scanner(fileObj);
       while (fileReader.hasNextLine()) {
         courseList.getItems().add(fileReader.nextLine());
@@ -108,7 +114,7 @@ public class courseRegController extends Controller implements Initializable {
   // Read and display Courses Registered of the student from txt file
   public void displaycourseregistered() {
     try {
-      File fileObj = new File("data/Student Registered Course/" + "123456" + ".txt");
+      File fileObj = new File("data/Student Registered Course/" + stuID + ".txt");
       Scanner fileReader = new Scanner(fileObj);
       while (fileReader.hasNextLine()) {
         registeredCourse.getItems().add(fileReader.nextLine());
@@ -123,7 +129,7 @@ public class courseRegController extends Controller implements Initializable {
   public void addcourse() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
       // Store Courses Registered into txt file
-      try (FileWriter myWriter = new FileWriter("data/Student Registered Course/" + "123456" + ".txt", true)) {
+      try (FileWriter myWriter = new FileWriter("data/Student Registered Course/" + stuID + ".txt", true)) {
         String linetoAdd = courseList.getSelectionModel().getSelectedItem();
         myWriter.write(String.valueOf(linetoAdd), 0, String.valueOf(linetoAdd).length());
         myWriter.write("\n");
@@ -137,7 +143,7 @@ public class courseRegController extends Controller implements Initializable {
           "data/Course Student List/" + courseList.getSelectionModel().getSelectedItem() + ".txt", true)) {
         myWriter.write(String.valueOf("Student 1 Name"), 0, String.valueOf("Student 1 Name").length());
         myWriter.write("\t");
-        myWriter.write(String.valueOf("123456"), 0, String.valueOf("123456").length());
+        myWriter.write(String.valueOf(stuID), 0, String.valueOf(stuID).length());
         myWriter.write("\n");
       } catch (IOException e) {
         System.out.println("An error occurred.");
@@ -162,7 +168,7 @@ public class courseRegController extends Controller implements Initializable {
     if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
       // Remove Courses Registered from txt file
       try {
-        File file = new File("data/Student Registered Course/" + "123456" + ".txt");
+        File file = new File("data/Student Registered Course/" + stuID + ".txt");
         File temp = new File("data/Student Registered Course/TempFile.txt");
         // File temp = File.createTempFile("temporarystudent",
         // ".txt",file.getParentFile());
@@ -200,7 +206,7 @@ public class courseRegController extends Controller implements Initializable {
         // file.getParentFile());
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
-        String lineToRemove = "Student 1 Name\t123456";
+        String lineToRemove = "Student 1 Name\t" + stuID;
         String currentLine;
         while ((currentLine = reader.readLine()) != null) {
           // Trim newline when comparing with lineToRemove
@@ -235,7 +241,7 @@ public class courseRegController extends Controller implements Initializable {
     // an ArrayList named "list"
     List<String> list = new ArrayList<>();
     try {
-      File fileObj = new File("data/Student Course List/" + "123456" + ".txt");
+      File fileObj = new File("data/Student Course List/" + stuID + ".txt");
       Scanner fileReader = new Scanner(fileObj);
       while (fileReader.hasNextLine()) {
         list.add(fileReader.nextLine());
@@ -298,9 +304,9 @@ public class courseRegController extends Controller implements Initializable {
     // In this case: studentcourseList = courseList – studentregisteredCourse
     try {
       // PrintWriter object for output.txt
-      PrintWriter pw = new PrintWriter("data/Student Course List/" + "123456" + ".txt");
+      PrintWriter pw = new PrintWriter("data/Student Course List/" + stuID + ".txt");
       // BufferedReader object for delete.txt
-      BufferedReader br2 = new BufferedReader(new FileReader("data/Student Registered Course/" + "123456" + ".txt"));
+      BufferedReader br2 = new BufferedReader(new FileReader("data/Student Registered Course/" + stuID + ".txt"));
       String line2 = br2.readLine();
       // hashset for storing lines of delete.txt
       HashSet<String> hs = new HashSet<String>();
