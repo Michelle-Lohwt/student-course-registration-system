@@ -2,23 +2,22 @@ package sample;
 
 // import sample.classes.Student;
 import sample.classes.StudentList;
+//open sample.classes.StudentList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-// import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-// import java.lang.invoke.StringConcatFactory;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-// import java.util.Collection;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,24 +26,18 @@ import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
 
-// import javafx.beans.property.SimpleStringProperty;
-// import javafx.beans.property.StringProperty;
-// import javafx.collections.FXCollections;
-// import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
-// import javafx.scene.Scene;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-// import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 public class stuListController extends Controller implements Initializable {
@@ -59,16 +52,18 @@ public class stuListController extends Controller implements Initializable {
   private TextField searchCourse, searchStudent;
 
   @FXML
-  // public TableView<StudentList> studentList;
-  public TableView<StudentList> studentList = new TableView<>();
+  public TableView<StudentList> studentList;
+  //public TableView<StudentList> studentList = new TableView<>();
 
   @FXML
-  // public TableColumn<StudentList, String> name;
-  public TableColumn<StudentList, String> name = new TableColumn<>("name");
+  public TableColumn<StudentList, String> name;
+  //public TableColumn<StudentList, String> name = new TableColumn<>("name");
+  //public TableColumn<StudentList, String> name = new TableColumn<>();
 
   @FXML
-  // public TableColumn<StudentList, Integer> matric;
-  public TableColumn<StudentList, Integer> matric = new TableColumn<>("matric");
+  public TableColumn<StudentList, String> matric;
+  //public TableColumn<StudentList, String> matric = new TableColumn<>("matric");
+  //public TableColumn<StudentList, String> matric = new TableColumn<>();
 
   @FXML
   private Text courseTitle;
@@ -125,77 +120,6 @@ public class stuListController extends Controller implements Initializable {
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
-    }
-  }
-
-  public void addcourse() {
-    if (courseList.getSelectionModel().getSelectedItem() != null) {
-      // Store Courses Added into txt file
-      try (FileWriter myWriter = new FileWriter("data/Lecturer Teaching Course/" + "123456" + ".txt", true)) {
-        String linetoAdd = courseList.getSelectionModel().getSelectedItem();
-        myWriter.write(String.valueOf(linetoAdd), 0, String.valueOf(linetoAdd).length());
-        myWriter.write("\n");
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-
-      // Update both Teaching Course ListView, Course List ListView and
-      // filter out courses that have been registered by the lecturer.
-      updatebothlist();
-
-      // Clear the searchCourse Textfield after a course is registered.
-      searchCourse.clear();
-
-      // Clear the Course Details after a course is registered.
-      courseTitle.setText("");
-      time.clear();
-      desc.clear();
-    }
-  }
-
-  public void removecourse() {
-    if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
-      // Remove Teaching Course from txt file
-      try {
-        File file = new File("data/Lecturer Teaching Course/" + "123456" + ".txt");
-        File temp = new File("data/Lecturer Teaching Course/TempFile.txt");
-        // File temp = File.createTempFile("temporarystudent", ".txt",
-        // file.getParentFile());
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
-
-        String lineToRemove = teachingCourse.getSelectionModel().getSelectedItem();
-        String currentLine;
-
-        while ((currentLine = reader.readLine()) != null) {
-          // Trim newline when comparing with lineToRemove
-          if (currentLine.trim().equals(lineToRemove))
-            continue;
-          writer.write(currentLine + System.getProperty("line.separator"));
-        }
-
-        // Close the reader and writer (preferably in the finally block).
-        reader.close();
-        writer.close();
-        // Delete the file.
-        file.delete();
-        // Rename the temp file.
-        temp.renameTo(file);
-
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-
-      // Update both Teaching Course ListView, Course List ListView and
-      // filter out courses that have been registered by the lecturer.
-      updatebothlist();
-
-      // Clear the Course Details after a course is registered.
-      courseTitle.setText("");
-      time.clear();
-      desc.clear();
     }
   }
 
@@ -257,6 +181,177 @@ public class stuListController extends Controller implements Initializable {
     }
   }
 
+  //Clear the Course Details
+  public void cleardetails(){
+      courseTitle.setText("");
+      time.clear();
+      desc.clear();
+  }
+
+  // When a Course in the Course List is Clicked, this function will be executed.
+  public void courselist() {
+    if (courseList.getSelectionModel().getSelectedItem() != null) {
+
+      //Clear the TableView
+      studentList.getItems().clear();
+
+      //Clear the Course Details
+      cleardetails();
+
+      // Display the Course Details
+      courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
+      try {
+        List<String> lines = Files
+            .lines(Paths.get("data/Course Details/" + courseList.getSelectionModel().getSelectedItem() + ".txt"))
+            .collect(Collectors.toList());
+        time.setText(lines.get(0));
+        desc.setText(lines.get(2));
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+
+      editCourseButton.setDisable(false);
+
+      //Display the Course Student List
+      try{
+        Collection<StudentList> list = Files.readAllLines(new File("data/Course Student List/"+courseList.getSelectionModel().getSelectedItem()+".txt").toPath())
+              .stream()
+              .map(line -> {
+              String[] details = line.split("\t");
+              StudentList sl = new StudentList();
+              sl.setName(details[0]);
+              sl.setMatric(details[1]);
+              return sl;
+              })
+              .collect(Collectors.toList());
+  
+        ObservableList<StudentList> details = FXCollections.observableArrayList(list);
+            
+        name.setCellValueFactory(data -> data.getValue().nameProperty());
+        matric.setCellValueFactory(data -> data.getValue().matricProperty());
+            
+        studentList.setItems(details);
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+    }
+  }
+
+  // When a Course in the Course Registered is Clicked, this function will be
+  // executed.
+  public void teachingcourse() {
+    if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
+
+      //Clear the TableView
+      studentList.getItems().clear();
+
+      //Clear the Course Details
+      cleardetails();
+
+      // Display the Course Details
+      courseTitle.setText(teachingCourse.getSelectionModel().getSelectedItem());
+      try {
+        List<String> lines = Files
+            .lines(Paths.get("data/Course Details/" + teachingCourse.getSelectionModel().getSelectedItem() + ".txt"))
+            .collect(Collectors.toList());
+        time.setText(lines.get(0));
+        desc.setText(lines.get(2));
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+
+      editCourseButton.setDisable(false);
+
+      //Display the Course Student List
+      try{
+        Collection<StudentList> list = Files.readAllLines(new File("data/Course Student List/"+teachingCourse.getSelectionModel().getSelectedItem()+".txt").toPath())
+              .stream()
+              .map(line -> {
+              String[] details = line.split("\t");
+              StudentList sl = new StudentList();
+              sl.setName(details[0]);
+              sl.setMatric(details[1]);
+              return sl;
+              })
+              .collect(Collectors.toList());
+  
+        ObservableList<StudentList> details = FXCollections.observableArrayList(list);
+            
+        name.setCellValueFactory(data -> data.getValue().nameProperty());
+        matric.setCellValueFactory(data -> data.getValue().matricProperty());
+            
+        studentList.setItems(details);
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public void addcourse() {
+    if (courseList.getSelectionModel().getSelectedItem() != null) {
+      // Store Courses Added into txt file
+      try (FileWriter myWriter = new FileWriter("data/Lecturer Teaching Course/" + "123456" + ".txt", true)) {
+        String linetoAdd = courseList.getSelectionModel().getSelectedItem();
+        myWriter.write(String.valueOf(linetoAdd), 0, String.valueOf(linetoAdd).length());
+        myWriter.write("\n");
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+
+      // Update both Teaching Course ListView, Course List ListView and
+      // filter out courses that have been registered by the lecturer.
+      updatebothlist();
+
+      // Clear the searchCourse Textfield after a course is registered.
+      searchCourse.clear();
+    }
+  }
+
+  public void removecourse() {
+    if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
+      // Remove Teaching Course from txt file
+      try {
+        File file = new File("data/Lecturer Teaching Course/" + "123456" + ".txt");
+        File temp = new File("data/Lecturer Teaching Course/TempFile.txt");
+        // File temp = File.createTempFile("temporarystudent", ".txt",
+        // file.getParentFile());
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+
+        String lineToRemove = teachingCourse.getSelectionModel().getSelectedItem();
+        String currentLine;
+
+        while ((currentLine = reader.readLine()) != null) {
+          // Trim newline when comparing with lineToRemove
+          if (currentLine.trim().equals(lineToRemove))
+            continue;
+          writer.write(currentLine + System.getProperty("line.separator"));
+        }
+
+        // Close the reader and writer (preferably in the finally block).
+        reader.close();
+        writer.close();
+        // Delete the file.
+        file.delete();
+        // Rename the temp file.
+        temp.renameTo(file);
+
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+
+      // Update both Teaching Course ListView, Course List ListView and
+      // filter out courses that have been registered by the lecturer.
+      updatebothlist();
+    }
+  }
+
   public void updatebothlist() {
     // Clear the Teaching Course ListView
     teachingCourse.getItems().clear();
@@ -309,124 +404,6 @@ public class stuListController extends Controller implements Initializable {
     displaycourselist();
   }
 
-  // When a Course in the Course List is Clicked, this function will be executed.
-  public void courselist() {
-    if (courseList.getSelectionModel().getSelectedItem() != null) {
-
-      // Display the Course Details
-      courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
-      try {
-        List<String> lines = Files
-            .lines(Paths.get("data/Course Details/" + courseList.getSelectionModel().getSelectedItem() + ".txt"))
-            .collect(Collectors.toList());
-        time.setText(lines.get(0));
-        desc.setText(lines.get(2));
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-
-      editCourseButton.setDisable(false);
-      /*
-       * //Display the Course Student List
-       * try{
-       * Collection<StudentList> list = Files.readAllLines(new
-       * File("data/Course Student List/"+courseList.getSelectionModel().
-       * getSelectedItem()+".txt").toPath())
-       * .stream()
-       * .map(line -> {
-       * String[] details = line.split("\t");
-       * new StudentList().setName(details[0]);
-       * new StudentList().setMatric(details[1]);
-       * return new StudentList();
-       * })
-       * .collect(Collectors.toList());
-       * ObservableList<StudentList> details =
-       * FXCollections.observableArrayList(list);
-       * TableView<StudentList> studentList = new TableView<>();
-       * TableColumn<StudentList, String> col1 = new TableColumn<>();
-       * TableColumn<StudentList, String> col2 = new TableColumn<>();
-       * studentList.getColumns().addAll(col1, col2);
-       * col1.setCellValueFactory(data -> data.getValue().nameProperty());
-       * col2.setCellValueFactory(data -> data.getValue().matricProperty());
-       * studentList.setItems(details);
-       * //primaryStage.setScene(new Scene(new StackPane(studentList)));
-       * //primaryStage.show();
-       * } catch (IOException e) {
-       * System.out.println("An error occurred.");
-       * e.printStackTrace();
-       * }
-       */
-
-      // File file = new File("data/Course Student
-      // List/"+courseList.getSelectionModel().getSelectedItem()+".txt");
-      // ObservableList<StudentList> list = FXCollections.observableArrayList();
-
-      name.setCellValueFactory(new PropertyValueFactory<StudentList, String>("name"));
-      matric.setCellValueFactory(new PropertyValueFactory<StudentList, Integer>("matric"));
-
-      studentList = new TableView<>();
-
-      try {
-        BufferedReader br = new BufferedReader(new FileReader(
-            new File("data/Course Student List/" + courseList.getSelectionModel().getSelectedItem() + ".txt")));
-        String line;
-
-        while ((line = br.readLine()) != null) {
-          // String data = inputStream.nextLine();
-          // System.out.println(data);
-          String[] values_line = line.split("\t");
-          // Name[0] = (String)values[0];
-          // Score[0] = (String)values[1];
-          // for(int i = 0; i < values_line.length; i++){
-          System.out.println(String.valueOf(values_line[0] + "\t" + values_line[1]));
-          studentList.getItems().add(new StudentList(String.valueOf(values_line[0]), Integer.parseInt(values_line[1])));
-          // list.getItems().add(new
-          // StudentList(String.valueOf(values_line[0]),Integer.parseInt(values_line[1])));
-          // }
-        }
-        br.close();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-
-      // name.setCellValueFactory(new PropertyValueFactory<StudentList,
-      // String>("name"));
-      // matric.setCellValueFactory(new PropertyValueFactory<StudentList,
-      // Integer>("matric"));
-      // name.setCellValueFactory(data -> data.getValue.nameProperty());
-      // matric.setCellValueFactory(data -> data.getValue.matricProperty());
-
-      // bind list into the table
-      // studentList.setItems(list);
-
-      // studentList.getColumns().addAll(name, matric);
-
-    }
-  }
-
-  // When a Course in the Course Registered is Clicked, this function will be
-  // executed.
-  public void teachingcourse() {
-    if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
-
-      // Display the Course Details
-      courseTitle.setText(teachingCourse.getSelectionModel().getSelectedItem());
-      try {
-        List<String> lines = Files
-            .lines(Paths.get("data/Course Details/" + teachingCourse.getSelectionModel().getSelectedItem() + ".txt"))
-            .collect(Collectors.toList());
-        time.setText(lines.get(0));
-        desc.setText(lines.get(2));
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-
-      // Display the Course Student List
-    }
-  }
-
   public void EditCourse() {
     saveCourseDetailsButton.setDisable(false);
     editCourseButton.setDisable(true);
@@ -465,11 +442,7 @@ public class stuListController extends Controller implements Initializable {
       e.printStackTrace();
     }
   }
-
-  public void studentYear() {
-
-  }
-
+  
   public void searchstudent() {
 
   }

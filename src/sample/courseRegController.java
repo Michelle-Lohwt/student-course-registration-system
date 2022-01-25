@@ -126,6 +126,115 @@ public class courseRegController extends Controller implements Initializable {
     }
   }
 
+  public void searchcourse() {
+    // Get the list of courses that can be registered by the student and stored in
+    // an ArrayList named "list"
+    List<String> list = new ArrayList<>();
+    try {
+      File fileObj = new File("data/Student Course List/" + stuID + ".txt");
+      Scanner fileReader = new Scanner(fileObj);
+      while (fileReader.hasNextLine()) {
+        list.add(fileReader.nextLine());
+      }
+      fileReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    // Perform the search(filter) in "list" and output the result in another
+    // ArrayList named "result"
+    List<String> result = list
+        .stream()
+        .filter(x -> x.toLowerCase().contains(searchCourse.getText().toLowerCase()))
+        .collect(Collectors.toList());
+
+    // Convert the elements in "result" from ArrayList to String
+    StringBuilder strbul = new StringBuilder();
+    for (String str : result) {
+      strbul.append(str);
+      strbul.append("\n");
+    }
+
+    String str = strbul.toString();
+
+    // Clear the Course List ListView
+    courseList.getItems().clear();
+
+    // Insert Course List Search Result into txt file
+    try (FileWriter myWriter = new FileWriter("data/Search.txt", true)) {
+      myWriter.write(str);
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+    // Display the search result in Listview
+    try {
+      File fileObj = new File("data/Search.txt");
+      Scanner fileReader = new Scanner(fileObj);
+      while (fileReader.hasNextLine()) {
+        courseList.getItems().add(fileReader.nextLine());
+      }
+      fileReader.close();
+      fileObj.delete();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
+
+  //Clear the Course Details
+  public void cleardetails(){
+    courseTitle.setText("");
+    time.setText("");
+    desc.setText("");
+  }
+
+  // When a Course in the Course List is Clicked, this function will be executed.
+  public void courselistdetails() {
+    if (courseList.getSelectionModel().getSelectedItem() != null) {
+
+      // Clear the Course Details before displaying
+      cleardetails();
+
+      // Display the Course Details
+      courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
+      try {
+        List<String> lines = Files
+            .lines(Paths.get("data/Course Details/" + courseList.getSelectionModel().getSelectedItem() + ".txt"))
+            .collect(Collectors.toList());
+        time.setText(lines.get(0));
+        desc.setText(lines.get(2));
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+    }
+  }
+
+  // When a Course in the Course Registered is Clicked, this function will be
+  // executed.
+  public void courseregistereddetails() {
+    if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
+
+      // Clear the Course Details before displaying
+      cleardetails();
+
+      // Display the Course Details
+      courseTitle.setText(registeredCourse.getSelectionModel().getSelectedItem());
+      try {
+        List<String> lines = Files
+            .lines(Paths.get("data/Course Details/" + registeredCourse.getSelectionModel().getSelectedItem() + ".txt"))
+            .collect(Collectors.toList());
+        time.setText(lines.get(0));
+        desc.setText(lines.get(2));
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+    }
+  }
+
   public void addcourse() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
       // Store Courses Registered into txt file
@@ -156,11 +265,6 @@ public class courseRegController extends Controller implements Initializable {
 
       // Clear the searchCourse Textfield after a course is registered.
       searchCourse.clear();
-
-      // Clear the Course Details after a course is registered.
-      courseTitle.setText("");
-      time.setText("");
-      desc.setText("");
     }
   }
 
@@ -228,68 +332,6 @@ public class courseRegController extends Controller implements Initializable {
       // Update both Registered Course ListView, Course List ListView and
       // filter out courses that have been registered by the student.
       updatebothlist();
-
-      // Clear the Course Details after a course is registered.
-      courseTitle.setText("");
-      time.setText("");
-      desc.setText("");
-    }
-  }
-
-  public void searchcourse() {
-    // Get the list of courses that can be registered by the student and stored in
-    // an ArrayList named "list"
-    List<String> list = new ArrayList<>();
-    try {
-      File fileObj = new File("data/Student Course List/" + stuID + ".txt");
-      Scanner fileReader = new Scanner(fileObj);
-      while (fileReader.hasNextLine()) {
-        list.add(fileReader.nextLine());
-      }
-      fileReader.close();
-    } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-
-    // Perform the search(filter) in "list" and output the result in another
-    // ArrayList named "result"
-    List<String> result = list
-        .stream()
-        .filter(x -> x.toLowerCase().contains(searchCourse.getText().toLowerCase()))
-        .collect(Collectors.toList());
-
-    // Convert the elements in "result" from ArrayList to String
-    StringBuilder strbul = new StringBuilder();
-    for (String str : result) {
-      strbul.append(str);
-      strbul.append("\n");
-    }
-
-    String str = strbul.toString();
-
-    // Clear the Course List ListView
-    courseList.getItems().clear();
-
-    // Insert Course List Search Result into txt file
-    try (FileWriter myWriter = new FileWriter("data/Search.txt", true)) {
-      myWriter.write(str);
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-    // Display the search result in Listview
-    try {
-      File fileObj = new File("data/Search.txt");
-      Scanner fileReader = new Scanner(fileObj);
-      while (fileReader.hasNextLine()) {
-        courseList.getItems().add(fileReader.nextLine());
-      }
-      fileReader.close();
-      fileObj.delete();
-    } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
     }
   }
 
@@ -343,45 +385,6 @@ public class courseRegController extends Controller implements Initializable {
     courseList.getItems().clear();
     // Read and display list of all courses that can be registered from txt file
     displaycourselist();
-  }
-
-  // When a Course in the Course List is Clicked, this function will be executed.
-  public void courselistdetails() {
-    if (courseList.getSelectionModel().getSelectedItem() != null) {
-
-      // Display the Course Details
-      courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
-      try {
-        List<String> lines = Files
-            .lines(Paths.get("data/Course Details/" + courseList.getSelectionModel().getSelectedItem() + ".txt"))
-            .collect(Collectors.toList());
-        time.setText(lines.get(0));
-        desc.setText(lines.get(2));
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-    }
-  }
-
-  // When a Course in the Course Registered is Clicked, this function will be
-  // executed.
-  public void courseregistereddetails() {
-    if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
-
-      // Display the Course Details
-      courseTitle.setText(registeredCourse.getSelectionModel().getSelectedItem());
-      try {
-        List<String> lines = Files
-            .lines(Paths.get("data/Course Details/" + registeredCourse.getSelectionModel().getSelectedItem() + ".txt"))
-            .collect(Collectors.toList());
-        time.setText(lines.get(0));
-        desc.setText(lines.get(2));
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-    }
   }
 
   @Override
