@@ -7,12 +7,15 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -185,6 +188,7 @@ public class stuListController extends Controller implements Initializable {
   // When a Course in the Course List is Clicked, this function will be executed.
   public void courselist() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
+      addCourseButton.setDisable(false);
 
       //Clear the TableView
       studentList.getItems().clear();
@@ -237,6 +241,7 @@ public class stuListController extends Controller implements Initializable {
   // executed.
   public void teachingcourse() {
     if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
+      removeCourseButton.setDisable(false);
 
       //Clear the TableView
       studentList.getItems().clear();
@@ -303,6 +308,9 @@ public class stuListController extends Controller implements Initializable {
 
       // Clear the searchCourse Textfield after a course is registered.
       searchCourse.clear();
+
+      addCourseButton.setDisable(true);
+      removeCourseButton.setDisable(true);
     }
   }
 
@@ -343,6 +351,9 @@ public class stuListController extends Controller implements Initializable {
       // Update both Teaching Course ListView, Course List ListView and
       // filter out courses that have been registered by the lecturer.
       updatebothlist();
+
+      addCourseButton.setDisable(true);
+      removeCourseButton.setDisable(true);
     }
   }
 
@@ -402,8 +413,8 @@ public class stuListController extends Controller implements Initializable {
     saveCourseDetailsButton.setDisable(false);
     editCourseButton.setDisable(true);
     courseList.setDisable(true);
-    addCourseButton.setDisable(true);
     teachingCourse.setDisable(true);
+    addCourseButton.setDisable(true);
     removeCourseButton.setDisable(true);
 
     time.setEditable(true);
@@ -417,9 +428,9 @@ public class stuListController extends Controller implements Initializable {
     saveCourseDetailsButton.setDisable(true);
     editCourseButton.setDisable(false);
     courseList.setDisable(false);
-    addCourseButton.setDisable(false);
     teachingCourse.setDisable(false);
-    removeCourseButton.setDisable(false);
+    addCourseButton.setDisable(true);
+    removeCourseButton.setDisable(true);
 
     time.setEditable(false);
     desc.setEditable(false);
@@ -427,7 +438,7 @@ public class stuListController extends Controller implements Initializable {
     time.setStyle("-fx-border-color: transparent");
     desc.setStyle("-fx-border-color: transparent");
 
-    try (FileWriter myWriter = new FileWriter("data/Course Details/" + courseTitle.getText() + ".txt")) {
+    try (OutputStreamWriter myWriter = new OutputStreamWriter(new FileOutputStream("data/Course Details/" + courseTitle.getText() + ".txt"), StandardCharsets.UTF_8)) {
       myWriter.write(time.getText().replaceAll("\n", ", "));
       myWriter.write("\n\n");
       myWriter.write(desc.getText().replaceAll("\n", " "));
@@ -445,6 +456,8 @@ public class stuListController extends Controller implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     displaycourselist();
     displayteachingcourse();
+    addCourseButton.setDisable(true);
+    removeCourseButton.setDisable(true);
     editCourseButton.setDisable(true);
     saveCourseDetailsButton.setDisable(true);
   }

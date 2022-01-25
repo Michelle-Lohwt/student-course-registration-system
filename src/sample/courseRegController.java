@@ -193,6 +193,7 @@ public class courseRegController extends Controller implements Initializable {
   // When a Course in the Course List is Clicked, this function will be executed.
   public void courselistdetails() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
+      addCourseButton.setDisable(false);
 
       // Clear the Course Details before displaying
       cleardetails();
@@ -216,6 +217,7 @@ public class courseRegController extends Controller implements Initializable {
   // executed.
   public void courseregistereddetails() {
     if (registeredCourse.getSelectionModel().getSelectedItem() != null) {
+      removeCourseButton.setDisable(false);
 
       // Clear the Course Details before displaying
       cleardetails();
@@ -265,6 +267,9 @@ public class courseRegController extends Controller implements Initializable {
 
       // Clear the searchCourse Textfield after a course is registered.
       searchCourse.clear();
+
+      addCourseButton.setDisable(true);
+      removeCourseButton.setDisable(true);
     }
   }
 
@@ -332,6 +337,9 @@ public class courseRegController extends Controller implements Initializable {
       // Update both Registered Course ListView, Course List ListView and
       // filter out courses that have been registered by the student.
       updatebothlist();
+
+      addCourseButton.setDisable(true);
+      removeCourseButton.setDisable(true);
     }
   }
 
@@ -391,5 +399,7 @@ public class courseRegController extends Controller implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     displaycourselist();
     displaycourseregistered();
+    addCourseButton.setDisable(true);
+    removeCourseButton.setDisable(true);
   }
 }
