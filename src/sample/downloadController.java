@@ -12,9 +12,7 @@ import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.List;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.HorizontalAlignment;
@@ -41,10 +39,18 @@ public class downloadController implements Initializable {
   private Text pdfMessage;
 
   static String stuID;
+  static String stuName;
 
+  //Get StudentID
   public static void inputID(String text){
          stuID=text;
   }
+
+  //Get student name
+  public static void inputName(String getname){
+    stuName= getname;
+  }
+
   @FXML
   public void handleButtonAction(ActionEvent event) throws FileNotFoundException,IOException {
     final DirectoryChooser dirchooser = new DirectoryChooser();
@@ -94,6 +100,12 @@ public class downloadController implements Initializable {
       document.add(image1);
       document.add(new Paragraph("Universiti Sains Malaysia").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(30f));
       document.add(new Paragraph("Student ID:   "+stuID));
+      if(stuName==null){
+          document.add(new Paragraph("Student Name:   *THE STUDENT NAME IS BLANK*"));
+      }
+      else{
+        document.add(new Paragraph("Student Name:   "+stuName));
+      }
       document.add(courseTable);
       
       document.close();
