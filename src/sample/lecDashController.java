@@ -19,6 +19,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class lecDashController extends Controller implements Initializable {
 
@@ -33,7 +34,10 @@ public class lecDashController extends Controller implements Initializable {
 
   @FXML
   private ImageView profilePic;
-
+ 
+  @FXML
+  private Text errorMessage;
+  
   static String id;
 
   public void LogOut(MouseEvent event) throws IOException {
@@ -60,7 +64,6 @@ public class lecDashController extends Controller implements Initializable {
   private void defaultInfo() {
     displayLecName();
     displayLecNRIC();
-    displaystuffID();
     displayEmpStatus();
     displayPosition();
     displayLecSchool();
@@ -89,6 +92,13 @@ public class lecDashController extends Controller implements Initializable {
 
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
+
+    if(nric.getLength() !=12)
+    {
+      errorMessage.setText("Please enter a NRIC number with 12 digits!");
+    }
+
+    else{
     try{
       File stuinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
       stuinfoFile.createNewFile();
@@ -113,6 +123,7 @@ public class lecDashController extends Controller implements Initializable {
     school.setDisable(true);
     campus.setDisable(true);
   }
+}
 
   public void displayLecName()
   {
@@ -146,20 +157,7 @@ public class lecDashController extends Controller implements Initializable {
       }
   }
 
-  public void displaystuffID()
-  {
-    try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String lecID;
-      lecID = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(2);
-      staffID.setText(lecID);
-      sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
-  }
+  
 
   public void displayEmpStatus()
   {
@@ -231,7 +229,7 @@ public class lecDashController extends Controller implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    
+    staffID.setText(id);
     ChoiceBoxItem();
     defaultInfo();
    
