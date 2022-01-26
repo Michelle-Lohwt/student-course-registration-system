@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -17,6 +19,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
 
 public class stuDashController extends Controller implements Initializable {
 
@@ -30,7 +33,11 @@ public class stuDashController extends Controller implements Initializable {
   private ChoiceBox<String> acd_status, sem_reg, year, school, campus, programme, major, minor;
 
   @FXML
-  private JFXButton editInfoButton, saveButton;
+  private JFXButton editInfoButton, saveButton, courseregButton;
+
+  
+  
+  static String id;
 
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
@@ -48,14 +55,26 @@ public class stuDashController extends Controller implements Initializable {
     openLink();
   }
 
-  private void defaultInfo() throws IOException{
-    matric.setText("12345");
-    acd_status.setValue("Active");
+  public static void getID(String text)
+  {
+    id=text;
+  }
 
-   
-
-}
-
+  private void defaultInfo()
+  {
+    displayName();
+    displayNRIC();
+    displayAcdStatus();
+    displaySemRegistered();
+    displayCGPA();
+    displayYear();
+    displaySchool();
+    displayCampus();
+    displayProgramme();
+    displayMajor();
+    displayMinor();
+  }
+  
   public void editStuInfo() {
     name.setEditable(true);
     nric.setEditable(true);
@@ -65,6 +84,7 @@ public class stuDashController extends Controller implements Initializable {
     nric.setStyle("-fx-border-color: #eb7231");
     cgpa.setStyle("-fx-border-color: #eb7231");
 
+    
     name.setDisable(false);
     nric.setDisable(false);
     cgpa.setDisable(false);
@@ -88,11 +108,12 @@ public class stuDashController extends Controller implements Initializable {
     cgpa.setStyle("-fx-border-color: default");
 
     try{
-      File stuinfoFile = new File("data/Student Dashboard/"+name.getText()+".txt");
+      File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
       stuinfoFile.createNewFile();
-      BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Dashboard/"+name.getText()+".txt"));
+      BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Dashboard/"+ id +".txt"));
       writer.write(name.getText());
       writer.write("\n" + nric.getText());
+      writer.write("\n" + id);
       writer.write("\n" + acd_status.getSelectionModel().getSelectedItem());
       writer.write("\n" + sem_reg.getSelectionModel().getSelectedItem());
       writer.write("\n" + cgpa.getText());
@@ -111,9 +132,196 @@ public class stuDashController extends Controller implements Initializable {
 
 
   }
-
-
   
+  
+  public void displayName() 
+  {
+    try {
+    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+    Scanner sc = new Scanner(stuinfoFile);
+    String studentName;
+    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+    name.setText(studentName);
+    sc.close();
+    name.setEditable(false);
+    name.setDisable(true);
+    } catch (IOException e) {
+      
+      e.printStackTrace();
+    }
+    
+  }
+
+  public void displayNRIC()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String icnumber;
+      icnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(1);
+      nric.setText(icnumber);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+      
+  }
+
+
+  public void displayMatrics()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String matricsnumber;
+      matricsnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(2);
+      matric.setText(matricsnumber);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+      
+  }
+
+  public void displayAcdStatus()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String acdstatus;
+      acdstatus = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(3);
+      acd_status.setValue(acdstatus);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+      
+  }
+  
+  public void displaySemRegistered()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String semregistered;
+      semregistered = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(4);
+      sem_reg.setValue(semregistered);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+      
+  }
+
+  public void displayCGPA()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String result;
+      result = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(5);
+      cgpa.setText(result);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  }
+  
+  public void displayYear()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String acdYear;
+      acdYear = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(6);
+      year.setValue(acdYear);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  }
+
+  public void displaySchool()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String School;
+      School = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(7);
+      school.setValue(School);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  }
+
+  public void displayCampus()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String Campuses;
+      Campuses = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(8);
+      campus.setValue(Campuses);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  }
+
+  public void displayProgramme()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String Programmes;
+      Programmes = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(9);
+      programme.setValue(Programmes);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  }
+
+  public void displayMajor()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String Majors;
+      Majors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(10);
+      major.setValue(Majors);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  }
+
+  public void displayMinor()
+  {
+    try {
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String Minors;
+      Minors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(11);
+      minor.setValue(Minors);
+      sc.close();
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+  } 
+
   private void ChoiceBoxItem() {
     acd_status.getItems().addAll("Active", "Probationary");
     sem_reg.getItems().addAll("17/1", "17/2", "18/1", "18/2", "19/1", "19/2", "20/1", "20/2", "21/1", "21/2", "22/1",
@@ -128,29 +336,15 @@ public class stuDashController extends Controller implements Initializable {
 
   }
 
-  public void display() throws IOException{
-    File stuinfoFile = new File("data/Student Dashboard/"+name.getText()+".txt");
-    Scanner sc = new Scanner(stuinfoFile);
-    String name= sc.nextLine();
-    String ic = sc.nextLine();
-    while(sc.hasNextLine())
-    {
-      System.out.println(name);
-      System.out.println(ic);
-    }
-    sc.close();
-  }
+
+  
 
   @Override
   public void initialize(URL location, ResourceBundle resources){
+    matric.setText(id);
+    defaultInfo();
     ChoiceBoxItem();
-    try {
-      defaultInfo();
-      display();
-    } catch (IOException e) {
-      
-      e.printStackTrace();
-    }
-  }
-}
+   
 
+}
+}
