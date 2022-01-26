@@ -69,6 +69,7 @@ public class loginController extends Controller implements Initializable {
         } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
           if (rbStudent.isSelected()) {
             switchTo(event, "stuDash.fxml");
+            stuDashController.getID(id.getText());
           } else if (rbLecturer.isSelected()) {
             switchTo(event, "lecDash.fxml");
           } else {
