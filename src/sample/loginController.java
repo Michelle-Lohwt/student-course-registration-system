@@ -70,6 +70,8 @@ public class loginController extends Controller implements Initializable {
           } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
             courseRegController.inputID(id.getText());
             downloadController.inputID(id.getText());
+            switchTo(event, "stuDash.fxml");
+
             stuDashController.getID(id.getText());
             switchTo(event, "stuDash.fxml");
             sc.close();
@@ -79,6 +81,9 @@ public class loginController extends Controller implements Initializable {
             
           } else {
             loginMessage.setText("Please choose Student or Lecturer!");
+
+            sc.close();
+
           }
         } catch (IOException e) {
           loginMessage.setText("This ID has not registered yet!");
