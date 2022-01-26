@@ -56,36 +56,58 @@ public class loginController extends Controller implements Initializable {
     } else if (id.getLength() != 6) {
       loginMessage.setText("ID must be 6 characters");
     } else {
-      try {
-        File fileObj = new File("data/Student Profile/" + id.getText() + ".txt");
-        Scanner sc = new Scanner(fileObj);
-        String correctStudentID = sc.nextLine();
-        String correctPassword = sc.nextLine();
-
-        if (!id.getText().equals(correctStudentID)) {
-          loginMessage.setText("ID number is incorrect!");
-        } else if (!password.getText().equals(correctPassword)) {
-          loginMessage.setText("Password is incorrect!");
-        } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
-          if (rbStudent.isSelected()) {
+      if(rbStudent.isSelected()){
+        try {
+          File fileObj = new File("data/Student Profile/" + id.getText() + ".txt");
+          Scanner sc = new Scanner(fileObj);
+          String correctStudentID = sc.nextLine();
+          String correctPassword = sc.nextLine();
+  
+          if (!id.getText().equals(correctStudentID)) {
+            loginMessage.setText("ID number is incorrect!");
+          } else if (!password.getText().equals(correctPassword)) {
+            loginMessage.setText("Password is incorrect!");
+          } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
+            courseRegController.inputID(id.getText());
+            downloadController.inputID(id.getText());
             switchTo(event, "stuDash.fxml");
+
             stuDashController.getID(id.getText());
           } else if (rbLecturer.isSelected()) {
             switchTo(event, "lecDash.fxml");
           } else {
             loginMessage.setText("Please choose Student or Lecturer!");
+
+            sc.close();
+
           }
+        } catch (IOException e) {
+          loginMessage.setText("This ID has not registered yet!");
+          e.printStackTrace();
         }
-
-        while (sc.hasNextLine()) {
-          System.out.println(sc.nextInt());
-
+      } else if (rbLecturer.isSelected()){
+        try {
+          File fileObj = new File("data/Lecturer Profile/" + id.getText() + ".txt");
+          Scanner sc = new Scanner(fileObj);
+          String correctStudentID = sc.nextLine();
+          String correctPassword = sc.nextLine();
+  
+          if (!id.getText().equals(correctStudentID)) {
+            loginMessage.setText("ID number is incorrect!");
+          } else if (!password.getText().equals(correctPassword)) {
+            loginMessage.setText("Password is incorrect!");
+          } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
+            courseRegController.inputID(id.getText());
+            downloadController.inputID(id.getText());
+            switchTo(event, "lecDash.fxml");
+            sc.close();
+          }
+        } catch (IOException e) {
+          loginMessage.setText("This ID has not registered yet!");
+          e.printStackTrace();
         }
-        sc.close();
-      } catch (IOException e) {
-        loginMessage.setText("This ID has not registered yet!");
-        System.out.println("An error occurred.");
-        e.printStackTrace();
+      } else {
+        loginMessage.setText("Please select either Student or Lecturer!");
       }
     }
   }
