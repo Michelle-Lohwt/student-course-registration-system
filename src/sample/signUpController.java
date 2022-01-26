@@ -60,59 +60,113 @@ public class signUpController extends Controller implements Initializable {
     } else if (password.getText().equals(rePassword.getText()) && password.getLength() < 6) {
       signUpMessage.setText("Password must have minimum 6 characters!");
     } else{
-      File file1 = new File("data/Student Profile/"+id.getText()+".txt");
-      File file2 = new File("data/Student Course List/"+id.getText()+".txt");
-      File file3 = new File("data/Student Registered Course/"+id.getText()+".txt");
-
-      //Check whether if the account exist or not
-      if(!file1.exists() && !file2.exists() && !file3.exists()){
-        try{
-          //Create Student Profile txt file and save their matric number and password into it
-          file1.createNewFile();
-          BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Profile/"+id.getText()+".txt"));
-          writer.write(id.getText());
-          writer.write("\n" + password.getText());
-          writer.close();
-
-          //Create Student Course List txt file and copy the Course List into it
-          file2.createNewFile();
+      if(rbStudent.isSelected()){
+        File file1 = new File("data/Student Profile/"+id.getText()+".txt");
+        File file2 = new File("data/Student Course List/"+id.getText()+".txt");
+        File file3 = new File("data/Student Registered Course/"+id.getText()+".txt");
+      
+        //Check whether if the account exist or not
+        if(!file1.exists() && !file2.exists() && !file3.exists()){
           try{
-            FileInputStream in = new FileInputStream(new File("data/Course List.txt"));
-            FileOutputStream out = new FileOutputStream(new File ("data/Student Course List/"+id.getText()+".txt"));
-              try{
-                int n;
-                while ((n = in.read()) != -1){
-                  out.write(n);
+            //Create Student Profile txt file and save their matric number and password into it
+            file1.createNewFile();
+            BufferedWriter writer=new BufferedWriter(new FileWriter(file1));
+            writer.write(id.getText() + "\n");
+            writer.write(password.getText() + "\n");
+            writer.close();
+          
+            //Create Student Course List txt file and copy the Course List into it
+            file2.createNewFile();
+            try{
+              FileInputStream in = new FileInputStream(new File("data/Course List.txt"));
+              FileOutputStream out = new FileOutputStream(file2);
+                try{
+                  int n;
+                  while ((n = in.read()) != -1){
+                    out.write(n);
+                  }
                 }
-              }
-              finally{
-                if (in != null) {
-                  in.close();
+                finally{
+                  if (in != null) {
+                    in.close();
+                  }
+                  if (out != null) {
+                    out.close();
+                  }
                 }
-                if (out != null) {
-                  out.close();
-                }
-              }
+            } catch (IOException e) {
+              System.out.println("An error occurred.");
+              e.printStackTrace();
+            }
+          
+            //Create Student Registered Course txt file
+            file3.createNewFile();
+            signUpMessage.setFill(Color.GREEN);
+            signUpMessage.setText("Sign Up Successful!");
           } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
           }
-
-          //Create Student Registered Course txt file
-          file3.createNewFile();
-          signUpMessage.setFill(Color.GREEN);
-          signUpMessage.setText("Sign Up Successful!");
-        } catch (IOException e) {
-          System.out.println("An error occurred.");
-          e.printStackTrace();
-        }
+        } else if(file1.exists() || file2.exists() || file3.exists()) {
+          signUpMessage.setText("This ID has been registered before!");
+        } else{
+          signUpMessage.setText("An error occurred!");
+        }  
+      } else if(rbLecturer.isSelected()){
+        File file1 = new File("data/Lecturer Profile/"+id.getText()+".txt");
+        File file2 = new File("data/Lecturer Course List/"+id.getText()+".txt");
+        File file3 = new File("data/Lecturer Teaching Course/"+id.getText()+".txt");
+      
+        //Check whether if the account exist or not
+        if(!file1.exists() && !file2.exists() && !file3.exists()){
+          try{
+            //Create Lecturer Profile txt file and save their staff id and password into it
+            file1.createNewFile();
+            BufferedWriter writer=new BufferedWriter(new FileWriter(file1));
+            writer.write(id.getText() + "\n");
+            writer.write(password.getText() + "\n");
+            writer.close();
+          
+            //Create Student Course List txt file and copy the Course List into it
+            file2.createNewFile();
+            try{
+              FileInputStream in = new FileInputStream(new File("data/Course List.txt"));
+              FileOutputStream out = new FileOutputStream(file2);
+                try{
+                  int n;
+                  while ((n = in.read()) != -1){
+                    out.write(n);
+                  }
+                }
+                finally{
+                  if (in != null) {
+                    in.close();
+                  }
+                  if (out != null) {
+                    out.close();
+                  }
+                }
+            } catch (IOException e) {
+              System.out.println("An error occurred.");
+              e.printStackTrace();
+            }
+          
+            //Create Student Registered Course txt file
+            file3.createNewFile();
+            signUpMessage.setFill(Color.GREEN);
+            signUpMessage.setText("Sign Up Successful!");
+          } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+          }
+        } else if(file1.exists() || file2.exists() || file3.exists()) {
+          signUpMessage.setText("This ID has been registered before!");
+        } else{
+          signUpMessage.setText("An error occurred!");
+        }  
+      } else{
+        signUpMessage.setText("Please select either Student or Lecturer!");
       }
-      else if(file1.exists() || file2.exists() || file3.exists()) {
-        signUpMessage.setText("This matric number has been registered before!");
-      }
-      else{
-        signUpMessage.setText("An error occurred!");
-      }  
     }
   }
 
