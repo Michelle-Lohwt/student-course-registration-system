@@ -127,7 +127,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <ListView fx:id="courseList" onMouseClicked="#courselistdetails" prefHeight="200.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="140.0" />
+                  <ListView fx:id="courseList" onKeyPressed="#courselistdetails" onMouseClicked="#courselistdetails" prefHeight="200.0" prefWidth="440.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="140.0" />
                   <JFXButton fx:id="addCourseButton" layoutX="28.0" layoutY="344.0" onMouseClicked="#addcourse" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Add Course" textFill="WHITE" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="345.0">
                      <font>
                         <Font size="14.0" />
@@ -153,7 +153,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" onMouseClicked="#courseregistereddetails" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
+                  <ListView fx:id="registeredCourse" layoutX="10.0" layoutY="10.0" onKeyPressed="#courseregistereddetails" onMouseClicked="#courseregistereddetails" prefHeight="470.0" prefWidth="420.0" style="-fx-fixed-cell-size: 30;" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="100.0" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="440.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0">
                      <children>
                         <VBox prefWidth="420.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">

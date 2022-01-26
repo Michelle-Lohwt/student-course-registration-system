@@ -100,6 +100,7 @@ public class stuDashController extends Controller implements Initializable {
 
   public void saveInfo() throws IOException{
     name.setEditable(false);
+    downloadController.inputName(name.getText());
     nric.setEditable(false);
     cgpa.setEditable(false);
 
