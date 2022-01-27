@@ -19,6 +19,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 
 public class stuDashController extends Controller implements Initializable {
@@ -33,9 +34,10 @@ public class stuDashController extends Controller implements Initializable {
   private ChoiceBox<String> acd_status, sem_reg, year, school, campus, programme, major, minor;
 
   @FXML
-  private JFXButton editInfoButton, saveButton, courseregButton;
+  private JFXButton editInfoButton, saveButton;
 
-  
+  @FXML
+  private Text Messages;
   
   static String id;
 
@@ -44,9 +46,17 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-    switchTo(event, "courseReg.fxml");
+    //I am not sure what to put in the if statement, this one is incorrect 
+if (!editInfoButton.isPressed())
+{
+  Messages.setText("Please enter all the infos before proceed to course registration!");
+}
+else if (saveButton.isPressed() && editInfoButton.isPressed())
+  {    
+  switchTo(event, "courseReg.fxml");
   }
-
+  
+  }
   public void ContactUs(MouseEvent event) throws IOException {
     switchTo(event, "stuReport.fxml");
   }
@@ -98,16 +108,39 @@ public class stuDashController extends Controller implements Initializable {
     minor.setDisable(false);
   }
 
-  public void saveInfo() throws IOException{
+  
+  public void saveInfo() {
     name.setEditable(false);
     downloadController.inputName(name.getText());
     nric.setEditable(false);
     cgpa.setEditable(false);
-
+    
+    
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
     cgpa.setStyle("-fx-border-color: default");
 
+    //If want to do CGPA validation then have to convert string which is cgpa.getText() to int,
+    // and this is the way I found online, have tried several times
+    //but cannot
+    /**String cgpaInteger=cgpa.getText();
+    int cgpaNumber = Integer.valueOf(cgpaInteger);
+      if (cgpaNumber <0.00 && cgpaNumber>4.00)
+      {
+        Messages.setText("Please enter a CGPA between 0.00 and 4.00 ONLY!");
+      }*/
+    if (nric.getLength() !=12)
+    {
+      Messages.setText("Please enter a 12 digits NRIC number!");
+    }
+
+    else if (name.getText().isBlank() == true)
+    {
+      Messages.setText("Please enter your name!");
+    }
+    else
+    {
+      Messages.setText("Save successful!");
     try{
       File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
       stuinfoFile.createNewFile();
@@ -125,15 +158,15 @@ public class stuDashController extends Controller implements Initializable {
       writer.write("\n" + major.getSelectionModel().getSelectedItem());
       writer.write("\n" + minor.getSelectionModel().getSelectedItem());
       writer.close();
-      
+      //I also tried the save name things, but also fails, the name can still be edited after the first save
+      name.setEditable(false);
     }catch(IOException e)
     {
       System.out.println("An error occured.");
     }
-
+  }
 
   }
-  
   
   public void displayName() 
   {
@@ -144,8 +177,6 @@ public class stuDashController extends Controller implements Initializable {
     studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
     name.setText(studentName);
     sc.close();
-    name.setEditable(false);
-    name.setDisable(true);
     } catch (IOException e) {
       
       e.printStackTrace();
@@ -169,22 +200,6 @@ public class stuDashController extends Controller implements Initializable {
       
   }
 
-
-  public void displayMatrics()
-  {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String matricsnumber;
-      matricsnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(2);
-      matric.setText(matricsnumber);
-      sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
-      
-  }
 
   public void displayAcdStatus()
   {
@@ -342,6 +357,7 @@ public class stuDashController extends Controller implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources){
+    
     matric.setText(id);
     defaultInfo();
     ChoiceBoxItem();
