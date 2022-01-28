@@ -135,7 +135,7 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fx:id="downloadStudent" fitHeight="25.0" fitWidth="25.0" layoutX="332.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="325.0">
+                  <ImageView fx:id="downloadStudent" fitHeight="25.0" fitWidth="25.0" layoutX="332.0" layoutY="333.0" onMouseClicked="#printStuList" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="325.0">
                      <image>
                         <Image url="@images/download.png" />
                      </image>
@@ -236,7 +236,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <ImageView fx:id="downloadTeaching" fitHeight="25.0" fitWidth="25.0" layoutX="864.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="390.0">
+                  <ImageView fx:id="downloadTeaching" fitHeight="25.0" fitWidth="25.0" layoutX="864.0" layoutY="330.0" onMouseClicked="#printTeachCourse" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="390.0">
                      <image>
                         <Image url="@images/download.png" />
                      </image>
