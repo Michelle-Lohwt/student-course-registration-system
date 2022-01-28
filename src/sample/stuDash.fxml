@@ -258,6 +258,16 @@
                         <Font size="18.0" />
                      </font>
                   </JFXButton>
+                  <Text fx:id="Messages" fill="#f70000" layoutX="273.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="384.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <JFXButton fx:id="contactButton" layoutX="690.0" layoutY="448.0" onAction="#CallUs" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Contact Us" textFill="WHITE" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="448.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </center>
