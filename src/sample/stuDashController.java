@@ -11,15 +11,23 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+
+import javafx.stage.Stage;
 
 
 public class stuDashController extends Controller implements Initializable {
@@ -34,10 +42,13 @@ public class stuDashController extends Controller implements Initializable {
   private ChoiceBox<String> acd_status, sem_reg, year, school, campus, programme, major, minor;
 
   @FXML
-  private JFXButton editInfoButton, saveButton;
+  private JFXButton editInfoButton, saveButton,contactButton;
 
   @FXML
   private Text Messages;
+  
+  @FXML
+  private Button closeButton;
   
   static String id;
 
@@ -46,19 +57,36 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-    //I am not sure what to put in the if statement, this one is incorrect 
-if (!editInfoButton.isPressed())
-{
-  Messages.setText("Please enter all the infos before proceed to course registration!");
-}
-else if (saveButton.isPressed() && editInfoButton.isPressed())
-  {    
+    if(name.getText().isEmpty())
+    {
+      Messages.setText("Please save all the infos before proceed to course registration!");
+    }
+
+    else if(!name.getText().isEmpty())
+  {
   switchTo(event, "courseReg.fxml");
   }
+}
   
-  }
+  
   public void ContactUs(MouseEvent event) throws IOException {
     switchTo(event, "stuReport.fxml");
+
+  }
+  public void CallUs() {
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CallUs.fxml"));
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      Image icon = new Image("sample/images/usm-ringlogo.png");
+      stage.getIcons().add(icon);
+      stage.setTitle("Contact Us");
+      stage.setResizable(false);
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+      System.out.println("Can't load new window");
+    }
   }
 
   public void openBrowser() throws URISyntaxException, IOException {
@@ -134,9 +162,9 @@ else if (saveButton.isPressed() && editInfoButton.isPressed())
       Messages.setText("Please enter a 12 digits NRIC number!");
     }
 
-    else if (name.getText().isBlank() == true)
+    else if (name.getText().isEmpty() == true)
     {
-      Messages.setText("Please enter your name!");
+     Messages.setText("Please enter your name!");
     }
     else
     {
