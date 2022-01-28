@@ -38,7 +38,7 @@ public class downloadController implements Initializable {
   private TextField textfield;
   @FXML
   private Text pdfMessage;
-
+  
   static String stuID;
   static String stuName;
 
@@ -119,7 +119,8 @@ public class downloadController implements Initializable {
     }
 
   }
-  
+
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 

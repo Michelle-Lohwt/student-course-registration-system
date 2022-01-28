@@ -31,16 +31,21 @@ import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class stuListController extends Controller implements Initializable {
 
@@ -517,6 +522,40 @@ public class stuListController extends Controller implements Initializable {
     }
   }
 
+  public void printTeachCourse(MouseEvent event) throws IOException {
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeachCourseDownload.fxml"));
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      Image icon = new Image("sample/images/download.png");
+      stage.getIcons().add(icon);
+      stage.setTitle("Select Teaching Course List pdf directory");
+      stage.setResizable(false);
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+      System.out.println("Can't load new window");
+    }
+  }
+    public void printStuList(MouseEvent event) throws IOException {
+      try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StuListDownload.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Image icon = new Image("sample/images/download.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("Select Course Student List pdf directory");
+        stage.setResizable(false);
+        stage.setScene(new Scene(root1));
+        stage.show();
+      } catch (Exception e) {
+        System.out.println("Can't load new window");
+      }
+  
+    }
+  
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     displaycourselist();
