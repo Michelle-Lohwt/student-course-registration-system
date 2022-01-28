@@ -202,7 +202,7 @@ public class stuListController extends Controller implements Initializable {
       cleardetails();
 
       // Display the Course Details
-      downloadController.inputCourseTitle("CPT112");
+      downloadController.inputCourseTitle(courseList.getSelectionModel().getSelectedItem());
       courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
       try {
         List<String> lines = Files
@@ -257,6 +257,7 @@ public class stuListController extends Controller implements Initializable {
 
       // Display the Course Details
       courseTitle.setText(teachingCourse.getSelectionModel().getSelectedItem());
+      downloadController.inputCourseTitle(teachingCourse.getSelectionModel().getSelectedItem());
       try {
         List<String> lines = Files
             .lines(Paths.get("data/Course Details/" + teachingCourse.getSelectionModel().getSelectedItem() + ".txt"))

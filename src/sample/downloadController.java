@@ -221,12 +221,12 @@ public class downloadController implements Initializable {
 
       
       //Table
-      float TableColWidth[] = {50f,300f}; 
+      float TableColWidth[] = {50f,300f,100f}; 
       Table courseTable = new Table(TableColWidth);
 
       courseTable.addCell("No.");
       courseTable.addCell("Course Student List");
-
+      courseTable.addCell("Student ID");
       //Print student list in table
       try {
       File fileObj = new File("data/Course Student List/"+CourseTitle+".txt");
@@ -234,7 +234,20 @@ public class downloadController implements Initializable {
       int count=1;
       while (fileReader.hasNextLine()) {
       courseTable.addCell(Integer.toString(count));
-      courseTable.addCell(fileReader.nextLine());
+      String stuLine=fileReader.nextLine();
+      char[] chars =stuLine.toCharArray();
+      StringBuilder studentName = new StringBuilder();
+      StringBuilder studentID = new StringBuilder();
+      for(char c : chars){
+        if(Character.isDigit(c)){
+          studentID.append(c);
+        }
+        else{
+          studentName.append(c);
+        }
+      }
+      courseTable.addCell(studentName.toString());
+      courseTable.addCell(studentID.toString());
       count++;
       }
       fileReader.close();
