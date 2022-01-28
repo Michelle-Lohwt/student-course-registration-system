@@ -202,6 +202,7 @@ public class stuListController extends Controller implements Initializable {
       cleardetails();
 
       // Display the Course Details
+      downloadController.inputCourseTitle("CPT112");
       courseTitle.setText(courseList.getSelectionModel().getSelectedItem());
       try {
         List<String> lines = Files
