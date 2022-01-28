@@ -88,7 +88,6 @@ public class lecDashController extends Controller implements Initializable {
     displayPosition();
     displayLecSchool();
     displayLecCampus();
-
   }
 
   public void editInfo() {
@@ -252,7 +251,5 @@ public class lecDashController extends Controller implements Initializable {
     staffID.setText(id);
     ChoiceBoxItem();
     defaultInfo();
-   
   }
-
 }

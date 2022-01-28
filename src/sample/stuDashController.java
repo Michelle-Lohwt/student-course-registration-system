@@ -122,7 +122,6 @@ public class stuDashController extends Controller implements Initializable {
     nric.setStyle("-fx-border-color: #eb7231");
     cgpa.setStyle("-fx-border-color: #eb7231");
 
-    
     name.setDisable(false);
     nric.setDisable(false);
     cgpa.setDisable(false);
@@ -224,8 +223,7 @@ public class stuDashController extends Controller implements Initializable {
       } catch (IOException e) {
         
         e.printStackTrace();
-      }
-      
+      } 
   }
 
 
@@ -241,8 +239,7 @@ public class stuDashController extends Controller implements Initializable {
       } catch (IOException e) {
         
         e.printStackTrace();
-      }
-      
+      }   
   }
   
   public void displaySemRegistered()
@@ -257,8 +254,7 @@ public class stuDashController extends Controller implements Initializable {
       } catch (IOException e) {
         
         e.printStackTrace();
-      }
-      
+      } 
   }
 
   public void displayCGPA()
@@ -376,8 +372,6 @@ public class stuDashController extends Controller implements Initializable {
     programme.getItems().addAll("BSc Computer Science", "BSc Mathematics", "BSc Management");
     major.getItems().addAll("Software Engineering", "Intelligent Computing", "Computing Infrastructure");
     minor.getItems().addAll("Accounting", "Mathematics", "Electives");
-    
-
   }
 
 
@@ -385,11 +379,8 @@ public class stuDashController extends Controller implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources){
-    
     matric.setText(id);
     defaultInfo();
     ChoiceBoxItem();
-   
-
 }
 }
