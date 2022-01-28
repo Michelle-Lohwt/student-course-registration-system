@@ -88,6 +88,7 @@ public class lecDashController extends Controller implements Initializable {
 
   public void saveInfo() {
     name.setEditable(false);
+    downloadController.inputLectName(name.getText());
     nric.setEditable(false);
 
     name.setStyle("-fx-border-color: default");
