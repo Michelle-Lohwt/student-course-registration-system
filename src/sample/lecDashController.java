@@ -14,12 +14,17 @@ import java.util.Scanner;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class lecDashController extends Controller implements Initializable {
 
@@ -27,7 +32,7 @@ public class lecDashController extends Controller implements Initializable {
   private TextField name, nric, staffID;
 
   @FXML
-  private JFXButton editInfoButton, saveButton;
+  private JFXButton editInfoButton, saveButton, contactButton;
 
   @FXML
   private ChoiceBox<String> emp_status, position, school, campus;
@@ -52,6 +57,21 @@ public class lecDashController extends Controller implements Initializable {
     switchTo(event, "lecReport.fxml");
   }
 
+  public void CallUs() {
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CallUs.fxml"));
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      Image icon = new Image("sample/images/usm-ringlogo.png");
+      stage.getIcons().add(icon);
+      stage.setTitle("Contact Us");
+      stage.setResizable(false);
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+      System.out.println("Can't load new window");
+    }
+  }
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
