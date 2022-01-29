@@ -176,7 +176,7 @@
                         </VBox>
                         <VBox prefWidth="450.0" spacing="5.0" translateX="10.0">
                            <children>
-                              <TextField fx:id="name" disable="true" editable="false" promptText="Your Name" style="-fx-text-fill: Black;">
+                              <TextField fx:id="name" disable="true" editable="false" onKeyTyped="#validateName" promptText="Your Name" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -209,7 +209,7 @@
                         <Font size="18.0" />
                      </font>
                   </JFXButton>
-                  <Text fx:id="errorMessage" fill="#fa0000" layoutX="318.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="220.800048828125">
+                  <Text fx:id="errorMessage" fill="#fa0000" layoutX="318.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="311.20001220703125">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

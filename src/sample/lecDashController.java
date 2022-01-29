@@ -1,5 +1,5 @@
 package sample;
-
+ 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,77 +10,58 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
+ 
 import com.jfoenix.controls.JFXButton;
-
+ 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
+ 
 public class lecDashController extends Controller implements Initializable {
-
+ 
   @FXML
   private TextField name, nric, staffID;
-
+ 
   @FXML
   private JFXButton editInfoButton, saveButton, contactButton;
-
+ 
   @FXML
   private ChoiceBox<String> emp_status, position, school, campus;
-
+ 
   @FXML
   private ImageView profilePic;
  
   @FXML
-  private Text errorMessage;
-  
+  private Text Message;
+ 
   static String id;
-
+ 
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
   }
-
+ 
   public void StuList(MouseEvent event) throws IOException {
     switchTo(event, "stuList.fxml");
   }
-
+ 
   public void ContactUs(MouseEvent event) throws IOException {
     switchTo(event, "lecReport.fxml");
   }
-
-  public void CallUs() {
-    try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CallUs.fxml"));
-      Parent root1 = (Parent) fxmlLoader.load();
-      Stage stage = new Stage();
-      Image icon = new Image("sample/images/usm-ringlogo.png");
-      stage.getIcons().add(icon);
-      stage.setTitle("Contact Us");
-      stage.setResizable(false);
-      stage.setScene(new Scene(root1));
-      stage.show();
-    } catch (Exception e) {
-      System.out.println("Can't load new window");
-    }
-  }
+ 
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
-
+ 
   public static void getID(String text)
   {
     id=text;
   }
-
+ 
   private void defaultInfo() {
     displayLecName();
     displayLecNRIC();
@@ -89,14 +70,14 @@ public class lecDashController extends Controller implements Initializable {
     displayLecSchool();
     displayLecCampus();
   }
-
+ 
   public void editInfo() {
     name.setEditable(true);
     nric.setEditable(true);
-
+ 
     name.setStyle("-fx-border-color: #eb7231");
     nric.setStyle("-fx-border-color: #eb7231");
-
+ 
     name.setDisable(false);
     nric.setDisable(false);
     emp_status.setDisable(false);
@@ -104,21 +85,22 @@ public class lecDashController extends Controller implements Initializable {
     school.setDisable(false);
     campus.setDisable(false);
   }
-
+ 
   public void saveInfo() {
     name.setEditable(false);
     downloadController.inputLectName(name.getText());
     nric.setEditable(false);
-
+ 
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
-
+ 
     if(nric.getLength() !=12)
     {
-      errorMessage.setText("Please enter a NRIC number with 12 digits!");
+      Message.setText("Please enter a NRIC number with 12 digits!");
     }
-
+ 
     else{
+      Message.setText("Save successful!");
     try{
       File stuinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
       stuinfoFile.createNewFile();
@@ -144,7 +126,7 @@ public class lecDashController extends Controller implements Initializable {
     campus.setDisable(true);
   }
 }
-
+ 
   public void displayLecName()
   {
     try {
@@ -157,11 +139,11 @@ public class lecDashController extends Controller implements Initializable {
       name.setEditable(false);
       name.setDisable(true);
       } catch (IOException e) {
-        
+       
         e.printStackTrace();
       }
   }
-
+ 
   public void displayLecNRIC()
   {
     try {
@@ -172,13 +154,13 @@ public class lecDashController extends Controller implements Initializable {
       nric.setText(lecNric);
       sc.close();
       } catch (IOException e) {
-        
+       
         e.printStackTrace();
       }
   }
-
-  
-
+ 
+ 
+ 
   public void displayEmpStatus()
   {
     try {
@@ -189,11 +171,11 @@ public class lecDashController extends Controller implements Initializable {
       emp_status.setValue(status);
       sc.close();
       } catch (IOException e) {
-        
+       
         e.printStackTrace();
       }
   }
-
+ 
   public void displayPosition()
   {
     try {
@@ -204,11 +186,11 @@ public class lecDashController extends Controller implements Initializable {
       position.setValue(lecPosition);
       sc.close();
       } catch (IOException e) {
-        
+       
         e.printStackTrace();
       }
   }
-
+ 
   public void displayLecSchool()
   {
     try {
@@ -219,11 +201,11 @@ public class lecDashController extends Controller implements Initializable {
       school.setValue(lecSchool);
       sc.close();
       } catch (IOException e) {
-        
+       
         e.printStackTrace();
       }
   }
-
+ 
   public void displayLecCampus()
   {
     try {
@@ -234,11 +216,11 @@ public class lecDashController extends Controller implements Initializable {
       campus.setValue(lecCampus);
       sc.close();
       } catch (IOException e) {
-        
+       
         e.printStackTrace();
       }
   }
-
+ 
   private void ChoiceBoxItem() {
     emp_status.getItems().addAll("Active", "Research", "Further Study");
     position.getItems().addAll("Lecturer", "Senior Lecturer", "Professor", "Associate Professor",
@@ -246,7 +228,23 @@ public class lecDashController extends Controller implements Initializable {
     school.getItems().addAll("School of Computer Science", "School of Mathematical Sciences", "School of Management");
     campus.getItems().addAll("Main Campus", "Health Campus", "Engineering Campus");
   }
-
+ 
+  public void validateName(KeyEvent e) {
+    if (name.getText().isEmpty()) 
+    {
+      Message.setText("Please enter your name!");
+      saveButton.setDisable(true);
+    } 
+    else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ".contains(e.getCharacter())) 
+    {
+      Message.setText("Your name should only contains alphabets or slashes! Try again!");
+      name.setText(name.getText().substring(0, name.getText().length() - 1));
+      name.positionCaret(name.getText().length());
+      saveButton.setDisable(true);
+    } else if (!name.getText().isEmpty()) {
+      saveButton.setDisable(false);
+    }
+  }
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     staffID.setText(id);
