@@ -87,8 +87,7 @@ public class signUpController extends Controller implements Initializable {
                     while ((n = in.read()) != -1){
                       out.write(n);
                     }
-                  }
-                  finally{
+                  } finally{
                     if (in != null) {
                       in.close();
                     }
@@ -139,8 +138,7 @@ public class signUpController extends Controller implements Initializable {
                     while ((n = in.read()) != -1){
                       out.write(n);
                     }
-                  }
-                  finally{
+                  } finally{
                     if (in != null) {
                       in.close();
                     }
@@ -153,7 +151,7 @@ public class signUpController extends Controller implements Initializable {
                 e.printStackTrace();
               }
             
-              //Create Student Registered Course txt file
+              //Create Lecturer Registered Course txt file
               file3.createNewFile();
               signUpMessage.setFill(Color.GREEN);
               signUpMessage.setText("Sign Up Successful!");
@@ -171,7 +169,11 @@ public class signUpController extends Controller implements Initializable {
         }
       }
     } catch (NumberFormatException e) {
-      signUpMessage.setText("Please input numbers only!");
+      if (id.getText().isBlank()){
+        signUpMessage.setText("Please fill in all required fields!");
+      } else {
+      signUpMessage.setText("ID must be numbers only!");
+      }
     }
   }
 
