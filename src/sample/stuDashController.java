@@ -1,6 +1,5 @@
 package sample;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,21 +48,32 @@ public class stuDashController extends Controller implements Initializable {
   
   static String id;
 
+  public static void getID(String text)
+  {
+    id=text;
+  }
+
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-    //I have tried to insert saveButton.isPressed() condition but cannot
-    if(name.getText().isEmpty())
+
+     File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+     Scanner sc = new Scanner(stuinfoFile);
+     String studentName;
+     studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+     
+    if(studentName.isEmpty() == true)
     {
-      Messages.setText("Please save all the infos before proceed to course registration!");
+      Messages.setText("Please save the name before proceed to course registration!");
     }
     else 
   {
     stuReportController.inputName(name.getText());
     switchTo(event, "courseReg.fxml");
   }
+  sc.close();
 }
   
   public void ContactUs(MouseEvent event) throws IOException {
@@ -73,11 +83,6 @@ public class stuDashController extends Controller implements Initializable {
   
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
-  }
-
-  public static void getID(String text)
-  {
-    id=text;
   }
 
   private void defaultInfo()
@@ -95,8 +100,13 @@ public class stuDashController extends Controller implements Initializable {
     displayMinor();
   }
   
-  public void editStuInfo() {
-    if (name.getText().isEmpty()) 
+  public void editStuInfo() throws IOException {
+    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+    Scanner sc = new Scanner(stuinfoFile);
+    String studentName;
+    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+    sc.close();
+    if (studentName.isEmpty()==true)
     {
       name.setEditable(true);
       name.setDisable(false);
@@ -145,7 +155,7 @@ public class stuDashController extends Controller implements Initializable {
       
     }
 
-    else if (name.getText().isEmpty() == true)
+    else if (name.getText().isEmpty() == true || name.getText() == "empty")
     {
      Messages.setText("Please enter your name!");
      
@@ -161,9 +171,9 @@ public class stuDashController extends Controller implements Initializable {
       Messages.setText("Save successful!");
       saveButton.setDisable(false);
     try{
-      File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
-      stuinfoFile.createNewFile();
-      BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Dashboard/"+ id +".txt"));
+      //File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
+      //stuinfoFile.createNewFile();
+      FileWriter writer = new FileWriter("data/Student Dashboard/"+ id +".txt",false);
       writer.write(name.getText());
       writer.write("\n" + nric.getText());
       writer.write("\n" + id);
@@ -383,7 +393,7 @@ public void validation()
 }
 
 public void validateName(KeyEvent e) {
-  if (name.getText().isEmpty()) 
+  if (name.getText().isEmpty() || name.getText()=="empty") 
   {
     Messages.setText("Please enter your name!");
     saveButton.setDisable(true);
@@ -394,7 +404,7 @@ public void validateName(KeyEvent e) {
     name.setText(name.getText().substring(0, name.getText().length() - 1));
     name.positionCaret(name.getText().length());
     saveButton.setDisable(true);
-  } else if (!name.getText().isEmpty()) {
+  } else if (!name.getText().isEmpty() || name.getText() !="empty") {
     saveButton.setDisable(false);
   }
 }
