@@ -91,7 +91,7 @@ public class loginController extends Controller implements Initializable {
           } else if (!password.getText().equals(correctPassword)) {
             loginMessage.setText("Password is incorrect!");
           } else if (id.getText().equals(correctLecturerID) && password.getText().equals(correctPassword)) {
-            courseRegController.inputID(id.getText());
+            stuListController.inputID(id.getText());
             lecDashController.getID(id.getText());
             downloadController.inputLectID(id.getText());
             switchTo(event, "lecDash.fxml");
