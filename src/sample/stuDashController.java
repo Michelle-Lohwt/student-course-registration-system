@@ -24,8 +24,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 
-
-
 public class stuDashController extends Controller implements Initializable {
 
   @FXML
@@ -56,11 +54,11 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
+    //I have tried to insert saveButton.isPressed() condition but cannot
     if(name.getText().isEmpty())
     {
       Messages.setText("Please save all the infos before proceed to course registration!");
     }
-
     else 
   {
     stuReportController.inputName(name.getText());
@@ -445,7 +443,7 @@ public void validateCGPA(KeyEvent e) {
 
   @Override
   public void initialize(URL location, ResourceBundle resources){
-    saveButton.setDisable(false);
+    saveButton.setDisable(true);
     matric.setText(id);
     defaultInfo();
     ChoiceBoxItem();

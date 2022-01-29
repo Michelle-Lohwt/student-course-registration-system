@@ -209,7 +209,7 @@
                         <Font size="18.0" />
                      </font>
                   </JFXButton>
-                  <Text fx:id="errorMessage" fill="#fa0000" layoutX="318.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="311.20001220703125">
+                  <Text fx:id="Message" fill="#fa0000" layoutX="318.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="311.20001220703125">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
