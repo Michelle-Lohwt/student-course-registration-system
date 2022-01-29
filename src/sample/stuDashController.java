@@ -1,6 +1,5 @@
 package sample;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,21 +48,28 @@ public class stuDashController extends Controller implements Initializable {
   
   static String id;
 
+  public static void getID(String text) {
+    id=text;
+  }
+
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-    //I have tried to insert saveButton.isPressed() condition but cannot
-    if(name.getText().isEmpty())
-    {
-      Messages.setText("Please save all the infos before proceed to course registration!");
+
+    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+    Scanner sc = new Scanner(stuinfoFile);
+    String studentName;
+    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+     
+    if(studentName.isEmpty() == true) {
+      Messages.setText("Please save the name before proceed to course registration!");
+    } else {
+      stuReportController.inputName(name.getText());
+      switchTo(event, "courseReg.fxml");
     }
-    else 
-  {
-    stuReportController.inputName(name.getText());
-    switchTo(event, "courseReg.fxml");
-  }
+    sc.close();
 }
   
   public void ContactUs(MouseEvent event) throws IOException {
@@ -75,13 +81,7 @@ public class stuDashController extends Controller implements Initializable {
     openLink();
   }
 
-  public static void getID(String text)
-  {
-    id=text;
-  }
-
-  private void defaultInfo()
-  {
+  private void defaultInfo() {
     displayName();
     displayNRIC();
     displayAcdStatus();
@@ -95,15 +95,18 @@ public class stuDashController extends Controller implements Initializable {
     displayMinor();
   }
   
-  public void editStuInfo() {
-    if (name.getText().isEmpty()) 
-    {
+  public void editStuInfo() throws IOException {
+    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+    Scanner sc = new Scanner(stuinfoFile);
+    String studentName;
+    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+    sc.close();
+    if (studentName.isEmpty()==true) {
       name.setEditable(true);
       name.setDisable(false);
       name.setStyle("-fx-border-color: #eb7231");
     } 
-    else 
-    {
+    else {
       name.setEditable(false);
       name.setDisable(true);
       name.setStyle("-fx-border-color: default");
@@ -139,71 +142,53 @@ public class stuDashController extends Controller implements Initializable {
     nric.setStyle("-fx-border-color: default");
     cgpa.setStyle("-fx-border-color: default");
 
-    if (nric.getLength() !=12)
-    {
-      Messages.setText("Please enter a 12 digits NRIC number!");
-      
-    }
-
-    else if (name.getText().isEmpty() == true)
-    {
+    if (nric.getLength() !=12) {
+      Messages.setText("Please enter a 12 digits NRIC number!");      
+    } else if (name.getText().isEmpty() == true || name.getText() == "empty") {
      Messages.setText("Please enter your name!");
-     
-    }
-
-    else if (floatCGPA <0 || floatCGPA>4)
-    {
+    } else if (floatCGPA <0 || floatCGPA>4) {
       Messages.setText("Please enter a CGPA between 0 and 4 only!");
-      
-    }
-    else
-    {
+    } else {
       Messages.setText("Save successful!");
       saveButton.setDisable(false);
-    try{
-      File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
-      stuinfoFile.createNewFile();
-      BufferedWriter writer=new BufferedWriter(new FileWriter("data/Student Dashboard/"+ id +".txt"));
-      writer.write(name.getText());
-      writer.write("\n" + nric.getText());
-      writer.write("\n" + id);
-      writer.write("\n" + acd_status.getSelectionModel().getSelectedItem());
-      writer.write("\n" + sem_reg.getSelectionModel().getSelectedItem());
-      writer.write("\n" + cgpa.getText());
-      writer.write("\n" + year.getSelectionModel().getSelectedItem());
-      writer.write("\n" + school.getSelectionModel().getSelectedItem());
-      writer.write("\n" + campus.getSelectionModel().getSelectedItem());
-      writer.write("\n" + programme.getSelectionModel().getSelectedItem());
-      writer.write("\n" + major.getSelectionModel().getSelectedItem());
-      writer.write("\n" + minor.getSelectionModel().getSelectedItem());
-      writer.close();
-      saveButton.setDisable(false);
-    }catch(IOException e)
-    {
-      System.out.println("An error occured.");
+      try{
+        //File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
+        //stuinfoFile.createNewFile();
+        FileWriter writer = new FileWriter("data/Student Dashboard/"+ id +".txt",false);
+        writer.write(name.getText());
+        writer.write("\n" + nric.getText());
+        writer.write("\n" + id);
+        writer.write("\n" + acd_status.getSelectionModel().getSelectedItem());
+        writer.write("\n" + sem_reg.getSelectionModel().getSelectedItem());
+        writer.write("\n" + cgpa.getText());
+        writer.write("\n" + year.getSelectionModel().getSelectedItem());
+        writer.write("\n" + school.getSelectionModel().getSelectedItem());
+        writer.write("\n" + campus.getSelectionModel().getSelectedItem());
+        writer.write("\n" + programme.getSelectionModel().getSelectedItem());
+        writer.write("\n" + major.getSelectionModel().getSelectedItem());
+        writer.write("\n" + minor.getSelectionModel().getSelectedItem());
+        writer.close();
+        saveButton.setDisable(false);
+      } catch(IOException e) {
+        System.out.println("An error occured.");
+      }
     }
-  }
-
   }
   
-  public void displayName() 
-  {
+  public void displayName() {
     try {
-    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-    Scanner sc = new Scanner(stuinfoFile);
-    String studentName;
-    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
-    name.setText(studentName);
-    sc.close();
+      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String studentName;
+      studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+      name.setText(studentName);
+      sc.close();
     } catch (IOException e) {
-      
       e.printStackTrace();
     }
-    
   }
 
-  public void displayNRIC()
-  {
+  public void displayNRIC() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -211,14 +196,12 @@ public class stuDashController extends Controller implements Initializable {
       icnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(1);
       nric.setText(icnumber);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      } 
+    } catch (IOException e) {
+      e.printStackTrace();
+    } 
   }
 
-  public void displayAcdStatus()
-  {
+  public void displayAcdStatus() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -226,14 +209,12 @@ public class stuDashController extends Controller implements Initializable {
       acdstatus = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(3);
       acd_status.setValue(acdstatus);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }   
+    } catch (IOException e) {
+      e.printStackTrace();
+    }   
   }
   
-  public void displaySemRegistered()
-  {
+  public void displaySemRegistered() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -241,14 +222,12 @@ public class stuDashController extends Controller implements Initializable {
       semregistered = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(4);
       sem_reg.setValue(semregistered);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      } 
+    } catch (IOException e) {
+      e.printStackTrace();
+    } 
   }
 
-  public void displayCGPA()
-  {
+  public void displayCGPA() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -256,14 +235,12 @@ public class stuDashController extends Controller implements Initializable {
       result = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(5);
       cgpa.setText(result);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
   
-  public void displayYear()
-  {
+  public void displayYear() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -271,14 +248,12 @@ public class stuDashController extends Controller implements Initializable {
       acdYear = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(6);
       year.setValue(acdYear);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public void displaySchool()
-  {
+  public void displaySchool() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -286,14 +261,12 @@ public class stuDashController extends Controller implements Initializable {
       School = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(7);
       school.setValue(School);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public void displayCampus()
-  {
+  public void displayCampus() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -301,14 +274,12 @@ public class stuDashController extends Controller implements Initializable {
       Campuses = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(8);
       campus.setValue(Campuses);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public void displayProgramme()
-  {
+  public void displayProgramme() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -316,14 +287,12 @@ public class stuDashController extends Controller implements Initializable {
       Programmes = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(9);
       programme.setValue(Programmes);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public void displayMajor()
-  {
+  public void displayMajor() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -331,14 +300,12 @@ public class stuDashController extends Controller implements Initializable {
       Majors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(10);
       major.setValue(Majors);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) { 
+      e.printStackTrace();
+    }
   }
 
-  public void displayMinor()
-  {
+  public void displayMinor() {
     try {
       File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
       Scanner sc = new Scanner(stuinfoFile);
@@ -346,10 +313,9 @@ public class stuDashController extends Controller implements Initializable {
       Minors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(11);
       minor.setValue(Minors);
       sc.close();
-      } catch (IOException e) {
-        
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   } 
 
   private void ChoiceBoxItem() {
@@ -364,88 +330,78 @@ public class stuDashController extends Controller implements Initializable {
     minor.getItems().addAll("Accounting", "Mathematics", "Electives");
   }
 
-public void validation()
-{
-  CGPAsuccess = false;
-    floatCGPA = Float.parseFloat(cgpa.getText());
-    if (floatCGPA < 0 || floatCGPA > 4) {
-      Messages.setText("Please enter a CGPA between 0 and 4 only!");
-    } else if (!cgpa.getText().contains(".")) {
-      System.out.println("CGPA should contain 2 decimal places");
-    } else if (cgpa.getText().length() > 4) {
-      cgpa.setText(String.format("%.2f", floatCGPA));
-    }
+  public void validation() {
+    CGPAsuccess = false;
+      floatCGPA = Float.parseFloat(cgpa.getText());
+      if (floatCGPA < 0 || floatCGPA > 4) {
+        Messages.setText("Please enter a CGPA between 0 and 4 only!");
+      } else if (!cgpa.getText().contains(".")) {
+        System.out.println("CGPA should contain 2 decimal places");
+      } else if (cgpa.getText().length() > 4) {
+        cgpa.setText(String.format("%.2f", floatCGPA));
+      }
 
-    if (!name.getText().isEmpty() && CGPAsuccess) {
+      if (!name.getText().isEmpty() && CGPAsuccess) {
+        saveButton.setDisable(false);
+        editInfoButton.setDisable(false);
+      }
+  }
+
+  public void validateName(KeyEvent e) {
+    if (name.getText().isEmpty()) {
+      Messages.setText("");
+      saveButton.setDisable(true);
+    } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
+      Messages.setText("Your name should only contains alphabets or slashes! Try again!");
+      //name.setText(name.getText().substring(0, name.getText().length() - 1));
+      //name.positionCaret(name.getText().length());
+      saveButton.setDisable(true);
+    } else if (!name.getText().isEmpty()) {
+      Messages.setText("");
       saveButton.setDisable(false);
+    }    
+  }
+
+  public void validateNRIC(KeyEvent e) {
+    if (nric.getText().isEmpty()) {
+      Messages.setText("Please enter your NRIC!");
+      saveButton.setDisable(true);
       editInfoButton.setDisable(false);
+    } 
+    else if (!"0123456789".contains(e.getCharacter())) {
+      Messages.setText("Your NRIC should only contains numbers! Try again!");
+      //name.setText(name.getText().substring(0, name.getText().length() - 1));
+      //name.positionCaret(name.getText().length());
+      saveButton.setDisable(true);
+    } else if (!nric.getText().isEmpty()) {
+      saveButton.setDisable(false);
+    }else if (nric.getLength() !=12) {
+      Messages.setText("Please enter a 12 digits NRIC number!");
     }
-}
+  }
 
-public void validateName(KeyEvent e) {
-  if (name.getText().isEmpty()) 
-  {
-    Messages.setText("Please enter your name!");
-    saveButton.setDisable(true);
-  } 
-  else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ".contains(e.getCharacter())) 
-  {
-    Messages.setText("Your name should only contains alphabets or slashes! Try again!");
-    name.setText(name.getText().substring(0, name.getText().length() - 1));
-    name.positionCaret(name.getText().length());
-    saveButton.setDisable(true);
-  } else if (!name.getText().isEmpty()) {
-    saveButton.setDisable(false);
+  public void validateCGPA(KeyEvent e) {
+    if (cgpa.getText().isEmpty()) {
+      Messages.setText("Please enter your CGPA!");
+      saveButton.setDisable(true);
+      editInfoButton.setDisable(false);
+    } else if (!"0123456789.".contains(e.getCharacter())) {
+      Messages.setText("Please input valid number!");
+      cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
+      cgpa.positionCaret(cgpa.getText().length());
+      saveButton.setDisable(true);
+      //editInfoButton.setDisable(false);
+    } else if (!cgpa.getText().isEmpty()) {
+      saveButton.setDisable(false);
+    }
   }
-}
-
-public void validateNRIC(KeyEvent e)
-{
-  if (nric.getText().isEmpty()) 
-  {
-    Messages.setText("Please enter your NRIC!");
-    saveButton.setDisable(true);
-    editInfoButton.setDisable(false);
-  } 
-  else if (!"0123456789".contains(e.getCharacter())) 
-  {
-    Messages.setText("Your NRIC should only contains numbers! Try again!");
-    //name.setText(name.getText().substring(0, name.getText().length() - 1));
-    //name.positionCaret(name.getText().length());
-    saveButton.setDisable(true);
-  } else if (!nric.getText().isEmpty()) {
-    saveButton.setDisable(false);
-  }else if (nric.getLength() !=12)
-  {
-    Messages.setText("Please enter a 12 digits NRIC number!");
-  }
-}
-public void validateCGPA(KeyEvent e) {
-  if (cgpa.getText().isEmpty()) 
-  {
-    Messages.setText("Please enter your CGPA!");
-    saveButton.setDisable(true);
-    editInfoButton.setDisable(false);
-  } 
-  else if (!"0123456789.".contains(e.getCharacter())) 
-  {
-    Messages.setText("Please input valid number!");
-    cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
-    cgpa.positionCaret(cgpa.getText().length());
-    saveButton.setDisable(true);
-    //editInfoButton.setDisable(false);
-  } 
-  else if (!cgpa.getText().isEmpty())
-  {
-    saveButton.setDisable(false);
-  }
-}
 
   @Override
   public void initialize(URL location, ResourceBundle resources){
-    saveButton.setDisable(true);
     matric.setText(id);
     defaultInfo();
     ChoiceBoxItem();
-}
+    editInfoButton.setDisable(false);
+    saveButton.setDisable(true);
+  }
 }

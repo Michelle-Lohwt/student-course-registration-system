@@ -94,12 +94,20 @@ public class lecDashController extends Controller implements Initializable {
     Message.setText("");
     editInfoButton.setDisable(false);
     saveButton.setDisable(true);
-    name.setEditable(false);
-    downloadController.inputLectName(name.getText());
+
+    name.setEditable(false);    
     nric.setEditable(false);
+    name.setDisable(true);
+    nric.setDisable(true);
+    emp_status.setDisable(true);
+    position.setDisable(true);
+    school.setDisable(true);
+    campus.setDisable(true);
  
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
+
+    downloadController.inputLectName(name.getText());
     /*
     try {
       Integer.parseInt(nric.getText());
@@ -176,7 +184,7 @@ public class lecDashController extends Controller implements Initializable {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       String lec_position = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(4);
-      if(lec_position.contains("null") || lec_position.contains("")){
+      if(lec_position.contains("null")){
         position.setValue("");
       } else {
         position.setValue(lec_position);
@@ -191,7 +199,7 @@ public class lecDashController extends Controller implements Initializable {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       String lec_school = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(5);
-      if(lec_school.contains("null") || lec_school.contains("")){
+      if(lec_school.contains("null")){
         school.setValue("");
       } else {
         school.setValue(lec_school);
@@ -206,7 +214,7 @@ public class lecDashController extends Controller implements Initializable {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       String lec_campus = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(6);
-      if(lec_campus.contains("null") || lec_campus.contains("")){
+      if(lec_campus.contains("null")){
         campus.setValue("");
       } else {
         campus.setValue(lec_campus);
