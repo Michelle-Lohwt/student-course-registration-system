@@ -48,6 +48,7 @@ public class stuDashController extends Controller implements Initializable {
   private Button closeButton;
   
   static String id;
+  static String studentName;
 
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
@@ -55,9 +56,13 @@ public class stuDashController extends Controller implements Initializable {
 
   public void CourseRegistration(MouseEvent event) throws IOException {
     //I have tried to insert saveButton.isPressed() condition but cannot
-    if(name.getText().isEmpty())
+     File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+     Scanner sc = new Scanner(stuinfoFile);
+     studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+     sc.close();
+    if(studentName== null)
     {
-      Messages.setText("Please save all the infos before proceed to course registration!");
+      Messages.setText("Please save the name before proceed to course registration!");
     }
     else 
   {
@@ -79,6 +84,13 @@ public class stuDashController extends Controller implements Initializable {
   {
     id=text;
   }
+
+  // public static void getStudentName() throws IOException{
+  //   File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
+  //   Scanner sc = new Scanner(stuinfoFile);
+  //   studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
+  //   sc.close();
+  // }
 
   private void defaultInfo()
   {
