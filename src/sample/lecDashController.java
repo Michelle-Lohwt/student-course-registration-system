@@ -102,8 +102,8 @@ public class lecDashController extends Controller implements Initializable {
     else{
       Message.setText("Save successful!");
     try{
-      File stuinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
-      stuinfoFile.createNewFile();
+      File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
+      lecinfoFile.createNewFile();
       BufferedWriter writer=new BufferedWriter(new FileWriter("data/Lecturer Dashboard/"+ id +".txt"));
       writer.write(name.getText());
       writer.write("\n" + nric.getText());
@@ -118,12 +118,6 @@ public class lecDashController extends Controller implements Initializable {
     {
       System.out.println("An error occured.");
     }
-    name.setDisable(true);
-    nric.setDisable(true);
-    emp_status.setDisable(true);
-    position.setDisable(true);
-    school.setDisable(true);
-    campus.setDisable(true);
   }
 }
  
@@ -248,7 +242,7 @@ public class lecDashController extends Controller implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     staffID.setText(id);
-    ChoiceBoxItem();
     defaultInfo();
+    ChoiceBoxItem();
   }
 }
