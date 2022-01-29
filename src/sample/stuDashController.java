@@ -51,7 +51,6 @@ public class stuDashController extends Controller implements Initializable {
   
   static String id;
 
-  
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
   }
@@ -68,7 +67,6 @@ public class stuDashController extends Controller implements Initializable {
     switchTo(event, "courseReg.fxml");
   }
 }
-  
   
   public void ContactUs(MouseEvent event) throws IOException {
     stuReportController.inputName(name.getText());
@@ -138,7 +136,6 @@ public class stuDashController extends Controller implements Initializable {
     downloadController.inputName(name.getText());
     nric.setEditable(false);
     cgpa.setEditable(false);
-    
     
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
@@ -221,7 +218,6 @@ public class stuDashController extends Controller implements Initializable {
         e.printStackTrace();
       } 
   }
-
 
   public void displayAcdStatus()
   {
