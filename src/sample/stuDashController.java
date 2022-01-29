@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class stuDashController extends Controller implements Initializable {
@@ -27,6 +28,9 @@ public class stuDashController extends Controller implements Initializable {
 
   @FXML
   private JFXButton editInfoButton, saveButton;
+
+  Float floatCGPA = (float) -1;
+  Boolean success = true;
 
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
@@ -51,15 +55,21 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void editStuInfo() {
-    name.setEditable(true);
+    if (name.getText().isEmpty()) {
+      name.setEditable(true);
+      name.setDisable(false);
+      name.setStyle("-fx-border-color: #eb7231");
+    } else {
+      name.setEditable(false);
+      name.setDisable(true);
+      name.setStyle("-fx-border-color: default");
+    }
     nric.setEditable(true);
     cgpa.setEditable(true);
 
-    name.setStyle("-fx-border-color: #eb7231");
     nric.setStyle("-fx-border-color: #eb7231");
     cgpa.setStyle("-fx-border-color: #eb7231");
 
-    name.setDisable(false);
     nric.setDisable(false);
     cgpa.setDisable(false);
     acd_status.setDisable(false);
@@ -70,6 +80,51 @@ public class stuDashController extends Controller implements Initializable {
     programme.setDisable(false);
     major.setDisable(false);
     minor.setDisable(false);
+  }
+
+  public void validation() {
+    success = false;
+    floatCGPA = Float.parseFloat(cgpa.getText());
+    if (floatCGPA < 0 || floatCGPA > 4) {
+      System.out.println("CGPA should be within 0 and 4");
+      saveButton.setDisable(true);
+    } else if (!cgpa.getText().contains(".")) {
+      System.out.println("CGPA should have 2 decimal points");
+    } else if (cgpa.getText().length() > 4) {
+      System.out.println("We have converted the CGPA to 2 decimal points");
+      cgpa.setText(String.format("%.2f", floatCGPA));
+    }
+
+    if (!name.getText().isEmpty() && success) {
+      saveButton.setDisable(false);
+    }
+  }
+
+  public void validateName(KeyEvent e) {
+    if (name.getText().isEmpty()) {
+      System.out.println("Please enter name");
+      saveButton.setDisable(true);
+    } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ".contains(e.getCharacter())) {
+      System.out.println("Please input valid name");
+      name.setText(name.getText().substring(0, name.getText().length() - 1));
+      name.positionCaret(name.getText().length());
+      saveButton.setDisable(true);
+    } else if (!name.getText().isEmpty()) {
+      saveButton.setDisable(false);
+    }
+  }
+
+  public void validateCGPA(KeyEvent e) {
+    if (cgpa.getText().isEmpty()) {
+      saveButton.setDisable(true);
+    } else if (!"0123456789.".contains(e.getCharacter())) {
+      System.out.println("Please input valid number");
+      cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
+      cgpa.positionCaret(cgpa.getText().length());
+      saveButton.setDisable(true);
+    } else {
+      saveButton.setDisable(false);
+    }
   }
 
   public void saveInfo() {
@@ -109,6 +164,7 @@ public class stuDashController extends Controller implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    saveButton.setDisable(true);
     ChoiceBoxItem();
     defaultInfo();
   }
