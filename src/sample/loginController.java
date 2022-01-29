@@ -70,12 +70,14 @@ public class loginController extends Controller implements Initializable {
           } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
             courseRegController.inputID(id.getText());
             downloadController.inputID(id.getText());
+            stuDashController.getID(id.getText());
             switchTo(event, "stuDash.fxml");
             sc.close();
-          }
+          } 
         } catch (IOException e) {
           loginMessage.setText("This ID has not registered yet!");
           e.printStackTrace();
+          
         }
       } else if (rbLecturer.isSelected()){
         try {
@@ -90,6 +92,7 @@ public class loginController extends Controller implements Initializable {
             loginMessage.setText("Password is incorrect!");
           } else if (id.getText().equals(correctLecturerID) && password.getText().equals(correctPassword)) {
             courseRegController.inputID(id.getText());
+            lecDashController.getID(id.getText());
             downloadController.inputLectID(id.getText());
             switchTo(event, "lecDash.fxml");
             sc.close();
