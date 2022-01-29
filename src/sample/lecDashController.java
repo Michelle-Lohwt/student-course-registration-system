@@ -184,7 +184,7 @@ public class lecDashController extends Controller implements Initializable {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       String lec_position = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(4);
-      if(lec_position.contains("null")){
+      if(lec_position.contains("null") || lec_position.contains("")){
         position.setValue("");
       } else {
         position.setValue(lec_position);

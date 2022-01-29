@@ -350,7 +350,7 @@ public class stuDashController extends Controller implements Initializable {
   public void validateName(KeyEvent e) {
     if (name.getText().isEmpty()) {
       Messages.setText("");
-      saveButton.setDisable(true);
+      saveButton.setDisable(false);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Messages.setText("Your name should only contains alphabets or slashes! Try again!");
       //name.setText(name.getText().substring(0, name.getText().length() - 1));
