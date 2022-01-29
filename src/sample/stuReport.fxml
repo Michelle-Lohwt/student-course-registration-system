@@ -124,6 +124,11 @@
                         </Hyperlink>
                      </children>
                   </AnchorPane>
+                  <Text fx:id="Messages" fill="RED" layoutX="290.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="298.93682861328125">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
          </center>

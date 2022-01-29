@@ -11,23 +11,19 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import javafx.stage.Stage;
+
 
 
 public class stuDashController extends Controller implements Initializable {
@@ -42,7 +38,10 @@ public class stuDashController extends Controller implements Initializable {
   private ChoiceBox<String> acd_status, sem_reg, year, school, campus, programme, major, minor;
 
   @FXML
-  private JFXButton editInfoButton, saveButton,contactButton;
+  private JFXButton editInfoButton, saveButton;
+
+  Float floatCGPA = (float)-1;
+  Boolean CGPAsuccess = true;
 
   @FXML
   private Text Messages;
@@ -52,6 +51,7 @@ public class stuDashController extends Controller implements Initializable {
   
   static String id;
 
+  
   public void LogOut(MouseEvent event) throws IOException {
     switchTo(event, "logout.fxml");
   }
@@ -62,33 +62,19 @@ public class stuDashController extends Controller implements Initializable {
       Messages.setText("Please save all the infos before proceed to course registration!");
     }
 
-    else if(!name.getText().isEmpty())
+    else 
   {
-  switchTo(event, "courseReg.fxml");
+    stuReportController.inputName(name.getText());
+    switchTo(event, "courseReg.fxml");
   }
 }
   
   
   public void ContactUs(MouseEvent event) throws IOException {
+    stuReportController.inputName(name.getText());
     switchTo(event, "stuReport.fxml");
-
   }
-  public void CallUs() {
-    try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CallUs.fxml"));
-      Parent root1 = (Parent) fxmlLoader.load();
-      Stage stage = new Stage();
-      Image icon = new Image("sample/images/usm-ringlogo.png");
-      stage.getIcons().add(icon);
-      stage.setTitle("Contact Us");
-      stage.setResizable(false);
-      stage.setScene(new Scene(root1));
-      stage.show();
-    } catch (Exception e) {
-      System.out.println("Can't load new window");
-    }
-  }
-
+  
   public void openBrowser() throws URISyntaxException, IOException {
     openLink();
   }
@@ -114,7 +100,18 @@ public class stuDashController extends Controller implements Initializable {
   }
   
   public void editStuInfo() {
-    name.setEditable(true);
+    if (name.getText().isEmpty()) 
+    {
+      name.setEditable(true);
+      name.setDisable(false);
+      name.setStyle("-fx-border-color: #eb7231");
+    } 
+    else 
+    {
+      name.setEditable(false);
+      name.setDisable(true);
+      name.setStyle("-fx-border-color: default");
+    }
     nric.setEditable(true);
     cgpa.setEditable(true);
 
@@ -147,27 +144,27 @@ public class stuDashController extends Controller implements Initializable {
     nric.setStyle("-fx-border-color: default");
     cgpa.setStyle("-fx-border-color: default");
 
-    //If want to do CGPA validation then have to convert string which is cgpa.getText() to int,
-    // and this is the way I found online, have tried several times
-    //but cannot
-    /**String cgpaInteger=cgpa.getText();
-    int cgpaNumber = Integer.valueOf(cgpaInteger);
-      if (cgpaNumber <0.00 && cgpaNumber>4.00)
-      {
-        Messages.setText("Please enter a CGPA between 0.00 and 4.00 ONLY!");
-      }*/
     if (nric.getLength() !=12)
     {
       Messages.setText("Please enter a 12 digits NRIC number!");
+      
     }
 
     else if (name.getText().isEmpty() == true)
     {
      Messages.setText("Please enter your name!");
+     
+    }
+
+    else if (floatCGPA <0 || floatCGPA>4)
+    {
+      Messages.setText("Please enter a CGPA between 0 and 4 only!");
+      
     }
     else
     {
       Messages.setText("Save successful!");
+      saveButton.setDisable(false);
     try{
       File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
       stuinfoFile.createNewFile();
@@ -185,8 +182,7 @@ public class stuDashController extends Controller implements Initializable {
       writer.write("\n" + major.getSelectionModel().getSelectedItem());
       writer.write("\n" + minor.getSelectionModel().getSelectedItem());
       writer.close();
-      //I also tried the save name things, but also fails, the name can still be edited after the first save
-      name.setEditable(false);
+      saveButton.setDisable(false);
     }catch(IOException e)
     {
       System.out.println("An error occured.");
@@ -374,11 +370,86 @@ public class stuDashController extends Controller implements Initializable {
     minor.getItems().addAll("Accounting", "Mathematics", "Electives");
   }
 
+public void validation()
+{
+  CGPAsuccess = false;
+    floatCGPA = Float.parseFloat(cgpa.getText());
+    if (floatCGPA < 0 || floatCGPA > 4) {
+      Messages.setText("Please enter a CGPA between 0 and 4 only!");
+    } else if (!cgpa.getText().contains(".")) {
+      System.out.println("CGPA should contain 2 decimal places");
+    } else if (cgpa.getText().length() > 4) {
+      cgpa.setText(String.format("%.2f", floatCGPA));
+    }
 
-  
+    if (!name.getText().isEmpty() && CGPAsuccess) {
+      saveButton.setDisable(false);
+      editInfoButton.setDisable(false);
+    }
+}
+
+public void validateName(KeyEvent e) {
+  if (name.getText().isEmpty()) 
+  {
+    Messages.setText("Please enter your name!");
+    saveButton.setDisable(true);
+  } 
+  else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ".contains(e.getCharacter())) 
+  {
+    Messages.setText("Your name should only contains alphabets or slashes! Try again!");
+    name.setText(name.getText().substring(0, name.getText().length() - 1));
+    name.positionCaret(name.getText().length());
+    saveButton.setDisable(true);
+  } else if (!name.getText().isEmpty()) {
+    saveButton.setDisable(false);
+  }
+}
+
+public void validateNRIC(KeyEvent e)
+{
+  if (nric.getText().isEmpty()) 
+  {
+    Messages.setText("Please enter your NRIC!");
+    saveButton.setDisable(true);
+    editInfoButton.setDisable(false);
+  } 
+  else if (!"0123456789".contains(e.getCharacter())) 
+  {
+    Messages.setText("Your NRIC should only contains numbers! Try again!");
+    //name.setText(name.getText().substring(0, name.getText().length() - 1));
+    //name.positionCaret(name.getText().length());
+    saveButton.setDisable(true);
+  } else if (!nric.getText().isEmpty()) {
+    saveButton.setDisable(false);
+  }else if (nric.getLength() !=12)
+  {
+    Messages.setText("Please enter a 12 digits NRIC number!");
+  }
+}
+public void validateCGPA(KeyEvent e) {
+  if (cgpa.getText().isEmpty()) 
+  {
+    Messages.setText("Please enter your CGPA!");
+    saveButton.setDisable(true);
+    editInfoButton.setDisable(false);
+  } 
+  else if (!"0123456789.".contains(e.getCharacter())) 
+  {
+    Messages.setText("Please input valid number!");
+    cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
+    cgpa.positionCaret(cgpa.getText().length());
+    saveButton.setDisable(true);
+    //editInfoButton.setDisable(false);
+  } 
+  else if (!cgpa.getText().isEmpty())
+  {
+    saveButton.setDisable(false);
+  }
+}
 
   @Override
   public void initialize(URL location, ResourceBundle resources){
+    saveButton.setDisable(false);
     matric.setText(id);
     defaultInfo();
     ChoiceBoxItem();

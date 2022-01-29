@@ -181,7 +181,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="nric" disable="true" editable="false" layoutX="10.0" layoutY="327.0" promptText="Indentity Card No" style="-fx-text-fill: Black;">
+                              <TextField fx:id="nric" disable="true" editable="false" layoutX="10.0" layoutY="327.0" promptText="Identity Card No" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -214,11 +214,6 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <JFXButton fx:id="contactButton" layoutX="690.0" layoutY="448.0" onAction="#CallUs" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #EB7B31; -fx-cursor: hand;" text="Contact Us" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
                </children>
             </AnchorPane>
          </center>

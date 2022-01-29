@@ -216,12 +216,12 @@
                         </VBox>
                         <VBox prefWidth="450.0" spacing="5.0" translateX="10.0">
                            <children>
-                              <TextField fx:id="name" disable="true" editable="false" promptText="Your Name" style="-fx-text-fill: Black;">
+                              <TextField fx:id="name" disable="true" editable="false" onKeyTyped="#validateName" promptText="Your Name" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="nric" disable="true" editable="false" layoutX="10.0" layoutY="327.0" promptText="Indentity Card No" style="-fx-text-fill: Black;">
+                              <TextField fx:id="nric" disable="true" editable="false" layoutX="10.0" layoutY="327.0" onKeyTyped="#validateNRIC" promptText="Identity Card No" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -233,7 +233,7 @@
                               </TextField>
                               <ChoiceBox fx:id="acd_status" disable="true" prefWidth="450.0" style="-fx-font-size: 18px;" />
                               <ChoiceBox fx:id="sem_reg" disable="true" layoutX="10.0" layoutY="346.0" prefWidth="450.0" style="-fx-font-size: 18px;" />
-                              <TextField fx:id="cgpa" disable="true" editable="false" layoutX="10.0" layoutY="301.0" promptText="Current CGPA" style="-fx-text-fill: Black;">
+                              <TextField fx:id="cgpa" disable="true" editable="false" layoutX="10.0" layoutY="301.0" onKeyTyped="#validateCGPA" promptText="Current CGPA" style="-fx-text-fill: Black;">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -253,7 +253,7 @@
                         <Font size="18.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="saveButton" layoutX="700.0" layoutY="366.0" onAction="#saveInfo" prefWidth="170.0" style="-fx-background-color: #EB7E31; -fx-cursor: Hand;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="400.0">
+                  <JFXButton fx:id="saveButton" layoutX="700.0" layoutY="366.0" onAction="#saveInfo" onMouseClicked="#saveInfo" onMousePressed="#validation" prefWidth="170.0" style="-fx-background-color: #EB7E31; -fx-cursor: Hand;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="400.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -263,11 +263,6 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <JFXButton fx:id="contactButton" layoutX="690.0" layoutY="448.0" onAction="#CallUs" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #EB7E31; -fx-cursor: hand;" text="Contact Us" textFill="WHITE" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="448.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
                </children>
             </AnchorPane>
          </center>
