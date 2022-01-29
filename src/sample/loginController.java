@@ -83,17 +83,17 @@ public class loginController extends Controller implements Initializable {
         try {
           File fileObj = new File("data/Lecturer Profile/" + id.getText() + ".txt");
           Scanner sc = new Scanner(fileObj);
-          String correctStudentID = sc.nextLine();
+          String correctLecturerID = sc.nextLine();
           String correctPassword = sc.nextLine();
   
-          if (!id.getText().equals(correctStudentID)) {
+          if (!id.getText().equals(correctLecturerID)) {
             loginMessage.setText("ID number is incorrect!");
           } else if (!password.getText().equals(correctPassword)) {
             loginMessage.setText("Password is incorrect!");
-          } else if (id.getText().equals(correctStudentID) && password.getText().equals(correctPassword)) {
+          } else if (id.getText().equals(correctLecturerID) && password.getText().equals(correctPassword)) {
             courseRegController.inputID(id.getText());
-            downloadController.inputID(id.getText());
             lecDashController.getID(id.getText());
+            downloadController.inputLectID(id.getText());
             switchTo(event, "lecDash.fxml");
             sc.close();
           }
