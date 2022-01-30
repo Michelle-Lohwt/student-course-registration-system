@@ -446,10 +446,10 @@ public class stuDashController extends Controller implements Initializable {
         }
       }
     } else {
-      Messages.setText("CGPA cannot be empty!");
-      saveButton.setDisable(true);
-      name.setDisable(true);
-      nric.setDisable(true);
+      //Messages.setText("CGPA cannot be empty!");
+      saveButton.setDisable(false);
+      name.setDisable(false);
+      nric.setDisable(false);
     }
   }
 
