@@ -140,7 +140,6 @@ public class stuDashController extends Controller implements Initializable {
     saveButton.setDisable(true);
 
     name.setEditable(false);
-    downloadController.inputName(name.getText());
     courseRegController.inputName(name.getText());
     nric.setEditable(false);
     cgpa.setEditable(false);
@@ -162,8 +161,6 @@ public class stuDashController extends Controller implements Initializable {
     minor.setDisable(true);
 
     try {
-      // File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
-      // stuinfoFile.createNewFile();
       FileWriter writer = new FileWriter("data/Student Dashboard/" + id + ".txt", false);
       writer.write(name.getText());
       writer.write("\n" + nric.getText());
@@ -181,7 +178,6 @@ public class stuDashController extends Controller implements Initializable {
     } catch (IOException e) {
       System.out.println("An error occured.");
     }
-    // }
   }
 
   public void displayName() {
@@ -388,8 +384,6 @@ public class stuDashController extends Controller implements Initializable {
       cgpa.setDisable(true);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Messages.setText("Your name should only contains alphabets or slashes! Try again!");
-      // name.setText(name.getText().substring(0, name.getText().length() - 1));
-      // name.positionCaret(name.getText().length());
       saveButton.setDisable(true);
       nric.setDisable(true);
       cgpa.setDisable(true);
@@ -418,7 +412,6 @@ public class stuDashController extends Controller implements Initializable {
       }
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()) {
-        Messages.setText("NRIC cannot be empty!");
         // Message.setText("NRIC cannot be blank!");
         saveButton.setDisable(false);
         name.setDisable(false);
@@ -437,12 +430,9 @@ public class stuDashController extends Controller implements Initializable {
     if (!cgpa.getText().isEmpty()) {
       if (!"0123456789.\b".contains(e.getCharacter())) {
         Messages.setText("Please input valid number!");
-        // cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
-        // cgpa.positionCaret(cgpa.getText().length());
         saveButton.setDisable(true);
         name.setDisable(true);
         nric.setDisable(true);
-        // editInfoButton.setDisable(false);
       } else {
         if (cgpa.getText().length() != 4) {
           Messages.setText("CGPA must be 2 decimal places!");
