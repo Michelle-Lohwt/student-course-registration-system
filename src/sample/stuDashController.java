@@ -53,7 +53,7 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-
+    Messages.setFill(Color.RED);
     File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
     Scanner sc = new Scanner(stuinfoFile);
     String studentName;
@@ -340,6 +340,7 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void validateName(KeyEvent e) {
+    Messages.setFill(Color.RED);
     if (name.getText().isEmpty()) {
       Messages.setText("Name cannot be empty!");
       saveButton.setDisable(true);
@@ -361,6 +362,7 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void validateNRIC() {
+    Messages.setFill(Color.RED);
     try {
       Long.parseLong(nric.getText());
       if (nric.getLength() != 12) {
@@ -391,6 +393,7 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void validateCGPA(KeyEvent e) {
+    Messages.setFill(Color.RED);
     if (!cgpa.getText().isEmpty()) {
       if (!"0123456789.\b".contains(e.getCharacter())) {
         Messages.setText("Please input valid number!");

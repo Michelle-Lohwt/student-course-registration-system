@@ -19,6 +19,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
  
 public class lecDashController extends Controller implements Initializable {
@@ -67,6 +68,7 @@ public class lecDashController extends Controller implements Initializable {
   }
  
   public void editInfo() {
+    Message.setFill(Color.RED);
     name.setEditable(true);
     nric.setEditable(true);
  
@@ -87,6 +89,7 @@ public class lecDashController extends Controller implements Initializable {
   }
  
   public void saveInfo() {
+    Message.setFill(Color.GREEN);
     Message.setText("");
     editInfoButton.setDisable(false);
     saveButton.setDisable(true);
@@ -126,23 +129,12 @@ public class lecDashController extends Controller implements Initializable {
         } catch(IOException e) {
           System.out.println("An error occured.");
         }
-/*      }
-    } catch (NumberFormatException e) {
-      if (nric.getText().isBlank()){
-        Message.setText("NRIC cannot be blank!");
-      } else {
-      Message.setText("NRIC must be numbers only!");
-      }
-    } */
   }
  
   public void displayLecName()  {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       name.setText(Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0));
-      //String lecName;
-      //lecName = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0);
-      //name.setText(lecName);
       sc.close();
       name.setEditable(false);
       name.setDisable(true);
@@ -230,6 +222,7 @@ public class lecDashController extends Controller implements Initializable {
   }
 
   public void validateNRIC(){
+    Message.setFill(Color.RED);
     try {
       Long.parseLong(nric.getText());
       if(nric.getLength() !=12) {
@@ -242,7 +235,6 @@ public class lecDashController extends Controller implements Initializable {
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()){
         Message.setText("");
-        //Message.setText("NRIC cannot be blank!");
         saveButton.setDisable(false);
       } else {
         Message.setText("NRIC must be numbers only!");
@@ -252,13 +244,12 @@ public class lecDashController extends Controller implements Initializable {
   }
  
   public void validateName(KeyEvent e) {
+    Message.setFill(Color.RED);
     if (name.getText().isEmpty()) {
       Message.setText("");
       saveButton.setDisable(false);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Message.setText("Your name should only contains alphabets or slashes! Try again!");
-      //name.setText(name.getText().substring(0, name.getText().length() - 1));
-      //name.positionCaret(name.getText().length());
       saveButton.setDisable(true);
     } else if (!name.getText().isEmpty()) {
       Message.setText("");
