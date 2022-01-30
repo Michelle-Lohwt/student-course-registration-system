@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
- 
+
 import com.jfoenix.controls.JFXButton;
  
 import javafx.fxml.FXML;
@@ -57,8 +57,7 @@ public class lecDashController extends Controller implements Initializable {
     openLink();
   }
  
-  public static void getID(String text)
-  {
+  public static void getID(String text) {
     id=text;
   }
  
@@ -84,135 +83,138 @@ public class lecDashController extends Controller implements Initializable {
     position.setDisable(false);
     school.setDisable(false);
     campus.setDisable(false);
+
+    editInfoButton.setDisable(true);
+    saveButton.setDisable(false);
+
+    Message.setText("");
   }
  
   public void saveInfo() {
+    Message.setText("");
+    editInfoButton.setDisable(false);
+    saveButton.setDisable(true);
     name.setEditable(false);
     downloadController.inputLectName(name.getText());
     nric.setEditable(false);
  
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
- 
-    if(nric.getLength() !=12)
-    {
-      Message.setText("Please enter a NRIC number with 12 digits!");
-    }
- 
-    else{
-      Message.setText("Save successful!");
-    try{
-      File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
-      lecinfoFile.createNewFile();
-      BufferedWriter writer=new BufferedWriter(new FileWriter("data/Lecturer Dashboard/"+ id +".txt"));
-      writer.write(name.getText());
-      writer.write("\n" + nric.getText());
-      writer.write("\n" + id);
-      writer.write("\n" + emp_status.getSelectionModel().getSelectedItem());
-      writer.write("\n" + position.getSelectionModel().getSelectedItem());
-      writer.write("\n" + school.getSelectionModel().getSelectedItem());
-      writer.write("\n" + campus.getSelectionModel().getSelectedItem());
-      writer.close();
-    }
-    catch(IOException e)
-    {
-      System.out.println("An error occured.");
-    }
-  }
-}
- 
-  public void displayLecName()
-  {
+    /*
     try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String lecName;
-      lecName = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0);
-      name.setText(lecName);
+      Integer.parseInt(nric.getText());
+      if(nric.getLength() !=12) {
+        Message.setText("Please enter a NRIC number with 12 digits!");
+      } else{ */
+        Message.setText("Save successful!");
+        try{
+          File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
+          lecinfoFile.createNewFile();
+          BufferedWriter writer=new BufferedWriter(new FileWriter("data/Lecturer Dashboard/"+ id +".txt"));
+          writer.write(name.getText());
+          writer.write("\n" + nric.getText());
+          writer.write("\n" + id);
+          writer.write("\n" + emp_status.getSelectionModel().getSelectedItem());
+          writer.write("\n" + position.getSelectionModel().getSelectedItem());
+          writer.write("\n" + school.getSelectionModel().getSelectedItem());
+          writer.write("\n" + campus.getSelectionModel().getSelectedItem() + "\n");
+          writer.close();
+        } catch(IOException e) {
+          System.out.println("An error occured.");
+        }
+/*      }
+    } catch (NumberFormatException e) {
+      if (nric.getText().isBlank()){
+        Message.setText("NRIC cannot be blank!");
+      } else {
+      Message.setText("NRIC must be numbers only!");
+      }
+    } */
+  }
+ 
+  public void displayLecName()  {
+    try {
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
+      name.setText(Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0));
+      //String lecName;
+      //lecName = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0);
+      //name.setText(lecName);
       sc.close();
       name.setEditable(false);
       name.setDisable(true);
-      } catch (IOException e) {
-       
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
  
-  public void displayLecNRIC()
-  {
+  public void displayLecNRIC()  {
     try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String lecNric;
-      lecNric = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(1);
-      nric.setText(lecNric);
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
+      nric.setText(Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(1));
       sc.close();
-      } catch (IOException e) {
-       
-        e.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
  
- 
- 
-  public void displayEmpStatus()
-  {
+  public void displayEmpStatus()  {
     try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String status;
-      status = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(3);
-      emp_status.setValue(status);
-      sc.close();
-      } catch (IOException e) {
-       
-        e.printStackTrace();
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
+      String status = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(3);
+      if(status.contains("null")){
+        emp_status.setValue("");
+      } else {
+        emp_status.setValue(status);
       }
+      sc.close();
+    } catch (IOException e) {     
+      e.printStackTrace();
+    }
   }
  
-  public void displayPosition()
-  {
+  public void displayPosition()  {
     try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String lecPosition;
-      lecPosition = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(4);
-      position.setValue(lecPosition);
-      sc.close();
-      } catch (IOException e) {
-       
-        e.printStackTrace();
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
+      String lec_position = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(4);
+      if(lec_position.contains("null") || lec_position.contains("")){
+        position.setValue("");
+      } else {
+        position.setValue(lec_position);
       }
+      sc.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
  
-  public void displayLecSchool()
-  {
+  public void displayLecSchool()  {
     try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String lecSchool;
-      lecSchool = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(5);
-      school.setValue(lecSchool);
-      sc.close();
-      } catch (IOException e) {
-       
-        e.printStackTrace();
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
+      String lec_school = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(5);
+      if(lec_school.contains("null") || lec_school.contains("")){
+        school.setValue("");
+      } else {
+        school.setValue(lec_school);
       }
+      sc.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
  
-  public void displayLecCampus()
-  {
+  public void displayLecCampus()  {
     try {
-      File lecinfoFile = new File("data/Lecturer Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(lecinfoFile);
-      String lecCampus;
-      lecCampus = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(6);
-      campus.setValue(lecCampus);
-      sc.close();
-      } catch (IOException e) {
-       
-        e.printStackTrace();
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
+      String lec_campus = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(6);
+      if(lec_campus.contains("null") || lec_campus.contains("")){
+        campus.setValue("");
+      } else {
+        campus.setValue(lec_campus);
       }
+      sc.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
  
   private void ChoiceBoxItem() {
@@ -222,27 +224,50 @@ public class lecDashController extends Controller implements Initializable {
     school.getItems().addAll("School of Computer Science", "School of Mathematical Sciences", "School of Management");
     campus.getItems().addAll("Main Campus", "Health Campus", "Engineering Campus");
   }
- 
-  public void validateName(KeyEvent e) {
-    if (name.getText().isEmpty()) 
-    {
-      Message.setText("Please enter your name!");
-      saveButton.setDisable(true);
-    } 
-    else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ".contains(e.getCharacter())) 
-    {
-      Message.setText("Your name should only contains alphabets or slashes! Try again!");
-      name.setText(name.getText().substring(0, name.getText().length() - 1));
-      name.positionCaret(name.getText().length());
-      saveButton.setDisable(true);
-    } else if (!name.getText().isEmpty()) {
-      saveButton.setDisable(false);
+
+  public void validateNRIC(){
+    try {
+      Long.parseLong(nric.getText());
+      if(nric.getLength() !=12) {
+        Message.setText("Please enter a NRIC number with 12 digits!");
+        saveButton.setDisable(true);
+      } else{
+        Message.setText("");
+        saveButton.setDisable(false);
+      }
+    } catch (NumberFormatException e) {
+      if (nric.getText().isBlank()){
+        Message.setText("");
+        //Message.setText("NRIC cannot be blank!");
+        saveButton.setDisable(false);
+      } else {
+        Message.setText("NRIC must be numbers only!");
+        saveButton.setDisable(true);
+      }
     }
   }
+ 
+  public void validateName(KeyEvent e) {
+    if (name.getText().isEmpty()) {
+      Message.setText("");
+      saveButton.setDisable(false);
+    } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
+      Message.setText("Your name should only contains alphabets or slashes! Try again!");
+      //name.setText(name.getText().substring(0, name.getText().length() - 1));
+      //name.positionCaret(name.getText().length());
+      saveButton.setDisable(true);
+    } else if (!name.getText().isEmpty()) {
+      Message.setText("");
+      saveButton.setDisable(false);
+    }    
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     staffID.setText(id);
     defaultInfo();
     ChoiceBoxItem();
+    editInfoButton.setDisable(false);
+    saveButton.setDisable(true);
   }
 }
