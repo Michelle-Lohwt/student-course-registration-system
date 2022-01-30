@@ -79,6 +79,12 @@ public class stuListController extends Controller implements Initializable {
   @FXML
   private ImageView downloadStudent, downloadTeaching;
 
+  static String lecID;
+
+  public static void inputID(String text) {
+    lecID = text;
+  }
+
   public void LecDashboard(MouseEvent event) throws IOException {
     switchTo(event, "lecDash.fxml");
   }
@@ -98,7 +104,7 @@ public class stuListController extends Controller implements Initializable {
   // Read and display list of all courses that can be registered from txt file
   public void displaycourselist() {
     try {
-      File fileObj = new File("data/Lecturer Course List/" + "123456" + ".txt");
+      File fileObj = new File("data/Lecturer Course List/" + lecID + ".txt");
       Scanner fileReader = new Scanner(fileObj);
       while (fileReader.hasNextLine()) {
         courseList.getItems().add(fileReader.nextLine());
@@ -113,7 +119,7 @@ public class stuListController extends Controller implements Initializable {
   // Read and display teaching courses of the lecturer from txt file
   public void displayteachingcourse() {
     try {
-      File fileObj = new File("data/Lecturer Teaching Course/" + "123456" + ".txt");
+      File fileObj = new File("data/Lecturer Teaching Course/" + lecID + ".txt");
       Scanner fileReader = new Scanner(fileObj);
       while (fileReader.hasNextLine()) {
         teachingCourse.getItems().add(fileReader.nextLine());
@@ -130,7 +136,7 @@ public class stuListController extends Controller implements Initializable {
     // an ArrayList named "list"
     List<String> list = new ArrayList<>();
     try {
-      File fileObj = new File("data/Lecturer Course List/" + "123456" + ".txt");
+      File fileObj = new File("data/Lecturer Course List/" + lecID + ".txt");
       Scanner fileReader = new Scanner(fileObj);
       while (fileReader.hasNextLine()) {
         list.add(fileReader.nextLine());
@@ -300,7 +306,7 @@ public class stuListController extends Controller implements Initializable {
   public void addcourse() {
     if (courseList.getSelectionModel().getSelectedItem() != null) {
       // Store Courses Added into txt file
-      try (FileWriter myWriter = new FileWriter("data/Lecturer Teaching Course/" + "123456" + ".txt", true)) {
+      try (FileWriter myWriter = new FileWriter("data/Lecturer Teaching Course/" + lecID + ".txt", true)) {
         String linetoAdd = courseList.getSelectionModel().getSelectedItem();
         myWriter.write(String.valueOf(linetoAdd), 0, String.valueOf(linetoAdd).length());
         myWriter.write("\n");
@@ -325,7 +331,7 @@ public class stuListController extends Controller implements Initializable {
     if (teachingCourse.getSelectionModel().getSelectedItem() != null) {
       // Remove Teaching Course from txt file
       try {
-        File file = new File("data/Lecturer Teaching Course/" + "123456" + ".txt");
+        File file = new File("data/Lecturer Teaching Course/" + lecID + ".txt");
         File temp = new File("data/Lecturer Teaching Course/TempFile.txt");
         // File temp = File.createTempFile("temporarystudent", ".txt",
         // file.getParentFile());
@@ -375,9 +381,9 @@ public class stuListController extends Controller implements Initializable {
     // In this case: lecturercourseList = courseList – lecturerteachingCourse
     try {
       // PrintWriter object for output.txt
-      PrintWriter pw = new PrintWriter("data/Lecturer Course List/" + "123456" + ".txt");
+      PrintWriter pw = new PrintWriter("data/Lecturer Course List/" + lecID + ".txt");
       // BufferedReader object for delete.txt
-      BufferedReader br2 = new BufferedReader(new FileReader("data/Lecturer Teaching Course/" + "123456" + ".txt"));
+      BufferedReader br2 = new BufferedReader(new FileReader("data/Lecturer Teaching Course/" + lecID + ".txt"));
       String line2 = br2.readLine();
       // hashset for storing lines of delete.txt
       HashSet<String> hs = new HashSet<String>();
