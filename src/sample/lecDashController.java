@@ -235,7 +235,7 @@ public class lecDashController extends Controller implements Initializable {
       } else{
         Message.setText("");
         saveButton.setDisable(false);
-        name.setDisable(true);
+        name.setDisable(false);
       }
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()){
