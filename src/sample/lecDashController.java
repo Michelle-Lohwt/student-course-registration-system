@@ -1,6 +1,5 @@
 package sample;
- 
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -106,20 +105,8 @@ public class lecDashController extends Controller implements Initializable {
  
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
-
-
-    /*
-    try {
-      Integer.parseInt(nric.getText());
-      if(nric.getLength() !=12) {
-        Message.setText("Please enter a NRIC number with 12 digits!");
-      } else{ */
-
         
     try{
-      //File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
-      //lecinfoFile.createNewFile();
-      //BufferedWriter writer=new BufferedWriter(new FileWriter("data/Lecturer Dashboard/"+ id +".txt"));
       FileWriter writer = new FileWriter("data/Lecturer Dashboard/" + id + ".txt");
       writer.write(name.getText());
       writer.write("\n" + nric.getText());

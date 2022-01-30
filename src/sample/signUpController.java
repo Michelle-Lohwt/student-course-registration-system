@@ -118,7 +118,7 @@ public class signUpController extends Controller implements Initializable {
               writer1.write("\n" + "");
               writer1.write("\n" + "");
               writer1.write("\n" + "");
-              writer1.write("\n\n\n");
+              writer1.write("\n" + "" + "\n");
               writer1.close();
 
               signUpMessage.setFill(Color.GREEN);
@@ -184,7 +184,7 @@ public class signUpController extends Controller implements Initializable {
               writer1.write("\n" + "");
               writer1.write("\n" + "");
               writer1.write("\n" + "");
-              writer1.write("\n" + "" + "\n");
+              writer1.write("\n");
               writer1.close();
 
               signUpMessage.setFill(Color.GREEN);
