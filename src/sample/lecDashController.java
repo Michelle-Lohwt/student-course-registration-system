@@ -172,7 +172,7 @@ public class lecDashController extends Controller implements Initializable {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       String lec_position = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(4);
-      if(lec_position.contains("null") || lec_position.contains("")){
+      if(lec_position.contains("null")){
         position.setValue("");
       } else {
         position.setValue(lec_position);
@@ -228,17 +228,21 @@ public class lecDashController extends Controller implements Initializable {
       if(nric.getLength() !=12) {
         Message.setText("Please enter a NRIC number with 12 digits!");
         saveButton.setDisable(true);
+        name.setDisable(true);
       } else{
         Message.setText("");
         saveButton.setDisable(false);
+        name.setDisable(true);
       }
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()){
         Message.setText("");
         saveButton.setDisable(false);
+        name.setDisable(false);
       } else {
         Message.setText("NRIC must be numbers only!");
         saveButton.setDisable(true);
+        name.setDisable(true);
       }
     }
   }
@@ -248,12 +252,15 @@ public class lecDashController extends Controller implements Initializable {
     if (name.getText().isEmpty()) {
       Message.setText("");
       saveButton.setDisable(false);
+      nric.setDisable(false);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Message.setText("Your name should only contains alphabets or slashes! Try again!");
       saveButton.setDisable(true);
+      nric.setDisable(true);
     } else if (!name.getText().isEmpty()) {
       Message.setText("");
       saveButton.setDisable(false);
+      nric.setDisable(false);
     }    
   }
 
