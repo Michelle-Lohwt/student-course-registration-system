@@ -57,9 +57,14 @@ public class courseRegController extends Controller implements Initializable {
   private TextField searchCourse;
 
   static String stuID;
+  static String stuName;
 
   public static void inputID(String text) {
     stuID = text;
+  }
+
+  public static void inputName(String text) {
+    stuName = text;
   }
 
   public void StuDashboard(MouseEvent event) throws IOException {
@@ -183,8 +188,8 @@ public class courseRegController extends Controller implements Initializable {
     }
   }
 
-  //Clear the Course Details
-  public void cleardetails(){
+  // Clear the Course Details
+  public void cleardetails() {
     courseTitle.setText("");
     time.setText("");
     desc.setText("");
@@ -252,7 +257,7 @@ public class courseRegController extends Controller implements Initializable {
       // Store the student information into the respective courseStudentList.txt
       try (FileWriter myWriter = new FileWriter(
           "data/Course Student List/" + courseList.getSelectionModel().getSelectedItem() + ".txt", true)) {
-        myWriter.write(String.valueOf("Student 1 Name"), 0, String.valueOf("Student 1 Name").length());
+        myWriter.write(String.valueOf(stuName), 0, String.valueOf(stuName).length());
         myWriter.write("\t");
         myWriter.write(String.valueOf(stuID), 0, String.valueOf(stuID).length());
         myWriter.write("\n");
@@ -315,7 +320,7 @@ public class courseRegController extends Controller implements Initializable {
         // file.getParentFile());
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
-        String lineToRemove = "Student 1 Name\t" + stuID;
+        String lineToRemove = stuName + "\t" + stuID;
         String currentLine;
         while ((currentLine = reader.readLine()) != null) {
           // Trim newline when comparing with lineToRemove
