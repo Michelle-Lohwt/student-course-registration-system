@@ -106,7 +106,14 @@ public class lecDashController extends Controller implements Initializable {
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
 
-    downloadController.inputLectName(name.getText());
+
+    /*
+    try {
+      Integer.parseInt(nric.getText());
+      if(nric.getLength() !=12) {
+        Message.setText("Please enter a NRIC number with 12 digits!");
+      } else{ */
+
         Message.setText("Save successful!");
         try{
           File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");

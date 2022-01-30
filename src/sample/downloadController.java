@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -40,28 +42,17 @@ public class downloadController implements Initializable {
   private Text pdfMessage;
 
   static String stuID;
-  static String stuName;
   static String lectID;
-  static String lectName;
   static String CourseTitle;
+
   //Get StudentID
   public static void inputID(String text){
          stuID=text;
   }
 
-  //Get student name
-  public static void inputName(String getname){
-    stuName= getname;
-  }
-
   //Get LecturerID
   public static void inputLectID(String getLectID){
     lectID= getLectID;
-  }
-
-  //Get LecturerName
-  public static void inputLectName(String getLectName){
-    lectName=getLectName;
   }
 
   //Get CourseTitle
@@ -119,7 +110,12 @@ public class downloadController implements Initializable {
       Image image1 = new Image(data);
       image1.scaleToFit(140f,120f);
       image1.setHorizontalAlignment(HorizontalAlignment.CENTER);
-
+      // Get student name
+      File stuinfoFile = new File("data/Student Dashboard/" + stuID + ".txt");
+      Scanner sc = new Scanner(stuinfoFile);
+      String stuName;
+      stuName = Files.readAllLines(Paths.get("data/Student Dashboard/" + stuID + ".txt")).get(0);
+      //Output PDF
       document.add(image1);
       document.add(new Paragraph("Universiti Sains Malaysia").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(30f));
       document.add(new Paragraph("Student ID:   "+stuID));
@@ -132,7 +128,7 @@ public class downloadController implements Initializable {
       document.add(courseTable);
       
       document.close();
-
+      sc.close();
       pdfMessage.setText("The course list is printed successfully!");
     }
 
@@ -187,11 +183,17 @@ public class downloadController implements Initializable {
       Image image1 = new Image(data);
       image1.scaleToFit(140f,120f);
       image1.setHorizontalAlignment(HorizontalAlignment.CENTER);
-
+      
+      //Get lecturer name
+      String lectName;
+      Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + lectID + ".txt"));
+      lectName= Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + lectID + ".txt")).get(0);
+      
+      //Output PDF
       document.add(image1);
       document.add(new Paragraph("Universiti Sains Malaysia").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(30f));
       document.add(new Paragraph("Lecturer ID:   "+lectID));
-      if(stuName==null){
+      if(lectName==null){
           document.add(new Paragraph("Lecturer Name:   *THE LECTURER NAME IS BLANK*"));
       }
       else{
@@ -199,6 +201,7 @@ public class downloadController implements Initializable {
       }
       document.add(courseTable);
       
+      sc.close();
       document.close();
 
       pdfMessage.setText("The course list is printed successfully!");
