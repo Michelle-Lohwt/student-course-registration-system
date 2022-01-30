@@ -103,7 +103,6 @@ public class lecDashController extends Controller implements Initializable {
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
 
-    downloadController.inputLectName(name.getText());
     /*
     try {
       Integer.parseInt(nric.getText());
