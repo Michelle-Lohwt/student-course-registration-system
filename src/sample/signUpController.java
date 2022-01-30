@@ -108,17 +108,17 @@ public class signUpController extends Controller implements Initializable {
               file4.createNewFile();
               BufferedWriter writer1=new BufferedWriter(new FileWriter(file4));
               writer1.write("");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
-              writer1.write("\n" + "empty");
+              writer1.write("\n");
+              writer1.write("\n" + id.getText());
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n");
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "--Select--");
               writer1.close();
 
               signUpMessage.setFill(Color.GREEN);
