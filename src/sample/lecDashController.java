@@ -104,12 +104,6 @@ public class lecDashController extends Controller implements Initializable {
     nric.setStyle("-fx-border-color: default");
 
     downloadController.inputLectName(name.getText());
-    /*
-    try {
-      Integer.parseInt(nric.getText());
-      if(nric.getLength() !=12) {
-        Message.setText("Please enter a NRIC number with 12 digits!");
-      } else{ */
         Message.setText("Save successful!");
         try{
           File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
@@ -126,23 +120,12 @@ public class lecDashController extends Controller implements Initializable {
         } catch(IOException e) {
           System.out.println("An error occured.");
         }
-/*      }
-    } catch (NumberFormatException e) {
-      if (nric.getText().isBlank()){
-        Message.setText("NRIC cannot be blank!");
-      } else {
-      Message.setText("NRIC must be numbers only!");
-      }
-    } */
   }
  
   public void displayLecName()  {
     try {
       Scanner sc = new Scanner(new File("data/Lecturer Dashboard/" + id + ".txt"));
       name.setText(Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0));
-      //String lecName;
-      //lecName = Files.readAllLines(Paths.get("data/Lecturer Dashboard/" + id + ".txt")).get(0);
-      //name.setText(lecName);
       sc.close();
       name.setEditable(false);
       name.setDisable(true);
@@ -242,7 +225,6 @@ public class lecDashController extends Controller implements Initializable {
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()){
         Message.setText("");
-        //Message.setText("NRIC cannot be blank!");
         saveButton.setDisable(false);
       } else {
         Message.setText("NRIC must be numbers only!");
@@ -257,8 +239,6 @@ public class lecDashController extends Controller implements Initializable {
       saveButton.setDisable(false);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Message.setText("Your name should only contains alphabets or slashes! Try again!");
-      //name.setText(name.getText().substring(0, name.getText().length() - 1));
-      //name.positionCaret(name.getText().length());
       saveButton.setDisable(true);
     } else if (!name.getText().isEmpty()) {
       Message.setText("");
