@@ -141,6 +141,7 @@ public class stuDashController extends Controller implements Initializable {
 
     name.setEditable(false);
     downloadController.inputName(name.getText());
+    courseRegController.inputName(name.getText());
     nric.setEditable(false);
     cgpa.setEditable(false);
 
