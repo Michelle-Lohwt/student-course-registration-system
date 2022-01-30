@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -32,9 +31,6 @@ public class lecDashController extends Controller implements Initializable {
  
   @FXML
   private ChoiceBox<String> emp_status, position, school, campus;
- 
-  @FXML
-  private ImageView profilePic;
  
   @FXML
   private Text Message;
