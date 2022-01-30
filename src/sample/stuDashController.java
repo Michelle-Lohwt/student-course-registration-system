@@ -60,7 +60,7 @@ public class stuDashController extends Controller implements Initializable {
     studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
 
     if (studentName.isEmpty() == true) {
-      Messages.setText("Please save the name before proceed to course registration!");
+      Messages.setText("Please save your name before proceed to course registration!");
     } else {
       stuReportController.inputName(name.getText());
       switchTo(event, "courseReg.fxml");
