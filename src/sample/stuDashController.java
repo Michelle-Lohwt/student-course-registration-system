@@ -131,10 +131,19 @@ public class stuDashController extends Controller implements Initializable {
     programme.setDisable(false);
     major.setDisable(false);
     minor.setDisable(false);
+
+    editInfoButton.setDisable(true);
+    saveButton.setDisable(false);
+
+    Messages.setText("");
   }
 
   
   public void saveInfo() {
+    Messages.setText("");
+    editInfoButton.setDisable(false);
+    saveButton.setDisable(true);
+
     name.setEditable(false);
     downloadController.inputName(name.getText());
     nric.setEditable(false);
@@ -143,17 +152,15 @@ public class stuDashController extends Controller implements Initializable {
     name.setStyle("-fx-border-color: default");
     nric.setStyle("-fx-border-color: default");
     cgpa.setStyle("-fx-border-color: default");
-
-
+    /*
     if (nric.getLength() !=12) {
       Messages.setText("Please enter a 12 digits NRIC number!");      
     } else if (name.getText().isEmpty() == true || name.getText() == "empty") {
      Messages.setText("Please enter your name!");
     } else if (floatCGPA <0 || floatCGPA>4) {
       Messages.setText("Please enter a CGPA between 0 and 4 only!");
-    } else {
+    } else {  */
       Messages.setText("Save successful!");
-      saveButton.setDisable(false);
       try{
         //File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
         //stuinfoFile.createNewFile();
@@ -175,7 +182,7 @@ public class stuDashController extends Controller implements Initializable {
       } catch(IOException e) {
         System.out.println("An error occured.");
       }
-    }
+    //}
   }
   
   public void displayName() {
@@ -332,7 +339,7 @@ public class stuDashController extends Controller implements Initializable {
     major.getItems().addAll("Software Engineering", "Intelligent Computing", "Computing Infrastructure");
     minor.getItems().addAll("Accounting", "Mathematics", "Electives");
   }
-
+  /*
   public void validation() {
     CGPAsuccess = false;
       floatCGPA = Float.parseFloat(cgpa.getText());
@@ -349,53 +356,93 @@ public class stuDashController extends Controller implements Initializable {
         editInfoButton.setDisable(false);
       }
   }
-
+  */
   public void validateName(KeyEvent e) {
     if (name.getText().isEmpty()) {
-      Messages.setText("");
-      saveButton.setDisable(false);
+      Messages.setText("Name cannot be empty!");
+      saveButton.setDisable(true);
+      nric.setDisable(true);
+      cgpa.setDisable(true);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Messages.setText("Your name should only contains alphabets or slashes! Try again!");
       //name.setText(name.getText().substring(0, name.getText().length() - 1));
       //name.positionCaret(name.getText().length());
       saveButton.setDisable(true);
+      nric.setDisable(true);
+      cgpa.setDisable(true);
     } else if (!name.getText().isEmpty()) {
       Messages.setText("");
       saveButton.setDisable(false);
+      nric.setDisable(false);
+      cgpa.setDisable(false);
     }    
   }
 
-  public void validateNRIC(KeyEvent e) {
-    if (nric.getText().isEmpty()) {
-      Messages.setText("Please enter your NRIC!");
-      saveButton.setDisable(true);
-      editInfoButton.setDisable(false);
-    } 
-    else if (!"0123456789".contains(e.getCharacter())) {
-      Messages.setText("Your NRIC should only contains numbers! Try again!");
-      //name.setText(name.getText().substring(0, name.getText().length() - 1));
-      //name.positionCaret(name.getText().length());
-      saveButton.setDisable(true);
-    } else if (!nric.getText().isEmpty()) {
-      saveButton.setDisable(false);
-    }else if (nric.getLength() !=12) {
-      Messages.setText("Please enter a 12 digits NRIC number!");
+  public void validateNRIC() {
+    try {
+      Long.parseLong(nric.getText());
+      if(nric.getLength() !=12) {
+        Messages.setText("Please enter a NRIC number with 12 digits!");
+        saveButton.setDisable(true);
+        name.setDisable(true);
+        cgpa.setDisable(true);
+      } else{
+        Messages.setText("");
+        saveButton.setDisable(false);
+        name.setDisable(false);
+        cgpa.setDisable(false);
+      }
+    } catch (NumberFormatException e) {
+      if (nric.getText().isBlank()){
+        Messages.setText("NRIC cannot be empty!");
+        //Message.setText("NRIC cannot be blank!");
+        saveButton.setDisable(true);
+        name.setDisable(true);
+        cgpa.setDisable(true);
+      } else {
+        Messages.setText("NRIC must be numbers only!");
+        saveButton.setDisable(true);
+        name.setDisable(true);
+        cgpa.setDisable(true);
+      }
     }
   }
 
   public void validateCGPA(KeyEvent e) {
-    if (cgpa.getText().isEmpty()) {
-      Messages.setText("Please enter your CGPA!");
+    if (!cgpa.getText().isEmpty()) {      
+      if (!"0123456789.\b".contains(e.getCharacter())) {
+        Messages.setText("Please input valid number!");
+        //cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
+        //cgpa.positionCaret(cgpa.getText().length());
+        saveButton.setDisable(true);
+        name.setDisable(true);
+        nric.setDisable(true);
+        //editInfoButton.setDisable(false);
+      } else {
+        if (cgpa.getText().length() != 4) {
+          Messages.setText("CGPA must be 2 decimal places!");
+          saveButton.setDisable(true);
+          name.setDisable(true);
+          nric.setDisable(true);
+        } else {
+          if(Float.parseFloat(cgpa.getText()) > 4 || Float.parseFloat(cgpa.getText()) < 0) {
+            Messages.setText("CGPA must be 0.00-4.00!");
+            saveButton.setDisable(true);
+            name.setDisable(true);
+            nric.setDisable(true);
+          } else {
+            Messages.setText("");
+            saveButton.setDisable(false);
+            name.setDisable(false);
+            nric.setDisable(false);
+          }
+        }
+      }
+    } else {
+      Messages.setText("CGPA cannot be empty!");
       saveButton.setDisable(true);
-      editInfoButton.setDisable(false);
-    } else if (!"0123456789.".contains(e.getCharacter())) {
-      Messages.setText("Please input valid number!");
-      cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
-      cgpa.positionCaret(cgpa.getText().length());
-      saveButton.setDisable(true);
-      //editInfoButton.setDisable(false);
-    } else if (!cgpa.getText().isEmpty()) {
-      saveButton.setDisable(false);
+      name.setDisable(true);
+      nric.setDisable(true);
     }
   }
 
