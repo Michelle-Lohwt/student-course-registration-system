@@ -199,7 +199,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String icnumber;
       icnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(1);
-      if(icnumber.contains("empty")){
+      if(icnumber.contains("--Select--")){
         nric.setText("");
       } else {
         nric.setText(icnumber);
@@ -216,7 +216,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String acdstatus;
       acdstatus = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(3);
-      if(acdstatus.contains("empty")){
+      if(acdstatus.contains("--Select--")){
         acd_status.setValue("");
       } else {
         acd_status.setValue(acdstatus);
@@ -233,7 +233,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String semregistered;
       semregistered = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(4);
-      if(semregistered.contains("empty")){
+      if(semregistered.contains("--Select--")){
         sem_reg.setValue("");
       } else {
         sem_reg.setValue(semregistered);
@@ -250,7 +250,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String result;
       result = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(5);
-      if(result.contains("empty")){
+      if(result.contains("--Select--")){
         cgpa.setText("");
       } else {
         cgpa.setText(result);
@@ -267,7 +267,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String acdYear;
       acdYear = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(6);
-      if(acdYear.contains("empty")){
+      if(acdYear.contains("--Select--")){
         year.setValue("");
       } else {
         year.setValue(acdYear);
@@ -284,7 +284,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String School;
       School = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(7);
-      if(School.contains("empty")){
+      if(School.contains("--Select--")){
         school.setValue("");
       } else {
         school.setValue(School);
@@ -301,7 +301,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Campuses;
       Campuses = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(8);
-      if(Campuses.contains("empty")){
+      if(Campuses.contains("--Select--")){
         campus.setValue("");
       } else {
         campus.setValue(Campuses);
@@ -318,7 +318,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Programmes;
       Programmes = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(9);
-      if(Programmes.contains("empty")){
+      if(Programmes.contains("--Select--")){
         programme.setValue("");
       } else {
         programme.setValue(Programmes);
@@ -335,7 +335,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Majors;
       Majors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(10);
-      if(Majors.contains("empty")){
+      if(Majors.contains("--Select--")){
         major.setValue("");
       } else {
         major.setValue(Majors);
@@ -352,7 +352,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Minors;
       Minors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(11);
-      if(Minors.contains("empty")){
+      if(Minors.contains("--Select--")){
         minor.setValue("");
       } else {
         minor.setValue(Minors);
