@@ -108,17 +108,16 @@ public class signUpController extends Controller implements Initializable {
               file4.createNewFile();
               BufferedWriter writer1=new BufferedWriter(new FileWriter(file4));
               writer1.write("");
-              writer1.write("\n");
+              writer1.write("\n" + "");
               writer1.write("\n" + id.getText());
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n");
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n" + "--Select--");
-              writer1.write("\n" + "--Select--");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
               writer1.write("\n\n\n");
               writer1.close();
 
@@ -128,7 +127,7 @@ public class signUpController extends Controller implements Initializable {
               System.out.println("An error occurred.");
               e.printStackTrace();
             }
-          } else if(file1.exists() || file2.exists() || file3.exists()) {
+          } else if(file1.exists() || file2.exists() || file3.exists() || file4.exists()) {
             signUpMessage.setText("This ID has been registered before!");
           } else{
             signUpMessage.setText("An error occurred!");
@@ -137,9 +136,10 @@ public class signUpController extends Controller implements Initializable {
           File file1 = new File("data/Lecturer Profile/"+id.getText()+".txt");
           File file2 = new File("data/Lecturer Course List/"+id.getText()+".txt");
           File file3 = new File("data/Lecturer Teaching Course/"+id.getText()+".txt");
+          File file4 = new File("data/Lecturer Dashboard/"+id.getText()+".txt");
         
           //Check whether if the account exist or not
-          if(!file1.exists() && !file2.exists() && !file3.exists()){
+          if(!file1.exists() && !file2.exists() && !file3.exists() && !file4.exists()){
 
             try{
               //Create Lecturer Profile txt file and save their staff id and password into it
@@ -174,13 +174,26 @@ public class signUpController extends Controller implements Initializable {
             
               //Create Lecturer Registered Course txt file
               file3.createNewFile();
+              //Create Lecturer Dashboard txt file
+              file4.createNewFile();
+              BufferedWriter writer1=new BufferedWriter(new FileWriter(file4));
+              writer1.write("");
+              writer1.write("\n");
+              writer1.write("\n" + id.getText());
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "");
+              writer1.write("\n" + "" + "\n");
+              writer1.close();
+
               signUpMessage.setFill(Color.GREEN);
               signUpMessage.setText("Sign Up Successful!");
             } catch (IOException e) {
               System.out.println("An error occurred.");
               e.printStackTrace();
             }
-          } else if(file1.exists() || file2.exists() || file3.exists()) {
+          } else if(file1.exists() || file2.exists() || file3.exists() || file4.exists()) {
             signUpMessage.setText("This ID has been registered before!");
           } else{
             signUpMessage.setText("An error occurred!");

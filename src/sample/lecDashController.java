@@ -90,7 +90,8 @@ public class lecDashController extends Controller implements Initializable {
  
   public void saveInfo() {
     Message.setFill(Color.GREEN);
-    Message.setText("");
+    Message.setText("Save successful!");
+
     editInfoButton.setDisable(false);
     saveButton.setDisable(true);
 
@@ -114,22 +115,23 @@ public class lecDashController extends Controller implements Initializable {
         Message.setText("Please enter a NRIC number with 12 digits!");
       } else{ */
 
-        Message.setText("Save successful!");
-        try{
-          File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
-          lecinfoFile.createNewFile();
-          BufferedWriter writer=new BufferedWriter(new FileWriter("data/Lecturer Dashboard/"+ id +".txt"));
-          writer.write(name.getText());
-          writer.write("\n" + nric.getText());
-          writer.write("\n" + id);
-          writer.write("\n" + emp_status.getSelectionModel().getSelectedItem());
-          writer.write("\n" + position.getSelectionModel().getSelectedItem());
-          writer.write("\n" + school.getSelectionModel().getSelectedItem());
-          writer.write("\n" + campus.getSelectionModel().getSelectedItem() + "\n");
-          writer.close();
-        } catch(IOException e) {
-          System.out.println("An error occured.");
-        }
+        
+    try{
+      //File lecinfoFile = new File("data/Lecturer Dashboard/"+ id +".txt");
+      //lecinfoFile.createNewFile();
+      //BufferedWriter writer=new BufferedWriter(new FileWriter("data/Lecturer Dashboard/"+ id +".txt"));
+      FileWriter writer = new FileWriter("data/Lecturer Dashboard/" + id + ".txt");
+      writer.write(name.getText());
+      writer.write("\n" + nric.getText());
+      writer.write("\n" + id);
+      writer.write("\n" + emp_status.getSelectionModel().getSelectedItem());
+      writer.write("\n" + position.getSelectionModel().getSelectedItem());
+      writer.write("\n" + school.getSelectionModel().getSelectedItem());
+      writer.write("\n" + campus.getSelectionModel().getSelectedItem() + "\n");
+      writer.close();
+    } catch(IOException e) {
+      System.out.println("An error occured.");
+    }
   }
  
   public void displayLecName()  {

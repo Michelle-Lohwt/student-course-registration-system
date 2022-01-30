@@ -161,7 +161,7 @@ public class stuDashController extends Controller implements Initializable {
     minor.setDisable(true);
 
     try {
-      FileWriter writer = new FileWriter("data/Student Dashboard/" + id + ".txt", false);
+      FileWriter writer = new FileWriter("data/Student Dashboard/" + id + ".txt");
       writer.write(name.getText());
       writer.write("\n" + nric.getText());
       writer.write("\n" + id);
@@ -173,7 +173,7 @@ public class stuDashController extends Controller implements Initializable {
       writer.write("\n" + campus.getSelectionModel().getSelectedItem());
       writer.write("\n" + programme.getSelectionModel().getSelectedItem());
       writer.write("\n" + major.getSelectionModel().getSelectedItem());
-      writer.write("\n" + minor.getSelectionModel().getSelectedItem());
+      writer.write("\n" + minor.getSelectionModel().getSelectedItem() + "\n");
       writer.close();
     } catch (IOException e) {
       System.out.println("An error occured.");
@@ -199,11 +199,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String icnumber;
       icnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(1);
-      if(icnumber.contains("--Select--")){
-        nric.setText("");
-      } else {
-        nric.setText(icnumber);
-      }
+      nric.setText(icnumber);
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -216,7 +212,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String acdstatus;
       acdstatus = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(3);
-      if(acdstatus.contains("--Select--")){
+      if(acdstatus.contains("null")){
         acd_status.setValue("");
       } else {
         acd_status.setValue(acdstatus);
@@ -233,7 +229,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String semregistered;
       semregistered = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(4);
-      if(semregistered.contains("--Select--")){
+      if(semregistered.contains("null")){
         sem_reg.setValue("");
       } else {
         sem_reg.setValue(semregistered);
@@ -250,11 +246,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String result;
       result = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(5);
-      if(result.contains("--Select--")){
-        cgpa.setText("");
-      } else {
-        cgpa.setText(result);
-      }
+      cgpa.setText(result);
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -267,7 +259,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String acdYear;
       acdYear = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(6);
-      if(acdYear.contains("--Select--")){
+      if(acdYear.contains("null")){
         year.setValue("");
       } else {
         year.setValue(acdYear);
@@ -284,7 +276,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String School;
       School = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(7);
-      if(School.contains("--Select--")){
+      if(School.contains("null")){
         school.setValue("");
       } else {
         school.setValue(School);
@@ -301,7 +293,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Campuses;
       Campuses = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(8);
-      if(Campuses.contains("--Select--")){
+      if(Campuses.contains("null")){
         campus.setValue("");
       } else {
         campus.setValue(Campuses);
@@ -318,7 +310,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Programmes;
       Programmes = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(9);
-      if(Programmes.contains("--Select--")){
+      if(Programmes.contains("null")){
         programme.setValue("");
       } else {
         programme.setValue(Programmes);
@@ -335,7 +327,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Majors;
       Majors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(10);
-      if(Majors.contains("--Select--")){
+      if(Majors.contains("null")){
         major.setValue("");
       } else {
         major.setValue(Majors);
@@ -352,7 +344,7 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Minors;
       Minors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(11);
-      if(Minors.contains("--Select--")){
+      if(Minors.contains("null")){
         minor.setValue("");
       } else {
         minor.setValue(Minors);
