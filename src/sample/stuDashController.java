@@ -404,7 +404,7 @@ public class stuDashController extends Controller implements Initializable {
       }
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()) {
-        Message.setText("");
+        Messages.setText("");
         saveButton.setDisable(false);
         name.setDisable(false);
         cgpa.setDisable(false);
