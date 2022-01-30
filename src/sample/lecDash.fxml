@@ -100,7 +100,7 @@
                               <Image url="@images/user.png" />
                            </image>
                         </ImageView>
-                        <Label text="Student Information" translateX="10.0">
+                        <Label text="Lecturer Information" translateX="10.0">
                            <font>
                               <Font size="24.0" />
                            </font>
