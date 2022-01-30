@@ -199,7 +199,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String icnumber;
       icnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(1);
-      nric.setText(icnumber);
+      if(icnumber.contains("empty")){
+        nric.setText("");
+      } else {
+        nric.setText(icnumber);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -212,7 +216,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String acdstatus;
       acdstatus = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(3);
-      acd_status.setValue(acdstatus);
+      if(acdstatus.contains("empty")){
+        acd_status.setValue("");
+      } else {
+        acd_status.setValue(acdstatus);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -225,7 +233,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String semregistered;
       semregistered = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(4);
-      sem_reg.setValue(semregistered);
+      if(semregistered.contains("empty")){
+        sem_reg.setValue("");
+      } else {
+        sem_reg.setValue(semregistered);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -238,7 +250,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String result;
       result = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(5);
-      cgpa.setText(result);
+      if(result.contains("empty")){
+        cgpa.setText("");
+      } else {
+        cgpa.setText(result);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -251,7 +267,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String acdYear;
       acdYear = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(6);
-      year.setValue(acdYear);
+      if(acdYear.contains("empty")){
+        year.setValue("");
+      } else {
+        year.setValue(acdYear);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -264,7 +284,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String School;
       School = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(7);
-      school.setValue(School);
+      if(School.contains("empty")){
+        school.setValue("");
+      } else {
+        school.setValue(School);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -277,7 +301,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Campuses;
       Campuses = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(8);
-      campus.setValue(Campuses);
+      if(Campuses.contains("empty")){
+        campus.setValue("");
+      } else {
+        campus.setValue(Campuses);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -290,7 +318,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Programmes;
       Programmes = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(9);
-      programme.setValue(Programmes);
+      if(Programmes.contains("empty")){
+        programme.setValue("");
+      } else {
+        programme.setValue(Programmes);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -303,7 +335,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Majors;
       Majors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(10);
-      major.setValue(Majors);
+      if(Majors.contains("empty")){
+        major.setValue("");
+      } else {
+        major.setValue(Majors);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -316,7 +352,11 @@ public class stuDashController extends Controller implements Initializable {
       Scanner sc = new Scanner(stuinfoFile);
       String Minors;
       Minors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(11);
-      minor.setValue(Minors);
+      if(Minors.contains("empty")){
+        minor.setValue("");
+      } else {
+        minor.setValue(Minors);
+      }
       sc.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -372,10 +412,10 @@ public class stuDashController extends Controller implements Initializable {
       }
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()) {
-        Messages.setText("NRIC cannot be empty!");
-        saveButton.setDisable(true);
-        name.setDisable(true);
-        cgpa.setDisable(true);
+        // Message.setText("NRIC cannot be blank!");
+        saveButton.setDisable(false);
+        name.setDisable(false);
+        cgpa.setDisable(false);
       } else {
         Messages.setText("NRIC must be numbers only!");
         saveButton.setDisable(true);
