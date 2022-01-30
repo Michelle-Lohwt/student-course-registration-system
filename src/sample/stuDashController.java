@@ -53,14 +53,14 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void CourseRegistration(MouseEvent event) throws IOException {
-
+    Messages.setFill(Color.RED);
     File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
     Scanner sc = new Scanner(stuinfoFile);
     String studentName;
     studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
 
     if (studentName.isEmpty() == true) {
-      Messages.setText("Please save the name before proceed to course registration!");
+      Messages.setText("Please save your name before proceed to course registration!");
     } else {
       stuReportController.inputName(name.getText());
       switchTo(event, "courseReg.fxml");
@@ -161,8 +161,6 @@ public class stuDashController extends Controller implements Initializable {
     minor.setDisable(true);
 
     try {
-      // File stuinfoFile = new File("data/Student Dashboard/"+ id +".txt");
-      // stuinfoFile.createNewFile();
       FileWriter writer = new FileWriter("data/Student Dashboard/" + id + ".txt", false);
       writer.write(name.getText());
       writer.write("\n" + nric.getText());
@@ -180,7 +178,6 @@ public class stuDashController extends Controller implements Initializable {
     } catch (IOException e) {
       System.out.println("An error occured.");
     }
-    // }
   }
 
   public void displayName() {
@@ -339,6 +336,7 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void validateName(KeyEvent e) {
+    Messages.setFill(Color.RED);
     if (name.getText().isEmpty()) {
       Messages.setText("Name cannot be empty!");
       saveButton.setDisable(true);
@@ -346,8 +344,6 @@ public class stuDashController extends Controller implements Initializable {
       cgpa.setDisable(true);
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Messages.setText("Your name should only contains alphabets or slashes! Try again!");
-      // name.setText(name.getText().substring(0, name.getText().length() - 1));
-      // name.positionCaret(name.getText().length());
       saveButton.setDisable(true);
       nric.setDisable(true);
       cgpa.setDisable(true);
@@ -360,6 +356,7 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void validateNRIC() {
+    Messages.setFill(Color.RED);
     try {
       Long.parseLong(nric.getText());
       if (nric.getLength() != 12) {
@@ -376,7 +373,6 @@ public class stuDashController extends Controller implements Initializable {
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()) {
         Messages.setText("NRIC cannot be empty!");
-        // Message.setText("NRIC cannot be blank!");
         saveButton.setDisable(true);
         name.setDisable(true);
         cgpa.setDisable(true);
@@ -390,15 +386,13 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   public void validateCGPA(KeyEvent e) {
+    Messages.setFill(Color.RED);
     if (!cgpa.getText().isEmpty()) {
       if (!"0123456789.\b".contains(e.getCharacter())) {
         Messages.setText("Please input valid number!");
-        // cgpa.setText(cgpa.getText().substring(0, cgpa.getText().length() - 1));
-        // cgpa.positionCaret(cgpa.getText().length());
         saveButton.setDisable(true);
         name.setDisable(true);
         nric.setDisable(true);
-        // editInfoButton.setDisable(false);
       } else {
         if (cgpa.getText().length() != 4) {
           Messages.setText("CGPA must be 2 decimal places!");

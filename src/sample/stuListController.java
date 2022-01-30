@@ -1,6 +1,5 @@
 package sample;
 
-// import sample.classes.Student;
 import sample.classes.StudentList;
 
 import java.io.BufferedReader;
@@ -333,8 +332,6 @@ public class stuListController extends Controller implements Initializable {
       try {
         File file = new File("data/Lecturer Teaching Course/" + lecID + ".txt");
         File temp = new File("data/Lecturer Teaching Course/TempFile.txt");
-        // File temp = File.createTempFile("temporarystudent", ".txt",
-        // file.getParentFile());
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
 

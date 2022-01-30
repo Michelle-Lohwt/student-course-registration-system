@@ -316,8 +316,6 @@ public class courseRegController extends Controller implements Initializable {
         File file = new File(
             "data/Course Student List/" + registeredCourse.getSelectionModel().getSelectedItem() + ".txt");
         File temp = new File("data/Course Student List/TempFile.txt");
-        // File temp = File.createTempFile("temporarystudent", ".txt",
-        // file.getParentFile());
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
         String lineToRemove = stuName + "\t" + stuID;
