@@ -1,12 +1,12 @@
-Ali
-020304011234
-111111
+Michelle
+010203040506
+111112
 Active
-17/1
-3.55
+18/1
+3.77
 Year 1
 School of Computer Science
 Main Campus
 BSc Computer Science
-Software Engineering
-Accounting
+Intelligent Computing
+Mathematics

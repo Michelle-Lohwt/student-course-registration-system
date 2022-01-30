@@ -1,12 +1,12 @@
-Ali
-020304011234
-111111
+Muthu
+991123012321
+111114
 Active
-17/1
-3.55
-Year 1
+20/1
+4.00
+Year 2
 School of Computer Science
 Main Campus
 BSc Computer Science
-Software Engineering
+Computing Infrastructure
 Accounting
