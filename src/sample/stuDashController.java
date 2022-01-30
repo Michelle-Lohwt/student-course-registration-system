@@ -70,6 +70,7 @@ public class stuDashController extends Controller implements Initializable {
       switchTo(event, "courseReg.fxml");
     }
     sc.close();
+
 }
   
   public void ContactUs(MouseEvent event) throws IOException {
@@ -101,6 +102,7 @@ public class stuDashController extends Controller implements Initializable {
     String studentName;
     studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
     sc.close();
+
     if (studentName.isEmpty()==true) {
       name.setEditable(true);
       name.setDisable(false);
