@@ -176,7 +176,6 @@ public class stuDashController extends Controller implements Initializable {
         writer.write("\n" + major.getSelectionModel().getSelectedItem());
         writer.write("\n" + minor.getSelectionModel().getSelectedItem());
         writer.close();
-        saveButton.setDisable(false);
       } catch(IOException e) {
         System.out.println("An error occured.");
       }
