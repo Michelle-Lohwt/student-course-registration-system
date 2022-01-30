@@ -404,7 +404,7 @@ public class stuDashController extends Controller implements Initializable {
       }
     } catch (NumberFormatException e) {
       if (nric.getText().isBlank()) {
-        // Message.setText("NRIC cannot be blank!");
+        Message.setText("");
         saveButton.setDisable(false);
         name.setDisable(false);
         cgpa.setDisable(false);
@@ -446,7 +446,7 @@ public class stuDashController extends Controller implements Initializable {
         }
       }
     } else {
-      //Messages.setText("CGPA cannot be empty!");
+      Messages.setText("");
       saveButton.setDisable(false);
       name.setDisable(false);
       nric.setDisable(false);
