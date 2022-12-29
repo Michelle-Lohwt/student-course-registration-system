@@ -1,4 +1,11 @@
 # Student Course Registration System
+
+## Dependencies
+- JavaFX
+- JFoenix
+- ITextPDF
+
+## Demo
 https://user-images.githubusercontent.com/60863955/153826648-3d2dcf6b-5f61-4cc3-999f-c417dce77828.mp4
 
 
