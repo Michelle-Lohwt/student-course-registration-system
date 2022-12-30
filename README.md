@@ -5,6 +5,16 @@
 - JFoenix
 - ITextPDF
 
+## Database
+- Oracle sql developer 11g
+### ERD
+- ![ERD of the system](ERD.png)
+- The SQL script for creating the tables can be found in `CAT201project.sql`
+### Data
+- All of the data will be moved into excel files before migration.
+- This makes it so it is easy for users to set up their DBs.
+- Simply go into the tables in your sql developer 11g and import the data in.
+
 ## Demo
 https://user-images.githubusercontent.com/60863955/153826648-3d2dcf6b-5f61-4cc3-999f-c417dce77828.mp4
 
