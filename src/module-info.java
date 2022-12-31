@@ -12,6 +12,9 @@ module student.course.registration.system {
     requires kernel;
     requires layout;
     requires itextpdf;
+    requires com.oracle.database.jdbc;
+    requires mysql.connector.java;
+    requires java.sql;
 
     opens sample;
 }
