@@ -1,29 +1,30 @@
 package sample;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class AppDAO {
+    public enum UserType {
+        STUDENT, LECTURER
+    }
+
     private static final String DBUrl = String.format("jdbc:oracle:thin:%s/%s@%s", APIKeys.DBuser, APIKeys.DBPass, APIKeys.DBName);
     private static Connection conn = null;
 
-    public static void DBConnect() throws SQLException{
+    public static void DBConnect() throws SQLException {
         try {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             conn = DriverManager.getConnection(DBUrl);
-            if(conn != null){
+            if (conn != null) {
                 System.out.println("Connected Successfully");
             }
-        } catch (SQLException exc){
+        } catch (SQLException exc) {
             System.out.println("Something terrible happened!");
         }
     }
 
-    public static void DBDisconnect() throws SQLException{
-        try{
-            if(conn != null && !conn.isClosed()){
+    public static void DBDisconnect() throws SQLException {
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.close();
             }
         } catch (SQLException exc) {
@@ -31,36 +32,60 @@ public class AppDAO {
         }
     }
 
-    public static void createStudent(String StudID, String StudPass) throws SQLException{
+    public static void registerUser(String ID, String Pass, UserType User) throws SQLException {
         Statement stmnt = null;
-        try{
+        try {
             DBConnect();
             stmnt = conn.createStatement();
-            stmnt.execute(String.format("INSERT INTO STUDENT (STUDENT_ID, STUDENT_PASSWORD) VALUES (%s,'%s')", StudID, StudPass));
-        }   catch (SQLException exc){
+            switch (User) {
+                case STUDENT ->
+                        stmnt.execute(String.format("INSERT INTO STUDENT (STUDENT_ID, STUDENT_PASSWORD) VALUES (%s,'%s')", ID, Pass));
+                case LECTURER ->
+                        stmnt.execute(String.format("INSERT INTO LECTURER (LECTURER_ID, LECTURER_PASSWORD) VALUES (%s,'%s')", ID, Pass));
+            }
+        } catch (SQLException exc) {
             exc.printStackTrace();
-        }   finally{
-            if (stmnt != null){
+        } finally {
+            if (stmnt != null) {
                 stmnt.close();
             }
             DBDisconnect();
         }
     }
 
-    public static void createLecturer(String LectID, String LectPass) throws SQLException{
+    public static boolean loginUser(String ID, String Pass, UserType User) throws SQLException {
+        boolean status = false;
         Statement stmnt = null;
-        try{
+        ResultSet result = null;
+        try {
             DBConnect();
+
             stmnt = conn.createStatement();
-            stmnt.execute(String.format("INSERT INTO LECTURER (LECTURER_ID, LECTURER_PASSWORD) VALUES (%s,'%s')", LectID, LectPass));
-        }   catch (SQLException exc){
+            result = switch (User) {
+                case STUDENT ->
+                        stmnt.executeQuery(String.format("SELECT STUDENT_ID, STUDENT_PASSWORD FROM STUDENT WHERE STUDENT_ID = %s", ID));
+                case LECTURER ->
+                        stmnt.executeQuery(String.format("SELECT LECTURER_ID, LECTURER_PASSWORD FROM STUDENT WHERE LECTURER_ID = %s", ID));
+            };
+
+            result.next();
+            String correctPassword = result.getString(2);
+            if (Pass.equals(correctPassword)) {
+                status = true;
+            }
+
+        } catch (SQLException exc) {
             exc.printStackTrace();
-        }   finally{
-            if (stmnt != null){
+        } finally {
+            
+            if (result != null) {
+                result.close();
+            }
+            if (stmnt != null) {
                 stmnt.close();
             }
             DBDisconnect();
         }
+        return status;
     }
-
 }
