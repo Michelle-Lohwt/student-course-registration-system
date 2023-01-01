@@ -1,13 +1,14 @@
 package sample;
 
 import com.mysql.cj.protocol.Resultset;
+import sample.classes.Course;
 import sample.classes.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Turn AppDAO into an interface and implement it in StudentDAO and LecturerDAO
+// TODO: Turn AppDAO into an interface and implement it in StudentDAO, LecturerDAO, and CourseDAO
 public class AppDAO {
     public enum UserType {
         STUDENT, LECTURER
@@ -215,4 +216,92 @@ public class AppDAO {
         }
         return degrees;
     }
+
+    public static ArrayList<Course> getCourseList() throws SQLException{
+        Statement stmnt = null;
+        ResultSet result = null;
+        ArrayList<Course> courses= new ArrayList<Course>();
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            result = stmnt.executeQuery("SELECT * FROM COURSES");
+
+            while(result.next()){
+                courses.add(new Course(result.getString("COURSE_CODE"), result.getString("COURSE_TITLE"), result.getString("COURSE_DESC"), result.getString("COURSE_TIME")));
+            }
+        } catch (SQLException exc) {
+            System.out.println("Something went wrong while getting the course list");
+        } finally {
+            if(stmnt != null){
+                stmnt.close();
+            }
+            if(result != null){
+                result.close();
+            }
+            DBDisconnect();
+        }
+        return courses;
+    }
+
+    public static ArrayList<String> getStudentCourseList (String ID) throws SQLException {
+        Statement stmnt = null;
+        ResultSet result = null;
+        ArrayList<String> studentCourseList = new ArrayList<String>();
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            result = stmnt.executeQuery(String.format("SELECT COURSE_CODE FROM STUDENT_COURSES WHERE STUDENT_ID = %s", ID));
+
+            while(result.next()){
+                studentCourseList.add(result.getString("COURSE_CODE"));
+            }
+        } catch (SQLException exc) {
+            System.out.println("An error occurred while fetching the student's course list");
+        } finally {
+            if (stmnt != null){
+                stmnt.close();
+            }
+            if (result != null){
+                result.close();
+            }
+            DBDisconnect();
+        }
+        return studentCourseList;
+    }
+
+    public static void registerStudentCourse(String studID, String courseCode) throws SQLException {
+        Statement stmnt = null;
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            stmnt.execute(String.format("INSERT INTO STUDENT_COURSES VALUES ('%s', '%s')", studID, courseCode));
+
+        } catch (SQLException exc) {
+            System.out.println("Couldn't register student to course");
+        } finally {
+            if (stmnt != null) {
+                stmnt.close();
+            }
+            DBDisconnect();
+        }
+    }
+
+    public static void removeStudentCourse(String studID, String courseCode) throws SQLException{
+        Statement stmnt = null;
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            stmnt.execute(String.format("DELETE FROM STUDENT_COURSES WHERE STUDENT_ID = '%s' AND COURSE_CODE = '%s'", studID, courseCode));
+
+        } catch (SQLException exc) {
+            System.out.println("Couldn't unregister student to course");
+            exc.printStackTrace();
+        } finally {
+            if (stmnt != null) {
+                stmnt.close();
+            }
+            DBDisconnect();
+        }
+    }
+
 }

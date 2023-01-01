@@ -1,15 +1,10 @@
 package sample;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -37,6 +32,7 @@ public class stuDashController extends Controller implements Initializable {
   @FXML
   private JFXButton editInfoButton, saveButton;
 
+  // TODO: Check if these two variables have any use
   Float floatCGPA = (float) -1;
   Boolean CGPAsuccess = true;
 
@@ -62,6 +58,7 @@ public class stuDashController extends Controller implements Initializable {
       Messages.setText("Please save your name before proceed to course registration!");
     } else {
       stuReportController.inputName(name.getText());
+      courseRegController.stuID = String.format("%s", studDetails.getID());
       switchTo(event, "courseReg.fxml");
     }
 
