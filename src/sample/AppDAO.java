@@ -1,12 +1,11 @@
 package sample;
 
-import com.mysql.cj.protocol.Resultset;
 import sample.classes.Course;
+import sample.classes.Lecturer;
 import sample.classes.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 // TODO: Turn AppDAO into an interface and implement it in StudentDAO, LecturerDAO, and CourseDAO
 public class AppDAO {
@@ -15,7 +14,7 @@ public class AppDAO {
     }
 
     public enum ChoiceBoxItems{
-        SEMESTER, SCHOOL, CAMPUS, PROGRAMME, MAJOR, MINOR
+        SEMESTER, SCHOOL, CAMPUS, PROGRAMME, MAJOR, MINOR, POSITION
     }
 
     private static final String DBUrl = String.format("jdbc:oracle:thin:%s/%s@%s", APIKeys.DBuser, APIKeys.DBPass, APIKeys.DBName);
@@ -76,7 +75,7 @@ public class AppDAO {
                 case STUDENT ->
                         stmnt.executeQuery(String.format("SELECT STUDENT_ID, STUDENT_PASSWORD FROM STUDENT WHERE STUDENT_ID = %s", ID));
                 case LECTURER ->
-                        stmnt.executeQuery(String.format("SELECT LECTURER_ID, LECTURER_PASSWORD FROM STUDENT WHERE LECTURER_ID = %s", ID));
+                        stmnt.executeQuery(String.format("SELECT LECTURER_ID, LECTURER_PASSWORD FROM LECTURER WHERE LECTURER_ID = %s", ID));
             };
 
             result.next();
@@ -88,13 +87,13 @@ public class AppDAO {
         } catch (SQLException exc) {
             exc.printStackTrace();
         } finally {
-
             if (result != null) {
                 result.close();
             }
             if (stmnt != null) {
                 stmnt.close();
             }
+
             DBDisconnect();
         }
         return status;
@@ -164,7 +163,6 @@ public class AppDAO {
             System.out.println("Student record updated successfully!");
         } catch (SQLException exc) {
             System.out.println("Failed to update student");
-            exc.printStackTrace();
         } finally {
             if(stmnt != null){
                 stmnt.close();
@@ -187,6 +185,7 @@ public class AppDAO {
                 case PROGRAMME -> "DEGREE";
                 case MAJOR -> "MAJOR";
                 case MINOR -> "MINOR";
+                case POSITION -> "POSITIONS";
             };
 
             final String colName = switch (choice) {
@@ -196,6 +195,7 @@ public class AppDAO {
                 case PROGRAMME -> "DEGREE_NAME";
                 case MAJOR -> "MAJOR_CODE";
                 case MINOR -> "MINOR_CODE";
+                case POSITION -> "POSITION_TITLE";
             };
 
             result = stmnt.executeQuery(query);
@@ -295,13 +295,167 @@ public class AppDAO {
 
         } catch (SQLException exc) {
             System.out.println("Couldn't unregister student to course");
-            exc.printStackTrace();
         } finally {
             if (stmnt != null) {
                 stmnt.close();
             }
             DBDisconnect();
         }
+    }
+
+    public static Lecturer getLecturerDetails(int ID) throws SQLException {
+        Statement stmnt = null;
+        ResultSet result = null;
+        Lecturer lect = new Lecturer(ID);
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            result = stmnt.executeQuery(String.format("SELECT * FROM LECTURER WHERE LECTURER_ID = %s", ID));
+            result.next();
+
+            lect.setName(result.getString("LECTURER_NAME"));
+            lect.setNRIC(result.getLong("LECTURER_NRIC"));
+            lect.setStatus(result.getString("STATUS_NAME"));
+            lect.setPosition(result.getString("POSITION_TITLE"));
+            lect.setSchool(result.getString("SCHOOL_NAME"));
+            lect.setCampus(result.getString("CAMPUS_NAME"));
+        } catch (SQLException exc) {
+            System.out.println("An error occurred while retrieving lecturer's details");
+        } finally {
+            if (stmnt != null){
+                stmnt.close();
+            }
+            if (result != null) {
+                result.close();
+            }
+            DBDisconnect();
+        }
+        return lect;
+    }
+
+    public static void updateLecturerDetails(Lecturer lect) throws SQLException{
+        Statement stmnt = null;
+        try{
+            DBConnect();
+            stmnt = conn.createStatement();
+            stmnt.execute(String.format(
+                    "UPDATE LECTURER SET LECTURER_NAME = %s, LECTURER_NRIC = %s, STATUS_NAME = %s, POSITION_TITLE = %s, SCHOOL_NAME = %s, CAMPUS_NAME = %s WHERE LECTURER_ID = %s",
+                    nullFormat(lect.getName()), nullFormat(lect.getNRIC()), nullFormat(lect.getStatus()), nullFormat(lect.getPosition()),
+                    nullFormat(lect.getSchool()), nullFormat(lect.getCampus()), lect.getID()
+            ));
+            System.out.println("Lecturer record updated successfully!");
+        } catch (SQLException exc) {
+            System.out.println("Failed to update lecturer details");
+            exc.printStackTrace();
+        } finally {
+            if(stmnt != null){
+                stmnt.close();
+            }
+            DBDisconnect();
+        }
+    }
+
+    public static ArrayList<String> getTeachingList(int ID) throws SQLException{
+        Statement stmnt = null;
+        ResultSet result = null;
+        ArrayList<String> lecturerTeachingList = new ArrayList<String>();
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            result = stmnt.executeQuery(String.format("SELECT COURSE_CODE FROM LECTURER_COURSES WHERE LECTURER_ID = %s", ID));
+
+            while(result.next()){
+                lecturerTeachingList.add(result.getString("COURSE_CODE"));
+            }
+        } catch (SQLException exc) {
+            System.out.println("An error occurred while fetching the lecturer's course list");
+        } finally {
+            if (stmnt != null){
+                stmnt.close();
+            }
+            if (result != null){
+                result.close();
+            }
+            DBDisconnect();
+        }
+        return lecturerTeachingList;
+    }
+
+    public static void addLecturerCourse(int lectID, String courseCode) throws SQLException {
+        Statement stmnt = null;
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            stmnt.execute(String.format("INSERT INTO LECTURER_COURSES VALUES ('%s', '%s')", lectID, courseCode));
+
+        } catch (SQLException exc) {
+            System.out.println("Couldn't assign course to lecturer");
+        } finally {
+            if (stmnt != null) {
+                stmnt.close();
+            }
+            DBDisconnect();
+        }
+    }
+
+    public static void removeLecturerCourse(int lectID, String courseCode) throws SQLException {
+        Statement stmnt = null;
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            stmnt.execute(String.format("DELETE FROM LECTURER_COURSES WHERE LECTURER_ID = '%s' AND COURSE_CODE = '%s'", lectID, courseCode));
+
+        } catch (SQLException exc) {
+            System.out.println("Couldn't remove course from lecturer's teaching list");
+        } finally {
+            if (stmnt != null) {
+                stmnt.close();
+            }
+            DBDisconnect();
+        }
+    }
+
+    public static void updateCourse(String time, String desc, String courseCode) throws SQLException {
+        Statement stmnt = null;
+        try{
+            DBConnect();
+            stmnt = conn.createStatement();
+            stmnt.execute(String.format("UPDATE COURSES SET COURSE_TIME = %s, COURSE_DESC = %s WHERE COURSE_CODE = %s", nullFormat(time), nullFormat(desc), nullFormat(courseCode)));
+            System.out.println("Course updated successfully!");
+        } catch (SQLException exc) {
+            System.out.println("Failed to update course");
+        } finally {
+            if(stmnt != null){
+                stmnt.close();
+            }
+            DBDisconnect();
+        }
+    }
+
+    public static ArrayList<String> getCourseStudent(String courseCode) throws SQLException {
+        Statement stmnt = null;
+        ResultSet result = null;
+        ArrayList<String> studentIDs = new ArrayList<String>();
+        try {
+            DBConnect();
+            stmnt = conn.createStatement();
+            result = stmnt.executeQuery(String.format("SELECT STUDENT_ID FROM STUDENT_COURSES WHERE COURSE_CODE = %s", nullFormat(courseCode)));
+
+            while(result.next()){
+                studentIDs.add(result.getString("STUDENT_ID"));
+            }
+        } catch (SQLException exc) {
+            System.out.println("An error occurred while fetching the course's student list");
+        } finally {
+            if (stmnt != null){
+                stmnt.close();
+            }
+            if (result != null){
+                result.close();
+            }
+            DBDisconnect();
+        }
+        return studentIDs;
     }
 
 }

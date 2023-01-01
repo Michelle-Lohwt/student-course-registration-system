@@ -131,7 +131,6 @@ public class courseRegController extends Controller implements Initializable {
     }
 
     public void searchcourse() {
-        //  TODO: Only display courses that aren't registered already
         // Get the list of courses that can be registered by the student and stored in
         // an ArrayList named "list"
         List<String> list = new ArrayList<>(availableCourseList.stream().map(Course::getCode).toList());
@@ -212,6 +211,9 @@ public class courseRegController extends Controller implements Initializable {
         } catch (SQLException exc) {
             return;
         }
+
+        searchCourse.clear();
+
         updatebothlist();
 
         addCourseButton.setDisable(true);
@@ -232,6 +234,9 @@ public class courseRegController extends Controller implements Initializable {
         } catch (SQLException exc) {
             return;
         }
+
+        searchCourse.clear();
+
         // Update both Registered Course ListView, Course List ListView and
         // filter out courses that have been registered by the student.
         updatebothlist();
