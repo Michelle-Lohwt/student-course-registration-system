@@ -81,10 +81,12 @@ public class loginController extends Controller implements Initializable {
 
             if (rbStudent.isSelected()) {
                 if (AppDAO.loginUser(id.getText(), password.getText(), AppDAO.UserType.STUDENT)) {
+                    stuDashController.id = id.getText();
                     switchTo(event, "stuDash.fxml");
                 }
             } else {
                 if (AppDAO.loginUser(id.getText(), password.getText(), AppDAO.UserType.LECTURER)) {
+                    lecDashController.id = id.getText();
                     switchTo(event, "lecDash.fxml");
                 }
             }

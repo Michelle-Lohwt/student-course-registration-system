@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -21,8 +22,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import sample.classes.Student;
 
 public class stuDashController extends Controller implements Initializable {
+
+  private Student studDetails;
 
   @FXML
   private TextField name, nric, matric, cgpa;
@@ -54,18 +58,12 @@ public class stuDashController extends Controller implements Initializable {
 
   public void CourseRegistration(MouseEvent event) throws IOException {
     Messages.setFill(Color.RED);
-    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-    Scanner sc = new Scanner(stuinfoFile);
-    String studentName;
-    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
-
-    if (studentName.isEmpty() == true) {
+    if (studDetails.getName().isEmpty()) {
       Messages.setText("Please save your name before proceed to course registration!");
     } else {
       stuReportController.inputName(name.getText());
       switchTo(event, "courseReg.fxml");
     }
-    sc.close();
 
   }
 
@@ -79,28 +77,23 @@ public class stuDashController extends Controller implements Initializable {
   }
 
   private void defaultInfo() {
-    displayName();
-    displayNRIC();
-    displayAcdStatus();
-    displaySemRegistered();
-    displayCGPA();
-    displayYear();
-    displaySchool();
-    displayCampus();
-    displayProgramme();
-    displayMajor();
-    displayMinor();
+    name.setText(studDetails.getName());
+    nric.setText(String.format("%s", studDetails.getNRIC()));
+    acd_status.setValue(studDetails.getStatus());
+    sem_reg.setValue(studDetails.getSem());
+    cgpa.setText(String.format("%s", studDetails.getCGPA()));
+    year.setValue(String.format("%s", studDetails.getYear()));
+    school.setValue(studDetails.getSchool());
+    campus.setValue(studDetails.getCampus());
+    programme.setValue(studDetails.getProgramme());
+    major.setValue(studDetails.getMajor());
+    minor.setValue(studDetails.getMinor());
   }
 
   public void editStuInfo() throws IOException {
     Messages.setFill(Color.RED);
-    File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-    Scanner sc = new Scanner(stuinfoFile);
-    String studentName;
-    studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
-    sc.close();
 
-    if (studentName.isEmpty() == true) {
+    if (studDetails.getName() == null) {
       name.setEditable(true);
       name.setDisable(false);
       name.setStyle("-fx-border-color: #eb7231");
@@ -161,210 +154,39 @@ public class stuDashController extends Controller implements Initializable {
     minor.setDisable(true);
 
     try {
-      FileWriter writer = new FileWriter("data/Student Dashboard/" + id + ".txt");
-      writer.write(name.getText());
-      writer.write("\n" + nric.getText());
-      writer.write("\n" + id);
-      writer.write("\n" + acd_status.getSelectionModel().getSelectedItem());
-      writer.write("\n" + sem_reg.getSelectionModel().getSelectedItem());
-      writer.write("\n" + cgpa.getText());
-      writer.write("\n" + year.getSelectionModel().getSelectedItem());
-      writer.write("\n" + school.getSelectionModel().getSelectedItem());
-      writer.write("\n" + campus.getSelectionModel().getSelectedItem());
-      writer.write("\n" + programme.getSelectionModel().getSelectedItem());
-      writer.write("\n" + major.getSelectionModel().getSelectedItem());
-      writer.write("\n" + minor.getSelectionModel().getSelectedItem() + "\n");
-      writer.close();
-    } catch (IOException e) {
-      System.out.println("An error occured.");
-    }
-  }
-
-  public void displayName() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String studentName;
-      studentName = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(0);
-      name.setText(studentName);
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayNRIC() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String icnumber;
-      icnumber = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(1);
-      nric.setText(icnumber);
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayAcdStatus() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String acdstatus;
-      acdstatus = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(3);
-      if(acdstatus.contains("null")){
-        acd_status.setValue("");
-      } else {
-        acd_status.setValue(acdstatus);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displaySemRegistered() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String semregistered;
-      semregistered = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(4);
-      if(semregistered.contains("null")){
-        sem_reg.setValue("");
-      } else {
-        sem_reg.setValue(semregistered);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayCGPA() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String result;
-      result = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(5);
-      cgpa.setText(result);
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayYear() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String acdYear;
-      acdYear = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(6);
-      if(acdYear.contains("null")){
-        year.setValue("");
-      } else {
-        year.setValue(acdYear);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displaySchool() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String School;
-      School = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(7);
-      if(School.contains("null")){
-        school.setValue("");
-      } else {
-        school.setValue(School);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayCampus() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String Campuses;
-      Campuses = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(8);
-      if(Campuses.contains("null")){
-        campus.setValue("");
-      } else {
-        campus.setValue(Campuses);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayProgramme() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String Programmes;
-      Programmes = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(9);
-      if(Programmes.contains("null")){
-        programme.setValue("");
-      } else {
-        programme.setValue(Programmes);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayMajor() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String Majors;
-      Majors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(10);
-      if(Majors.contains("null")){
-        major.setValue("");
-      } else {
-        major.setValue(Majors);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void displayMinor() {
-    try {
-      File stuinfoFile = new File("data/Student Dashboard/" + id + ".txt");
-      Scanner sc = new Scanner(stuinfoFile);
-      String Minors;
-      Minors = Files.readAllLines(Paths.get("data/Student Dashboard/" + id + ".txt")).get(11);
-      if(Minors.contains("null")){
-        minor.setValue("");
-      } else {
-        minor.setValue(Minors);
-      }
-      sc.close();
-    } catch (IOException e) {
-      e.printStackTrace();
+      studDetails.setName(name.getText());
+      studDetails.setNRIC(Long.parseLong(nric.getText()));
+      studDetails.setStatus(acd_status.getValue());
+      studDetails.setSem(sem_reg.getValue());
+      studDetails.setProgramme(programme.getValue());
+      studDetails.setSchool(school.getValue());
+      studDetails.setMajor(major.getValue());
+      studDetails.setMinor(minor.getValue());
+      studDetails.setCGPA(Float.parseFloat(cgpa.getText()));
+      studDetails.setCampus(campus.getValue());
+      studDetails.setYear(Integer.parseInt(year.getValue()));
+      AppDAO.updateStudentDetails(studDetails);
+    } catch (SQLException exc) {
+      System.out.println("An error occurred.");
     }
   }
 
   private void ChoiceBoxItem() {
-    acd_status.getItems().addAll("Active", "Probationary");
-    sem_reg.getItems().addAll("17/1", "17/2", "18/1", "18/2", "19/1", "19/2", "20/1", "20/2", "21/1", "21/2", "22/1",
-        "22/2");
-    year.getItems().addAll("Year 1", "Year 2", "Year 3", "Year 4", "Others");
-    school.getItems().addAll("School of Computer Science", "School of Mathematical Sciences", "School of Management");
-    campus.getItems().addAll("Main Campus", "Health Campus", "Engineering Campus");
-    programme.getItems().addAll("BSc Computer Science", "BSc Mathematics", "BSc Management");
-    major.getItems().addAll("Software Engineering", "Intelligent Computing", "Computing Infrastructure");
-    minor.getItems().addAll("Accounting", "Mathematics", "Electives");
+    try{
+      // Note: Will leave the acd_status as it is here because they are diff
+      // for both the lecturer and student
+      acd_status.getItems().addAll("Active", "Probationary");
+      sem_reg.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.SEMESTER));
+      // Year can be edited from here itself as it is simply a list of numbers
+      year.getItems().addAll("1", "2", "3", "4");
+      school.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.SCHOOL));
+      campus.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.CAMPUS));
+      programme.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.PROGRAMME));
+      major.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.MAJOR));
+      minor.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.MINOR));
+    } catch (SQLException exc) {
+      exc.printStackTrace();
+    }
   }
 
   public void validateName(KeyEvent e) {
@@ -374,6 +196,7 @@ public class stuDashController extends Controller implements Initializable {
       saveButton.setDisable(true);
       nric.setDisable(true);
       cgpa.setDisable(true);
+      // TODO: Replace this line with a REGEX
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Messages.setText("Your name should only contains alphabets or slashes! Try again!");
       saveButton.setDisable(true);
@@ -455,6 +278,12 @@ public class stuDashController extends Controller implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    try{
+      studDetails = AppDAO.getStudentDetails(Integer.parseInt(id));
+    }
+    catch (SQLException exc) {
+      System.out.println("Exception at stuDashController initialize function!");
+    }
     matric.setText(id);
     defaultInfo();
     ChoiceBoxItem();

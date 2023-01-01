@@ -135,7 +135,7 @@
                   <Font size="18.0" />
                </font>
                <tooltip>
-                  <Tooltip text="Minimum 6 characters" />
+                  <Tooltip text="Between 6 and 25 characters" />
                </tooltip>
             </TextField>
             <TextField fx:id="reTextPassword" disable="true" layoutX="150.0" layoutY="400.0" prefHeight="26.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;" visible="false">
@@ -143,7 +143,7 @@
                   <Font size="18.0" />
                </font>
                <tooltip>
-                  <Tooltip text="Minimum 6 characters" />
+                  <Tooltip text="Between 6 and 25 characters" />
                </tooltip>
             </TextField>
             <PasswordField fx:id="password" layoutX="150.0" layoutY="330.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to right top, #3c047c, #8e0070, #c2005b, #e04644, #eb7e31); -fx-border-width: 0px 0px 2px 0px;">
