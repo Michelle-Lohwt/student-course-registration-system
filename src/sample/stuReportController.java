@@ -8,35 +8,35 @@ import javafx.scene.text.Text;
 import javafx.fxml.FXML;
 
 
-public class stuReportController extends Controller{
+public class stuReportController extends Controller {
 
-  @FXML
-  private Text Messages;
+    @FXML
+    private Text Messages;
 
-  static String name;
+    static String name;
 
-  public static void inputName(String text)
-  {
-    name =text;
-  }
-  public void StuDashboard(MouseEvent event) throws IOException {
-    switchTo(event, "stuDash.fxml");
-  }
+    public static void inputName(String text) {
+        name = text;
+    }
 
-  public void StuCourseRegistration(MouseEvent event) throws IOException{
+    public void StuDashboard(MouseEvent event) throws IOException {
+        switchTo(event, "stuDash.fxml");
+    }
 
-    if(name.isBlank())
-    {
-      Messages.setText("Please save your info on dashboard first!");
-    }else{
-    switchTo(event, "courseReg.fxml");
-  }
-  }
-  public void LogOut(MouseEvent event) throws IOException {
-    switchTo(event, "logout.fxml");
-  }
+    public void StuCourseRegistration(MouseEvent event) throws IOException {
 
-  public void openBrowser() throws URISyntaxException, IOException {
-    openLink();
-  }
+        if (name.isBlank()) {
+            Messages.setText("Please save your info on dashboard first!");
+        } else {
+            switchTo(event, "courseReg.fxml");
+        }
+    }
+
+    public void LogOut(MouseEvent event) throws IOException {
+        switchTo(event, "logout.fxml");
+    }
+
+    public void openBrowser() throws URISyntaxException, IOException {
+        openLink();
+    }
 }

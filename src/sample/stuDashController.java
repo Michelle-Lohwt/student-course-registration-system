@@ -58,10 +58,10 @@ public class stuDashController extends Controller implements Initializable {
       Messages.setText("Please save your name before proceed to course registration!");
     } else {
       stuReportController.inputName(name.getText());
+      courseRegController.stuName = studDetails.getName();
       courseRegController.stuID = String.format("%s", studDetails.getID());
       switchTo(event, "courseReg.fxml");
     }
-
   }
 
   public void ContactUs(MouseEvent event) throws IOException {

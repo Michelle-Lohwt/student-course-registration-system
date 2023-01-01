@@ -1,24 +1,13 @@
 package sample;
 
 import java.io.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File; // Import the File class
-import java.io.FileWriter; // Import the FileWriter class
-import java.io.FileNotFoundException; // Import this class to handle errors
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,8 +26,8 @@ import sample.classes.Course;
 
 public class courseRegController extends Controller implements Initializable {
     private ArrayList<Course> fullCourseList = new ArrayList<Course>();
-    private ArrayList<Course> availableCourseList = new ArrayList<Course>();
-    private ArrayList<Course> registeredCourseList = new ArrayList<Course>();
+    private final ArrayList<Course> availableCourseList = new ArrayList<Course>();
+    private final ArrayList<Course> registeredCourseList = new ArrayList<Course>();
 
     @FXML
     private JFXButton addCourseButton, removeCourseButton;
@@ -83,11 +72,14 @@ public class courseRegController extends Controller implements Initializable {
 
     public void printPreview(MouseEvent event) throws IOException {
         try {
+            downloadController.registeredCourses = registeredCourseList;
+            downloadController.studName = stuName;
+            downloadController.stuID = stuID;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("download.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            Image icon = new Image("sample/images/download.png");
+            Image icon = new Image(new FileInputStream("src/sample/images/download.png"));
             stage.getIcons().add(icon);
             stage.setTitle("Select Course List pdf directory");
             stage.setResizable(false);
@@ -132,7 +124,7 @@ public class courseRegController extends Controller implements Initializable {
                     registeredCourseList.add(course);
                 }
             }
-            registeredCourse.getItems().addAll(registeredCourseList.stream().map(course -> course.getCode()).toList());
+            registeredCourse.getItems().addAll(registeredCourseList.stream().map(Course::getCode).toList());
         } catch (SQLException exc) {
             System.out.println("An error occurred while fetching the student's course list");
         }
@@ -142,8 +134,7 @@ public class courseRegController extends Controller implements Initializable {
         //  TODO: Only display courses that aren't registered already
         // Get the list of courses that can be registered by the student and stored in
         // an ArrayList named "list"
-        List<String> list = new ArrayList<>();
-        list.addAll(availableCourseList.stream().map(course -> course.getCode()).toList());
+        List<String> list = new ArrayList<>(availableCourseList.stream().map(Course::getCode).toList());
 
 
         // Perform the search(filter) in "list" and output the result in another
@@ -166,7 +157,7 @@ public class courseRegController extends Controller implements Initializable {
     }
 
     private Course getCourseByID(String ID) {
-        return fullCourseList.stream().filter(course -> course.getCode() == ID).toList().get(0);
+        return fullCourseList.stream().filter(course -> Objects.equals(course.getCode(), ID)).toList().get(0);
     }
 
     // When a Course in the Course List is Clicked, this function will be executed.
