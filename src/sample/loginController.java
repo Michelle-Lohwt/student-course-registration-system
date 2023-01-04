@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import sample.classes.Student;
 
 public class loginController extends Controller implements Initializable {
     @FXML
@@ -80,12 +81,12 @@ public class loginController extends Controller implements Initializable {
             }
 
             if (rbStudent.isSelected()) {
-                if (AppDAO.loginUser(id.getText(), password.getText(), AppDAO.UserType.STUDENT)) {
+                if (StudentDAO.loginUser(id.getText(), password.getText())) {
                     stuDashController.id = id.getText();
                     switchTo(event, "stuDash.fxml");
                 }
             } else {
-                if (AppDAO.loginUser(id.getText(), password.getText(), AppDAO.UserType.LECTURER)) {
+                if (LecturerDAO.loginUser(id.getText(), password.getText())) {
                     lecDashController.id = id.getText();
                     switchTo(event, "lecDash.fxml");
                 }

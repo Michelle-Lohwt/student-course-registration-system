@@ -21,6 +21,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import sample.classes.Course;
 import sample.classes.Lecturer;
 
 public class lecDashController extends Controller implements Initializable {
@@ -119,7 +120,7 @@ public class lecDashController extends Controller implements Initializable {
         lectDetails.setStatus(emp_status.getValue());
 
         try {
-            AppDAO.updateLecturerDetails(lectDetails);
+            LecturerDAO.updateLecturerDetails(lectDetails);
         } catch (SQLException exc) {
             return;
         }
@@ -130,9 +131,9 @@ public class lecDashController extends Controller implements Initializable {
         emp_status.getItems().addAll("Active", "Research", "Further Study");
 
         try {
-            position.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.POSITION));
-            school.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.SCHOOL));
-            campus.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.CAMPUS));
+            position.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.POSITION));
+            school.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.SCHOOL));
+            campus.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.CAMPUS));
         } catch (SQLException exc) {
             System.out.println("Error occurred while getting ChoiceBox items");
         }
@@ -170,7 +171,6 @@ public class lecDashController extends Controller implements Initializable {
             Message.setText("");
             saveButton.setDisable(false);
             nric.setDisable(false);
-            // TODO: Replace with a REGEX
         } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
             Message.setText("Your name should only contains alphabets or slashes! Try again!");
             saveButton.setDisable(true);
@@ -186,7 +186,7 @@ public class lecDashController extends Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         staffID.setText(id);
         try {
-            lectDetails = AppDAO.getLecturerDetails(Integer.parseInt(id));
+            lectDetails = LecturerDAO.getLecturerDetails(Integer.parseInt(id));
         } catch (SQLException exc) {
             System.out.println("Error instantiating the lecturer dashboard");
         }

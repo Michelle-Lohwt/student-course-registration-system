@@ -171,7 +171,7 @@ public class downloadController implements Initializable {
 
             String lecName = null;
             try {
-                lecName = AppDAO.getLecturerDetails(Integer.parseInt(lectID)).getName();
+                lecName = LecturerDAO.getLecturerDetails(Integer.parseInt(lectID)).getName();
             } catch (SQLException exc) {
                 return;
             }

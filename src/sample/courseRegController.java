@@ -97,7 +97,7 @@ public class courseRegController extends Controller implements Initializable {
 
     private void initCourseList() {
         try {
-            fullCourseList = AppDAO.getCourseList();
+            fullCourseList = CourseDAO.getCourseList();
         } catch (SQLException exc) {
             System.out.println("An error occurred while fetching course list");
         }
@@ -118,7 +118,7 @@ public class courseRegController extends Controller implements Initializable {
     public void displaycourseregistered() {
         registeredCourseList.clear();
         try {
-            ArrayList<String> studReg = AppDAO.getStudentCourseList(stuID);
+            ArrayList<String> studReg = CourseDAO.getStudentCourseList(stuID);
             for (Course course : fullCourseList) {
                 if (studReg.contains(course.getCode())) {
                     registeredCourseList.add(course);
@@ -203,7 +203,7 @@ public class courseRegController extends Controller implements Initializable {
             // Get course
             Course selectedCourse = getCourseByID(courseList.getSelectionModel().getSelectedItem());
             // Add to DB
-            AppDAO.registerStudentCourse(stuID, selectedCourse.getCode());
+            CourseDAO.registerStudentCourse(stuID, selectedCourse.getCode());
             // Add to registered list
             registeredCourseList.add(selectedCourse);
             // Remove from fullCourseList
@@ -228,7 +228,7 @@ public class courseRegController extends Controller implements Initializable {
 
         Course selectedCourse = getCourseByID(registeredCourse.getSelectionModel().getSelectedItem());
         try {
-            AppDAO.removeStudentCourse(stuID, selectedCourse.getCode());
+            CourseDAO.removeStudentCourse(stuID, selectedCourse.getCode());
             availableCourseList.add(selectedCourse);
             registeredCourseList.remove(selectedCourse);
         } catch (SQLException exc) {

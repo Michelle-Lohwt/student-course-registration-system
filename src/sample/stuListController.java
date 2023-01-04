@@ -99,7 +99,7 @@ public class stuListController extends Controller implements Initializable {
 
     private void initCourseList() {
         try {
-            fullCourseList = AppDAO.getCourseList();
+            fullCourseList = CourseDAO.getCourseList();
         } catch (SQLException exc) {
             System.out.println("An error occurred while fetching the course list");
         }
@@ -120,7 +120,7 @@ public class stuListController extends Controller implements Initializable {
     public void displayteachingcourse() {
         teachingCourseList.clear();
         try {
-            ArrayList<String> teachingCourses = AppDAO.getTeachingList(Integer.parseInt(lecID));
+            ArrayList<String> teachingCourses = LecturerDAO.getTeachingList(Integer.parseInt(lecID));
             for (Course course : fullCourseList) {
                 if (teachingCourses.contains(course.getCode())) {
                     teachingCourseList.add(course);
@@ -214,7 +214,7 @@ public class stuListController extends Controller implements Initializable {
         }
 
         try {
-            AppDAO.addLecturerCourse(Integer.parseInt(lecID), courseList.getSelectionModel().getSelectedItem());
+            LecturerDAO.addLecturerCourse(Integer.parseInt(lecID), courseList.getSelectionModel().getSelectedItem());
             Course selectedCourse = getCourseByID(courseList.getSelectionModel().getSelectedItem());
             availableCourseList.remove(selectedCourse);
             teachingCourseList.add(selectedCourse);
@@ -241,7 +241,7 @@ public class stuListController extends Controller implements Initializable {
         }
 
         try {
-            AppDAO.removeLecturerCourse(Integer.parseInt(lecID), teachingCourse.getSelectionModel().getSelectedItem());
+            LecturerDAO.removeLecturerCourse(Integer.parseInt(lecID), teachingCourse.getSelectionModel().getSelectedItem());
             Course selectedCourse = getCourseByID(teachingCourse.getSelectionModel().getSelectedItem());
             teachingCourseList.remove(selectedCourse);
             availableCourseList.add(selectedCourse);
@@ -298,7 +298,7 @@ public class stuListController extends Controller implements Initializable {
 
         try {
             Course selectedCourse = fullCourseList.stream().filter(course -> Objects.equals(course.getTitle(), courseTitle.getText())).toList().get(0);
-            AppDAO.updateCourse(time.getText(), desc.getText(), selectedCourse.getCode());
+            CourseDAO.updateCourse(time.getText(), desc.getText(), selectedCourse.getCode());
             selectedCourse.setTime(time.getText());
             selectedCourse.setDesc(desc.getText());
         } catch (SQLException exc) {
@@ -311,9 +311,9 @@ public class stuListController extends Controller implements Initializable {
         ArrayList<String> students = null;
         try {
             Course selectedCourse = fullCourseList.stream().filter(course -> Objects.equals(course.getTitle(), courseTitle.getText())).toList().get(0);
-            students = AppDAO.getCourseStudent(selectedCourse.getCode());
+            students = CourseDAO.getCourseStudent(selectedCourse.getCode());
             for (String studentID : students) {
-                studentsList.add(AppDAO.getStudentDetails(Integer.parseInt(studentID)));
+                studentsList.add(StudentDAO.getStudentDetails(Integer.parseInt(studentID)));
             }
         } catch (SQLException exc) {
             System.out.println("Oh no! oh no! oh no no no!!");

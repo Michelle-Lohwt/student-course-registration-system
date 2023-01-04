@@ -83,9 +83,9 @@ public class signUpController extends Controller implements Initializable {
             }
 
             if (rbStudent.isSelected()) {
-                AppDAO.registerUser(id.getText(), password.getText(), AppDAO.UserType.STUDENT);
+                StudentDAO.registerUser(id.getText(), password.getText());
             } else {
-                AppDAO.registerUser(id.getText(), password.getText(), AppDAO.UserType.LECTURER);
+                LecturerDAO.registerUser(id.getText(), password.getText());
             }
             signUpMessage.setFill(Color.GREEN);
             signUpMessage.setText("SignUp Successful");

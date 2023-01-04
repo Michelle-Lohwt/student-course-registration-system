@@ -54,7 +54,7 @@ public class stuDashController extends Controller implements Initializable {
 
   public void CourseRegistration(MouseEvent event) throws IOException {
     Messages.setFill(Color.RED);
-    if (studDetails.getName().isEmpty()) {
+    if (studDetails.getName() == null || studDetails.getName().isEmpty()) {
       Messages.setText("Please save your name before proceed to course registration!");
     } else {
       stuReportController.inputName(name.getText());
@@ -162,7 +162,7 @@ public class stuDashController extends Controller implements Initializable {
       studDetails.setCGPA(Float.parseFloat(cgpa.getText()));
       studDetails.setCampus(campus.getValue());
       studDetails.setYear(Integer.parseInt(year.getValue()));
-      AppDAO.updateStudentDetails(studDetails);
+      StudentDAO.updateStudentDetails(studDetails);
     } catch (SQLException exc) {
       System.out.println("An error occurred.");
     }
@@ -173,14 +173,14 @@ public class stuDashController extends Controller implements Initializable {
       // Note: Will leave the acd_status as it is here because they are diff
       // for both the lecturer and student
       acd_status.getItems().addAll("Active", "Probationary");
-      sem_reg.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.SEMESTER));
+      sem_reg.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.SEMESTER));
       // Year can be edited from here itself as it is simply a list of numbers
       year.getItems().addAll("1", "2", "3", "4");
-      school.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.SCHOOL));
-      campus.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.CAMPUS));
-      programme.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.PROGRAMME));
-      major.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.MAJOR));
-      minor.getItems().addAll(AppDAO.getChoiceBoxItems(AppDAO.ChoiceBoxItems.MINOR));
+      school.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.SCHOOL));
+      campus.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.CAMPUS));
+      programme.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.PROGRAMME));
+      major.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.MAJOR));
+      minor.getItems().addAll(CourseDAO.getChoiceBoxItems(ChoiceBoxItems.MINOR));
     } catch (SQLException exc) {
       exc.printStackTrace();
     }
@@ -193,7 +193,6 @@ public class stuDashController extends Controller implements Initializable {
       saveButton.setDisable(true);
       nric.setDisable(true);
       cgpa.setDisable(true);
-      // TODO: Replace this line with a REGEX
     } else if (!"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ \b".contains(e.getCharacter())) {
       Messages.setText("Your name should only contains alphabets or slashes! Try again!");
       saveButton.setDisable(true);
@@ -276,7 +275,7 @@ public class stuDashController extends Controller implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try{
-      studDetails = AppDAO.getStudentDetails(Integer.parseInt(id));
+      studDetails = StudentDAO.getStudentDetails(Integer.parseInt(id));
     }
     catch (SQLException exc) {
       System.out.println("Exception at stuDashController initialize function!");
