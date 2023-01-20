@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import java.io.FileInputStream;
 
 public class App extends Application {
   public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class App extends Application {
     try {
       Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
       Scene scene = new Scene(root, 1200, 770);
-      Image icon = new Image("sample/images/usm-ringlogo.png");
+      Image icon = new Image(new FileInputStream("src/sample/images/usm-ringlogo.png"));
       stage.getIcons().add(icon);
       stage.setTitle("CAT201 Student Course Registration System");
       stage.setResizable(false);

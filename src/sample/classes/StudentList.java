@@ -7,6 +7,11 @@ public class StudentList {
     
     StringProperty name = new SimpleStringProperty();
     StringProperty matric = new SimpleStringProperty();
+
+//    public StudentList(String name, String matric) {
+//        this.name.setValue(name);
+//        this.matric.setValue(matric);
+//    }
     
     public final StringProperty nameProperty() {
         return this.name;

@@ -1,3 +1,0 @@
-Tuesday 3:00pm-5:00pm
-
-This course introduces the basic concepts of linear algebra such as matrices, real vector spaces, linear transformations from R^n to R^m, inner product in R^n and diagonalization problems in real eigen value. The relationship between linear transformations and matrices is emphasized.
